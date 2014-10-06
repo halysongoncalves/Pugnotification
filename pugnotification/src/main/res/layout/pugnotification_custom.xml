@@ -8,7 +8,6 @@
         android:id="@+id/notification_img_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/pugnotification_ic_placeholder"
         android:contentDescription="@string/pugnotificationtext_description_image_background" />
 
     <RelativeLayout

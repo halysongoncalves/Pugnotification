@@ -31,6 +31,7 @@ public class Load {
     }
 
     private void createNotifationDefault() {
+        this.mIdentifier = Utils.radom();
         this.mBuilder.setContentTitle("");
         this.mBuilder.setContentText("");
         this.mBuilder.setSmallIcon(R.drawable.pugnotification_ic_launcher);
@@ -71,7 +72,7 @@ public class Load {
         }
 
         if (title.trim().length() == 0) {
-            throw new IllegalArgumentException("Path Must Not Be Empty!");
+            throw new IllegalArgumentException("Title Must Not Be Empty!");
         }
 
         this.mTitle = title;
@@ -103,7 +104,7 @@ public class Load {
         }
 
         if (message.trim().length() == 0) {
-            throw new IllegalArgumentException("Path Must Not Be Empty!");
+            throw new IllegalArgumentException("Message Must Not Be Empty!");
         }
 
         this.mMessage = message;
@@ -158,7 +159,7 @@ public class Load {
         }
 
         if (bigTextStyle.trim().length() == 0) {
-            throw new IllegalArgumentException("Ticker Must Not Be Empty!");
+            throw new IllegalArgumentException("Big Text Style Must Not Be Empty!");
         }
 
         this.mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText((bigTextStyle)));

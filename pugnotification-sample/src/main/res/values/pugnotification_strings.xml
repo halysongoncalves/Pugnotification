@@ -5,8 +5,13 @@
     <string name="pugnotification_text_title">Title</string>
     <string name="pugnotification_text_hint_title">Insert Title</string>
     <string name="pugnotification_text_message">Message</string>
+    <string name="pugnotification_text_bigtext">Big Text</string>
+    <string name="pugnotification_text_url">Url Image</string>
+    <string name="pugnotification_text_hint_url">Url</string>
+    <string name="pugnotification_text_hint_bigtext">Big Text</string>
     <string name="pugnotification_text_hint_message">Insert Message</string>
-    <string name="pugnotification_button_notify">Notify</string>
+    <string name="pugnotification_button_notify_simple">Notify Simple</string>
+    <string name="pugnotification_button_notify_custom">Notify Custom</string>
 
 
 </resources>
