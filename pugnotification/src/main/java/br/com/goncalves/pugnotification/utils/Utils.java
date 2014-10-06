@@ -4,7 +4,7 @@ import android.os.Looper;
 
 import java.util.Random;
 
-import br.com.goncalves.pugnotification.Notifications;
+import br.com.goncalves.pugnotification.notification.PugNotification;
 
 public class Utils {
     private static final String TAG = Utils.class.getSimpleName();
@@ -24,7 +24,7 @@ public class Utils {
         return gerador.nextInt(99999);
     }
 
-    public static Notifications isActiveSingleton(Notifications notification) {
+    public static PugNotification isActiveSingleton(PugNotification notification) {
         if (notification.shutdown) {
             throw new IllegalStateException("Notification instance already shut down. Cannot submit new requests.");
         }

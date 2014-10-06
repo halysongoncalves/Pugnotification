@@ -1,4 +1,4 @@
-package br.com.goncalves.pugnotification;
+package br.com.goncalves.pugnotification.notification;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -7,10 +7,12 @@ import android.widget.RemoteViews;
 
 import com.squareup.picasso.Picasso;
 
+import br.com.goncalves.pugnotification.R;
+
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public class CustomNotification extends BasicNotification {
-    private static final String TAG = CustomNotification.class.getSimpleName();
+public class Custom extends Basic {
+    private static final String TAG = Custom.class.getSimpleName();
     private RemoteViews mRemoteView;
     private String mTitle;
     private String mMessage;
@@ -18,9 +20,9 @@ public class CustomNotification extends BasicNotification {
     private int mSmallIcon;
     private int mBackgroundResId;
 
-    public CustomNotification(Builder builder, int identifier, String title, String message, int smallIcon) {
+    public Custom(Builder builder, int identifier, String title, String message, int smallIcon) {
         super(builder, identifier);
-        this.mRemoteView = new RemoteViews(Notifications.mSingleton.mContext.getPackageName(), R.layout.pugnotification_custom);
+        this.mRemoteView = new RemoteViews(PugNotification.mSingleton.mContext.getPackageName(), R.layout.pugnotification_custom);
         this.mTitle = title;
         this.mMessage = message;
         this.mSmallIcon = smallIcon;
@@ -48,7 +50,7 @@ public class CustomNotification extends BasicNotification {
         mRemoteView.setImageViewResource(R.id.notification_img_icon, mSmallIcon);
     }
 
-    public CustomNotification background(int resource) {
+    public Custom background(int resource) {
         if (resource <= 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
@@ -61,7 +63,7 @@ public class CustomNotification extends BasicNotification {
         return this;
     }
 
-    public CustomNotification background(String path) {
+    public Custom background(String path) {
         if (mBackgroundResId >= 0) {
             throw new IllegalStateException("Background Already Set!");
         }

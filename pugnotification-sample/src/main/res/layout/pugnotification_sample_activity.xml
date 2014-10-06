@@ -17,6 +17,7 @@
             android:textSize="@dimen/textSize_medium" />
 
         <EditText
+            android:id="@+id/edt_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/pugnotification_text_hint_title"
@@ -39,6 +40,7 @@
             android:textSize="@dimen/textSize_medium" />
 
         <EditText
+            android:id="@+id/edt_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/pugnotification_text_hint_message"
@@ -47,13 +49,9 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/btn_notify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/content_message"
         android:text="@string/pugnotification_button_notify"/>
-
-
-
-
-
 </RelativeLayout>

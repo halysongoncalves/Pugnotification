@@ -4,7 +4,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 
-import br.com.goncalves.pugnotification.Notifications;
+import br.com.goncalves.pugnotification.notification.PugNotification;
 import br.com.goncalves.pugnotification.constants.BroadcastActions;
 import br.com.goncalves.pugnotification.interfaces.PendingIntentNotification;
 
@@ -21,12 +21,12 @@ public class ClickPendingIntentBroadCast implements PendingIntentNotification {
     public PendingIntent onSettingPendingIntent() {
         Intent clickIntentBroadcast = new Intent(BroadcastActions.ACTION_PUGNOTIFICATION_CLICK_INTENT);
         clickIntentBroadcast.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        clickIntentBroadcast.setPackage(Notifications.mSingleton.mContext.getPackageName());
+        clickIntentBroadcast.setPackage(PugNotification.mSingleton.mContext.getPackageName());
         if (mBundle != null) {
             clickIntentBroadcast.putExtras(mBundle);
         }
 
-        return PendingIntent.getBroadcast(Notifications.mSingleton.mContext, mIdentifier, clickIntentBroadcast,
+        return PendingIntent.getBroadcast(PugNotification.mSingleton.mContext, mIdentifier, clickIntentBroadcast,
                 PendingIntent.FLAG_UPDATE_CURRENT);
     }
 

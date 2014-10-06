@@ -1,4 +1,4 @@
-package br.com.goncalves.pugnotification;
+package br.com.goncalves.pugnotification.notification;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
 
+import br.com.goncalves.pugnotification.R;
 import br.com.goncalves.pugnotification.interfaces.PendingIntentNotification;
 import br.com.goncalves.pugnotification.pendingintent.ClickPendingIntentActivity;
 import br.com.goncalves.pugnotification.pendingintent.ClickPendingIntentBroadCast;
@@ -14,16 +15,16 @@ import br.com.goncalves.pugnotification.pendingintent.DismissPendingIntentActivi
 import br.com.goncalves.pugnotification.pendingintent.DismissPendingIntentBroadCast;
 import br.com.goncalves.pugnotification.utils.Utils;
 
-public class LoadNotification {
-    private static final String TAG = LoadNotification.class.getSimpleName();
-    private final Notifications mNotification;
+public class Load {
+    private static final String TAG = Load.class.getSimpleName();
+    private final PugNotification mNotification;
     private Builder mBuilder;
     private int mIdentifier;
     private String mTitle;
     private String mMessage;
     private int mSmallIcon;
 
-    public LoadNotification(Notifications notification) {
+    public Load(PugNotification notification) {
         this.mNotification = Utils.isActiveSingleton(notification);
         this.mBuilder = new NotificationCompat.Builder(mNotification.mContext);
         this.createNotifationDefault();
@@ -37,7 +38,7 @@ public class LoadNotification {
                 R.drawable.pugnotification_ic_launcher));
     }
 
-    public LoadNotification identifier(int identifier) {
+    public Load identifier(int identifier) {
         if (identifier <= 0) {
             throw new IllegalStateException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
@@ -46,7 +47,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification title(int title) {
+    public Load title(int title) {
         if (title <= 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
@@ -60,7 +61,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification title(String title) {
+    public Load title(String title) {
         if (mTitle != null) {
             throw new IllegalStateException("Title Already Set!");
         }
@@ -78,7 +79,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification message(int message) {
+    public Load message(int message) {
         if (message <= 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
@@ -92,7 +93,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification message(String message) {
+    public Load message(String message) {
         if (mMessage != null) {
             throw new IllegalStateException("Message already set.");
         }
@@ -110,7 +111,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification ticker(int ticker) {
+    public Load ticker(int ticker) {
         if (ticker <= 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
@@ -119,7 +120,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification ticker(String ticker) {
+    public Load ticker(String ticker) {
         if (ticker == null) {
             throw new IllegalStateException("Ticker Must Not Be Null!");
         }
@@ -132,7 +133,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification when(long when) {
+    public Load when(long when) {
         if (when <= 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
@@ -141,7 +142,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification bigTextStyle(int bigTextStyle) {
+    public Load bigTextStyle(int bigTextStyle) {
         if (bigTextStyle <= 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
@@ -151,7 +152,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification bigTextStyle(String bigTextStyle) {
+    public Load bigTextStyle(String bigTextStyle) {
         if (bigTextStyle == null) {
             throw new IllegalStateException("Big Text Style Must Not Be Null!");
         }
@@ -164,12 +165,12 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification autoCancel(boolean autoCancel) {
+    public Load autoCancel(boolean autoCancel) {
         this.mBuilder.setAutoCancel(autoCancel);
         return this;
     }
 
-    public LoadNotification smallIcon(int smallIcon) {
+    public Load smallIcon(int smallIcon) {
         if (smallIcon <= 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
@@ -179,7 +180,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification largeIcon(Bitmap bitmap) {
+    public Load largeIcon(Bitmap bitmap) {
         if (bitmap == null) {
             throw new IllegalArgumentException("Bitmap Must Not Be Null.");
         }
@@ -188,7 +189,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification vibrate(long[] vibrate) {
+    public Load vibrate(long[] vibrate) {
         for (int count = 0; count < vibrate.length; count++) {
             if (vibrate[count] <= 0) {
                 throw new IllegalArgumentException("Vibrate Time " + vibrate[count] + " Invalid!");
@@ -199,7 +200,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification lights(int color, int ledOnMs, int ledOfMs) {
+    public Load lights(int color, int ledOnMs, int ledOfMs) {
         if (ledOnMs < 0) {
             throw new IllegalStateException("Led On Milliseconds Invalid!");
         }
@@ -212,7 +213,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification sound(Uri sound) {
+    public Load sound(Uri sound) {
         if (sound == null) {
             throw new IllegalArgumentException("Sound Must Not Be Null.");
         }
@@ -221,7 +222,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification click(Class<?> activity, Bundle bundle) {
+    public Load click(Class<?> activity, Bundle bundle) {
         if (activity == null) {
             throw new IllegalArgumentException("Activity Must Not Be Null.");
         }
@@ -230,12 +231,12 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification click(Class<?> activity) {
+    public Load click(Class<?> activity) {
         click(activity, null);
         return this;
     }
 
-    public LoadNotification click(Bundle bundle) {
+    public Load click(Bundle bundle) {
         if (bundle == null) {
             throw new IllegalArgumentException("Bundle Must Not Be Null.");
         }
@@ -244,7 +245,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification click(PendingIntentNotification pendingIntentNotification) {
+    public Load click(PendingIntentNotification pendingIntentNotification) {
         if (pendingIntentNotification == null) {
             throw new IllegalArgumentException("PendingIntentNotification Must Not Be Null.");
         }
@@ -253,7 +254,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification dismiss(Class<?> activity, Bundle bundle) {
+    public Load dismiss(Class<?> activity, Bundle bundle) {
         if (activity == null) {
             throw new IllegalArgumentException("Activity Must Not Be Null.");
         }
@@ -262,12 +263,12 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification dismiss(Class<?> activity) {
+    public Load dismiss(Class<?> activity) {
         dismiss(activity, null);
         return this;
     }
 
-    public LoadNotification dismiss(Bundle bundle) {
+    public Load dismiss(Bundle bundle) {
         if (bundle == null) {
             throw new IllegalArgumentException("Bundle Must Not Be Null.");
         }
@@ -276,7 +277,7 @@ public class LoadNotification {
         return this;
     }
 
-    public LoadNotification dismiss(PendingIntentNotification pendingIntentNotification) {
+    public Load dismiss(PendingIntentNotification pendingIntentNotification) {
         if (pendingIntentNotification == null) {
             throw new IllegalArgumentException("Pending Intent Notification Must Not Be Null.");
         }
@@ -285,12 +286,12 @@ public class LoadNotification {
         return this;
     }
 
-    public CustomNotification custom() {
+    public Custom custom() {
         Utils.checkMain();
-        return new CustomNotification(mBuilder, mIdentifier, mTitle, mMessage, mSmallIcon);
+        return new Custom(mBuilder, mIdentifier, mTitle, mMessage, mSmallIcon);
     }
 
-    public SimpleNotification simple() {
-        return new SimpleNotification(mBuilder, mIdentifier);
+    public Simple simple() {
+        return new Simple(mBuilder, mIdentifier);
     }
 }

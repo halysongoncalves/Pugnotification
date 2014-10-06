@@ -1,23 +1,23 @@
-package br.com.goncalves.pugnotification;
+package br.com.goncalves.pugnotification.notification;
 
 import android.app.NotificationManager;
 import android.content.Context;
 
 import br.com.goncalves.pugnotification.utils.Utils;
 
-public class Notifications {
-    private static final String TAG = Notifications.class.getSimpleName();
-    public static Notifications mSingleton = null;
+public class PugNotification {
+    private static final String TAG = PugNotification.class.getSimpleName();
+    public static PugNotification mSingleton = null;
     public final Context mContext;
     public boolean shutdown;
 
-    public Notifications(Context context) {
+    public PugNotification(Context context) {
         this.mContext = context;
     }
 
-    public static Notifications with(Context context) {
+    public static PugNotification with(Context context) {
         if (mSingleton == null) {
-            synchronized (Notifications.class) {
+            synchronized (PugNotification.class) {
                 if (mSingleton == null) {
                     mSingleton = new Contractor(context).build();
                 }
@@ -26,8 +26,8 @@ public class Notifications {
         return mSingleton;
     }
 
-    public LoadNotification load() {
-        return new LoadNotification(this);
+    public Load load() {
+        return new Load(this);
     }
 
     public void cancel(int identifier) {
@@ -56,8 +56,8 @@ public class Notifications {
             this.mContext = context.getApplicationContext();
         }
 
-        public Notifications build() {
-            return new Notifications(mContext);
+        public PugNotification build() {
+            return new PugNotification(mContext);
         }
     }
 
