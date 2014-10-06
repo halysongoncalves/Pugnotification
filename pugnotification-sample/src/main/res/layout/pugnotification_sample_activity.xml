@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_large">
+
+    <RelativeLayout
+        android:id="@+id/content_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pugnotification_text_title"
+            android:textSize="@dimen/textSize_medium" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/pugnotification_text_hint_title"
+            android:layout_toRightOf="@+id/text_title"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/content_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/content_title">
+
+        <TextView
+            android:id="@+id/text_message"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pugnotification_text_message"
+            android:textSize="@dimen/textSize_medium" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/pugnotification_text_hint_message"
+            android:layout_toRightOf="@+id/text_message"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/content_message"
+        android:text="@string/pugnotification_button_notify"/>
+
+
+
+
+
+</RelativeLayout>

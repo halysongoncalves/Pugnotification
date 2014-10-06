@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="pugnotification_app_name">PugNotification Sample</string>
+    <string name="pugnotification_text_title">Title</string>
+    <string name="pugnotification_text_hint_title">Insert Title</string>
+    <string name="pugnotification_text_message">Message</string>
+    <string name="pugnotification_text_hint_message">Insert Message</string>
+    <string name="pugnotification_button_notify">Notify</string>
+
+
+</resources>

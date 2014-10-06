@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pugnotification_background">#CC2f2f2f</color>
+    <color name="pugnotification_color_white">#FFFFFF</color>
+</resources>

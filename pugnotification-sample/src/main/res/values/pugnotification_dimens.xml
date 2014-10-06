@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Text Sizes -->
+    <dimen name="textSize_micro">12sp</dimen>
+    <dimen name="textSize_small">14sp</dimen>
+    <dimen name="textSize_medium">18sp</dimen>
+    <dimen name="textSize_large">22sp</dimen>
+    <dimen name="textSize_xLarge">35sp</dimen>
+    <dimen name="textSize_big">60sp</dimen>
+
+
+    <!-- Margin Default Vertical -->
+    <dimen name="margin_micro">2dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_default">8dp</dimen>
+    <dimen name="margin_middle">12dp</dimen>
+    <dimen name="margin_large">16dp</dimen>
+    <dimen name="margin_xlarge">20dp</dimen>
+    <dimen name="margin_big">24dp</dimen>
+</resources>
