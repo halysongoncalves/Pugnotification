@@ -15,7 +15,7 @@ public class Custom extends Basic {
     private RemoteViews mRemoteView;
     private String mTitle;
     private String mMessage;
-    private String mUrl;
+    private String mUri;
     private int mSmallIcon;
     private int mBackgroundResId;
 
@@ -54,7 +54,7 @@ public class Custom extends Basic {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        if (mUrl != null) {
+        if (mUri != null) {
             throw new IllegalStateException("Background Already Set!");
         }
 
@@ -62,39 +62,40 @@ public class Custom extends Basic {
         return this;
     }
 
-    public Custom background(String path) {
+    public Custom background(String uri) {
         if (mBackgroundResId > 0) {
             throw new IllegalStateException("Background Already Set!");
         }
 
-        if (mUrl != null) {
+        if (mUri != null) {
             throw new IllegalStateException("Background Already Set!");
         }
 
-        if (path == null) {
+        if (uri == null) {
             throw new IllegalArgumentException("Path Must Not Be Null!");
         }
-        if (path.trim().length() == 0) {
+        if (uri.trim().length() == 0) {
             throw new IllegalArgumentException("Path Must Not Be Empty!");
         }
 
-        this.mUrl = path;
+        this.mUri = uri;
         return this;
     }
 
     @Override
     public void build() {
         super.build();
-        mNotificaton.bigContentView = mRemoteView;
+        mNotification.bigContentView = mRemoteView;
 
         loadImageBackground();
     }
 
     private final void loadImageBackground() {
-        if (mUrl != null) {
-            Picasso.with(mSingleton.mContext).load("http://cdn.bemobi.com.br/json/mahjong_2.jpg").placeholder(R.drawable.pugnotification_ic_placeholder).into(mRemoteView, R.id.notification_img_background, mIdentifier, mNotificaton);
+        if (mUri != null) {
+            Picasso.with(mSingleton.mContext).load(mUri).placeholder(R.drawable.pugnotification_ic_placeholder)
+                    .into(mRemoteView, R.id.notification_img_background, 0, mNotification);
         } else {
-            Picasso.with(mSingleton.mContext).load("http://cdn.bemobi.com.br/json/mahjong_2.jpg").placeholder(R.drawable.pugnotification_ic_placeholder).into(mRemoteView, R.id.notification_img_background, mIdentifier, mNotificaton);
-        }
+            Picasso.with(mSingleton.mContext).load(mBackgroundResId).placeholder(R.drawable.pugnotification_ic_placeholder)
+                    .into(mRemoteView, R.id.notification_img_background, 0, mNotification);        }
     }
 }

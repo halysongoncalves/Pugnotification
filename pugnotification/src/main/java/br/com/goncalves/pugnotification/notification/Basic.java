@@ -10,7 +10,7 @@ import br.com.goncalves.pugnotification.utils.Utils;
 public abstract class Basic {
     private static final String TAG = Basic.class.getSimpleName();
     protected final PugNotification mSingleton;
-    protected Notification mNotificaton;
+    protected Notification mNotification;
     protected Builder mBuilder;
     protected int mIdentifier;
 
@@ -21,7 +21,10 @@ public abstract class Basic {
     }
 
     public void build() {
-        mNotificaton = mBuilder.build();
+        mNotification = mBuilder.build();
+        mNotification.defaults |= Notification.DEFAULT_LIGHTS;
+        mNotification.defaults |= Notification.DEFAULT_VIBRATE;
+        mNotification.defaults |= Notification.DEFAULT_SOUND;
     }
 
     protected Notification notificationNotify() {
@@ -32,8 +35,8 @@ public abstract class Basic {
         NotificationManager notificationManager = (NotificationManager) mSingleton.mContext
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(identifier, mNotificaton);
-        return mNotificaton;
+        notificationManager.notify(identifier, mNotification);
+        return mNotification;
     }
 
 }

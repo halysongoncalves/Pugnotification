@@ -25,8 +25,8 @@ public class Simple extends Basic {
         Builder builder = new NotificationCompat.Builder(PugNotification.mSingleton.mContext);
         builder.setProgress(mMax, mProgress, mIndeterminate);
 
-        mNotificaton = builder.build();
-        mNotificaton.flags |= Notification.FLAG_NO_CLEAR;
+        mNotification = builder.build();
+        mNotification.flags |= Notification.FLAG_NO_CLEAR;
         notificationNotify(identifier);
         return this;
     }
