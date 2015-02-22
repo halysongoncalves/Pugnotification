@@ -1,5 +1,7 @@
 package br.com.goncalves.pugnotification.notification;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -37,6 +39,7 @@ public class Load {
         this.mBuilder.setSmallIcon(R.drawable.pugnotification_ic_launcher);
         this.mBuilder.setLargeIcon(BitmapFactory.decodeResource(mNotification.mContext.getResources(),
                 R.drawable.pugnotification_ic_launcher));
+        this.mBuilder.setContentIntent(PendingIntent.getBroadcast(mNotification.mContext, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
     public Load identifier(int identifier) {
@@ -109,6 +112,15 @@ public class Load {
 
         this.mMessage = message;
         this.mBuilder.setContentText(message);
+        return this;
+    }
+
+    public Load color(int color) {
+        if (color <= 0) {
+            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
+        }
+
+        this.mBuilder.setColor(color);
         return this;
     }
 

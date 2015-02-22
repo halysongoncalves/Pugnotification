@@ -18,6 +18,7 @@ public class Custom extends Basic {
     private String mUri;
     private int mSmallIcon;
     private int mBackgroundResId;
+    private int mPlaceHolderResourceId;
 
     public Custom(Builder builder, int identifier, String title, String message, int smallIcon) {
         super(builder, identifier);
@@ -25,6 +26,7 @@ public class Custom extends Basic {
         this.mTitle = title;
         this.mMessage = message;
         this.mSmallIcon = smallIcon;
+        this.mPlaceHolderResourceId = R.drawable.pugnotification_ic_placeholder;
         this.init();
     }
 
@@ -62,6 +64,15 @@ public class Custom extends Basic {
         return this;
     }
 
+    public Custom setPlaceholder(int resource) {
+        if (resource <= 0) {
+            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
+        }
+
+        this.mPlaceHolderResourceId = resource;
+        return this;
+    }
+
     public Custom background(String uri) {
         if (mBackgroundResId > 0) {
             throw new IllegalStateException("Background Already Set!");
@@ -85,17 +96,17 @@ public class Custom extends Basic {
     @Override
     public void build() {
         super.build();
-        mNotification.bigContentView = mRemoteView;
-
+        setBigContentView(mRemoteView);
         loadImageBackground();
     }
 
     private final void loadImageBackground() {
         if (mUri != null) {
             Picasso.with(mSingleton.mContext).load(mUri).placeholder(R.drawable.pugnotification_ic_placeholder)
-                    .into(mRemoteView, R.id.notification_img_background, 0, mNotification);
+                    .into(mRemoteView, R.id.notification_img_background, mIdentifier, mNotification);
         } else {
             Picasso.with(mSingleton.mContext).load(mBackgroundResId).placeholder(R.drawable.pugnotification_ic_placeholder)
-                    .into(mRemoteView, R.id.notification_img_background, 0, mNotification);        }
+                    .into(mRemoteView, R.id.notification_img_background, mIdentifier, mNotification);
+        }
     }
 }
