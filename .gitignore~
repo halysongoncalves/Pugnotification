@@ -77,4 +77,8 @@ local.properties
 # Log Files
 *.log
 
+#Ignorando SVN!!
+**/.svn/
+.svn/
+
 *.DS_Store
