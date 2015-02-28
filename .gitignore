@@ -14,24 +14,24 @@
 # if you remove the above rule, at least ignore the follwing:
 
 # User-specific stuff:
-# .idea/workspace.xml
-# .idea/tasks.xml
-# .idea/dictionaries
+ .idea/workspace.xml
+ .idea/tasks.xml
+ .idea/dictionaries
 
 # Sensitive or high-churn files:
-# .idea/dataSources.ids
-# .idea/dataSources.xml
-# .idea/sqlDataSources.xml
-# .idea/dynamic.xml
-# .idea/uiDesigner.xml
+ .idea/dataSources.ids
+ .idea/dataSources.xml
+ .idea/sqlDataSources.xml
+ .idea/dynamic.xml
+ .idea/uiDesigner.xml
 
 # Gradle:
-# .idea/gradle.xml
-# .idea/libraries
+ .idea/gradle.xml
+ .idea/libraries
 
 ## File-based project format:
-# *.ipr
-# *.iws
+ *.ipr
+ *.iws
 
 ## Plugin-specific files:
 
@@ -56,7 +56,7 @@ build/
 ### Android ###
 # Built application files
 *.apk
-# *.ap_
+ *.ap_
 
 # Files for the Dalvik VM
 *.dex
