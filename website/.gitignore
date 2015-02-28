@@ -1,0 +1,31 @@
+# Eclipse
+.classpath
+.project
+.settings
+eclipsebin
+
+# Ant
+bin
+gen
+build
+out
+lib
+
+# Maven
+target
+pom.xml.*
+release.properties
+coverage.ec
+
+# IntelliJ
+.idea
+*.iml
+*.iws
+*.ipr
+classes
+gen-external-apklibs
+
+# Robolectric
+tmp
+
+.DS_Store
