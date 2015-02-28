@@ -1,8 +1,0 @@
-<resources>
-    <string name="pugnotification_text_notification">Notification</string>
-    <string name="pugnotification_text_notification_custom">Notification Custom</string>
-    <string name="pugnotification_text_title">Title</string>
-    <string name="pugnotification_text_message">Message</string>
-    <string name="pugnotification_text_description_image_icon">Small Icon</string>
-    <string name="pugnotificationtext_description_image_background">Background</string>
-</resources>
