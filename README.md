@@ -65,7 +65,7 @@ PugNotification.with(context)
 
 ### Custom Notification
 
-PugNotification supports placeholders if download the image in the background is not successful. The bibilioteca already have a default placeholder size 622x384.
+PugNotification supports placeholders if download the image in the background is not successful. The library already have a default placeholder size 622x384.
 
 ```java
 PugNotification.with(context)
@@ -120,4 +120,4 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[1]: https://search.maven.org/
+[1]: http://repo1.maven.org/maven2/com/github/halysongoncalves/pugnotification/1.0.1/pugnotification-1.0.1.aar
