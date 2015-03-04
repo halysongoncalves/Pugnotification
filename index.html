@@ -89,7 +89,7 @@
     .build();
     		</pre>
             <h4>Place Holders</h4>
-            <p>PugNotification supports placeholders if download the image in the background is not successful. The bibilioteca already have a default placeholder size 622x384.</p>
+            <p>PugNotification supports placeholders if download the image in the background is not successful. The library already have a default placeholder size 622x384.</p>
             <pre class-"prettyprint">PugNotification.with(context)
     .load()
     .title(title)
@@ -105,7 +105,12 @@
 
             <p>Using the picasso library for working with images. The request will be repeated three times before the error placeholder is shown.</p>
 
-            <h6 id="download">Download</h6>
+
+
+              <h6 id="proguard">Proguard</h6>
+              <p>If you are using ProGuard make sure you add the following option:</p>
+              <pre class="prettyprint">-dontwarn com.squareup.okhttp.**</pre>
+              <h6 id="download">Download</h6>
             <p><a href="https://search.maven.org/remote_content?g=com.github.halysongoncalves&a=pugnotification&v=LATEST" class="dl version-href">&darr; <span class="version-tag">Latest</span> JAR</a></p>
             <p>The source code to the PugNotification, its samples, and this website is <a href="https://github.com/halysongoncalves/PugNotification">available on GitHub</a>.</p>
 
