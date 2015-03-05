@@ -1,8 +1,10 @@
-### PugNotification
+# PugNotification
+=================
 
 ![Screenshots](https://raw.githubusercontent.com/halysongoncalves/pugnotification/master/art/screencshot.png)
 
 ### Download
+============
 
 Download [the latest JAR][1] or grab via Maven:
 ```xml
@@ -16,9 +18,9 @@ or Gradle:
 ```groovy
 compile 'com.github.halysongoncalves:pugnotification:1.0.1'
 ```
----
 
 ### Introduction
+================
 
 You're probably tired of writing code to display notifications in your applications, the library abstracts all the notifications construction process for you in a single line of code. Magic? Lie? I summarize in: productivity.
 
@@ -42,9 +44,9 @@ Handling ImageView recycling and download cancelation in an adapter.
 Complex image transformations with minimal memory use.
 Automatic memory and disk caching.
 
----
 
 ### Simple Notification
+=======================
 
 Simple notification with just text and message.
 
@@ -61,9 +63,9 @@ PugNotification.with(context)
     .build();
 ```
 
----
 
 ### Custom Notification
+=======================
 
 PugNotification supports placeholders if download the image in the background is not successful. The library already have a default placeholder size 622x384.
 
@@ -83,9 +85,9 @@ PugNotification.with(context)
 
 Using the picasso library for working with images. The request will be repeated three times before the error placeholder is shown.
 
----
 
 ### ProGuard 
+============
 
 If you are using ProGuard make sure you add the following option:
 
@@ -93,18 +95,16 @@ If you are using ProGuard make sure you add the following option:
 -dontwarn com.squareup.okhttp.**
 ```
 
----
-
 ### Contributing
+=================
 
 If you would like to contribute code you can do so through GitHub by forking the repository and sending a pull request.
 
 When submitting code, please make every effort to follow existing conventions and style in order to keep the code as readable as possible. Please also make sure your code compiles by running gradlew clean and gradlew assemble.
 
----
 
 License
---------
+=================
 
     Copyright 2013 Halyson L. Gonçalves, Inc.
 
