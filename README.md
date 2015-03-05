@@ -1,7 +1,6 @@
-# PugNotification
-=================
+### PugNotification
 
-![Screenshots](https://github.com/halysongoncalves/pugnotification/blob/master/art/screenshots1.png)
+![Screenshots](https://raw.githubusercontent.com/halysongoncalves/pugnotification/master/art/screencshot.png)
 
 ### Download
 
