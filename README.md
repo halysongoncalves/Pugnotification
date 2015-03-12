@@ -9,12 +9,12 @@ Download [the latest JAR][1] or grab via Maven:
 <dependency>
   <groupId>com.github.halysongoncalves</groupId>
   <artifactId>pugnotification</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-compile 'com.github.halysongoncalves:pugnotification:1.0.1'
+compile 'com.github.halysongoncalves:pugnotification:1.0.2'
 ```
 
 # Introduction
@@ -112,4 +112,4 @@ When submitting code, please make every effort to follow existing conventions an
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[1]: http://repo1.maven.org/maven2/com/github/halysongoncalves/pugnotification/1.0.1/pugnotification-1.0.1.aar
+[1]: http://repo1.maven.org/maven2/com/github/halysongoncalves/pugnotification/1.0.2/pugnotification-1.0.2.aar
