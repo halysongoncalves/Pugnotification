@@ -18,6 +18,7 @@ public class SamplePugNotification extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
         setContentView(R.layout.pugnotification_sample_activity);
 
         loadInfoComponents();
