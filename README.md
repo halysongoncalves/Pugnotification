@@ -1,4 +1,5 @@
 # PugNotification
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.clans/fab/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.0.2|) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-fab-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1522)
 
 ![Screenshots](https://raw.githubusercontent.com/halysongoncalves/pugnotification/master/art/screencshot.png)
 
