@@ -202,6 +202,16 @@ public class Load {
         return this;
     }
 
+    public Load largeIcon(int largeIcon) {
+        if (largeIcon <= 0) {
+            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
+        }
+
+        Bitmap bitmap = BitmapFactory.decodeResource(mNotification.mContext.getResources(), largeIcon);
+        this.mBuilder.setLargeIcon(bitmap);
+        return this;
+    }
+
     public Load vibrate(long[] vibrate) {
         for (int count = 0; count < vibrate.length; count++) {
             if (vibrate[count] <= 0) {
