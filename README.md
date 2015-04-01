@@ -1,5 +1,6 @@
 # PugNotification
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.0.2|) [![Android [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PugNotification-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1688)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.0.2|) 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PugNotification-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1688)
 
 ![Screenshots](https://raw.githubusercontent.com/halysongoncalves/pugnotification/master/art/screencshot.png)
 
