@@ -18,6 +18,7 @@ public class SamplePugNotification extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
         setContentView(R.layout.pugnotification_sample_activity);
 
         loadInfoComponents();
@@ -44,7 +45,7 @@ public class SamplePugNotification extends ActionBarActivity {
                 PugNotification.with(mContext).load()
                         .smallIcon(R.drawable.pugnotification_ic_launcher)
                         .autoCancel(true)
-                        .largeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.pugnotification_ic_launcher))
+                        .largeIcon(R.drawable.pugnotification_ic_launcher)
                         .title(title)
                         .message(message)
                         .bigTextStyle(bigtext)
@@ -66,7 +67,7 @@ public class SamplePugNotification extends ActionBarActivity {
                         .message(message)
                         .bigTextStyle(bigtext)
                         .smallIcon(R.drawable.pugnotification_ic_launcher)
-                        .largeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.pugnotification_ic_launcher))
+                        .largeIcon(R.drawable.pugnotification_ic_launcher)
                         .color(android.R.color.holo_green_dark)
                         .custom()
                         .background(url)

@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    compile 'com.github.halysongoncalves:notification:1.0.0'
+    compile project(':pugnotification')
     compile 'com.android.support:appcompat-v7:21.0.3'
 
 }
