@@ -1,1 +1,1 @@
-include ':pugnotification', 'pugnotification-sample'
+include 'pugnotification-sample', 'pugnotification'

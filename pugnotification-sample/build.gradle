@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "20.0.0"
+    compileSdkVersion 22
+    buildToolsVersion "22.0.0"
 
     defaultConfig {
         applicationId "br.com.goncalves.pugnotification.sample"
         minSdkVersion 10
-        targetSdkVersion 21
-        versionCode 1
-        versionName "1.0.0"
+        targetSdkVersion 22
+        versionCode 3
+        versionName "1.1.0"
     }
 
     buildTypes {
@@ -35,6 +35,6 @@ android {
 
 dependencies {
     compile project(':pugnotification')
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:appcompat-v7:22.0.0'
 
 }
