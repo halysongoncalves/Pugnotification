@@ -1,16 +1,17 @@
 package br.com.goncalves.pugnotification.notification;
 
 import android.annotation.TargetApi;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.widget.RemoteViews;
 
-import com.squareup.picasso.Picasso;
-
 import br.com.goncalves.pugnotification.R;
+import br.com.goncalves.pugnotification.interfaces.ImageLoader;
+import br.com.goncalves.pugnotification.interfaces.OnImageLoadingCompleted;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public class Custom extends Basic {
+public class Custom extends Basic implements OnImageLoadingCompleted {
     private static final String TAG = Custom.class.getSimpleName();
     private RemoteViews mRemoteView;
     private String mTitle;
@@ -19,6 +20,7 @@ public class Custom extends Basic {
     private int mSmallIcon;
     private int mBackgroundResId;
     private int mPlaceHolderResourceId;
+    private ImageLoader mImageLoader;
 
     public Custom(Builder builder, int identifier, String title, String message, int smallIcon) {
         super(builder, identifier);
@@ -73,6 +75,11 @@ public class Custom extends Basic {
         return this;
     }
 
+    public Custom setImageLoader(ImageLoader imageLoader) {
+        this.mImageLoader = imageLoader;
+        return this;
+    }
+
     public Custom background(String uri) {
         if (mBackgroundResId > 0) {
             throw new IllegalStateException("Background Already Set!");
@@ -89,6 +96,10 @@ public class Custom extends Basic {
             throw new IllegalArgumentException("Path Must Not Be Empty!");
         }
 
+        if (mImageLoader == null) {
+            throw new IllegalStateException("You have to set an ImageLoader!");
+        }
+
         this.mUri = uri;
         return this;
     }
@@ -98,15 +109,24 @@ public class Custom extends Basic {
         super.build();
         setBigContentView(mRemoteView);
         loadImageBackground();
+        super.notificationNotify();
     }
 
     private final void loadImageBackground() {
+        mRemoteView.setImageViewResource(R.id.notification_img_background, mPlaceHolderResourceId);
         if (mUri != null) {
-            Picasso.with(mSingleton.mContext).load(mUri).placeholder(R.drawable.pugnotification_ic_placeholder)
-                    .into(mRemoteView, R.id.notification_img_background, mIdentifier, mNotification);
+            mImageLoader.load(mUri, this);
         } else {
-            Picasso.with(mSingleton.mContext).load(mBackgroundResId).placeholder(R.drawable.pugnotification_ic_placeholder)
-                    .into(mRemoteView, R.id.notification_img_background, mIdentifier, mNotification);
+            mImageLoader.load(mBackgroundResId, this);
         }
+    }
+
+    @Override
+    public void imageLoadingCompleted(Bitmap bitmap) {
+        if (bitmap == null) {
+            throw new IllegalArgumentException("bitmap cannot be null");
+        }
+        mRemoteView.setImageViewBitmap(R.id.notification_img_background, bitmap);
+        super.notificationNotify();
     }
 }
