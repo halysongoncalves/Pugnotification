@@ -112,7 +112,7 @@ public class Custom extends Basic implements OnImageLoadingCompleted {
         super.notificationNotify();
     }
 
-    private final void loadImageBackground() {
+    private void loadImageBackground() {
         mRemoteView.setImageViewResource(R.id.notification_img_background, mPlaceHolderResourceId);
         if (mUri != null) {
             mImageLoader.load(mUri, this);

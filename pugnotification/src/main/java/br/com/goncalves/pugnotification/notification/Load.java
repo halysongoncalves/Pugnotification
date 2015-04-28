@@ -213,9 +213,9 @@ public class Load {
     }
 
     public Load vibrate(long[] vibrate) {
-        for (int count = 0; count < vibrate.length; count++) {
-            if (vibrate[count] <= 0) {
-                throw new IllegalArgumentException("Vibrate Time " + vibrate[count] + " Invalid!");
+        for (long aVibrate : vibrate) {
+            if (aVibrate <= 0) {
+                throw new IllegalArgumentException("Vibrate Time " + aVibrate + " Invalid!");
             }
         }
 
