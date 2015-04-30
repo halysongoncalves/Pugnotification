@@ -3,7 +3,7 @@ package br.com.goncalves.pugnotification.notification;
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
 import br.com.goncalves.pugnotification.R;
@@ -22,7 +22,7 @@ public class Custom extends Basic implements OnImageLoadingCompleted {
     private int mPlaceHolderResourceId;
     private ImageLoader mImageLoader;
 
-    public Custom(Builder builder, int identifier, String title, String message, int smallIcon) {
+    public Custom(NotificationCompat.Builder builder, int identifier, String title, String message, int smallIcon) {
         super(builder, identifier);
         this.mRemoteView = new RemoteViews(PugNotification.mSingleton.mContext.getPackageName(), R.layout.pugnotification_custom);
         this.mTitle = title;
@@ -109,7 +109,6 @@ public class Custom extends Basic implements OnImageLoadingCompleted {
         super.build();
         setBigContentView(mRemoteView);
         loadImageBackground();
-        super.notificationNotify();
     }
 
     private void loadImageBackground() {

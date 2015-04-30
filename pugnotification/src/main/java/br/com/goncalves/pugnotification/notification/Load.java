@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationCompat.Builder;
 
 import br.com.goncalves.pugnotification.R;
 import br.com.goncalves.pugnotification.interfaces.PendingIntentNotification;
@@ -20,26 +19,26 @@ import br.com.goncalves.pugnotification.utils.Utils;
 public class Load {
     private static final String TAG = Load.class.getSimpleName();
     private final PugNotification mNotification;
-    private Builder mBuilder;
-    private int mIdentifier;
-    private String mTitle;
-    private String mMessage;
-    private int mSmallIcon;
+    private NotificationCompat.Builder builder;
+    private int notificationId;
+    private String title;
+    private String message;
+    private int smallIcon;
 
     public Load(PugNotification notification) {
         this.mNotification = Utils.isActiveSingleton(notification);
-        this.mBuilder = new NotificationCompat.Builder(mNotification.mContext);
+        this.builder = new NotificationCompat.Builder(mNotification.mContext);
         this.createNotifationDefault();
     }
 
     private void createNotifationDefault() {
-        this.mIdentifier = Utils.radom();
-        this.mBuilder.setContentTitle("");
-        this.mBuilder.setContentText("");
-        this.mBuilder.setSmallIcon(R.drawable.pugnotification_ic_launcher);
-        this.mBuilder.setLargeIcon(BitmapFactory.decodeResource(mNotification.mContext.getResources(),
+        this.notificationId = Utils.radom();
+        this.builder.setContentTitle("");
+        this.builder.setContentText("");
+        this.builder.setSmallIcon(R.drawable.pugnotification_ic_launcher);
+        this.builder.setLargeIcon(BitmapFactory.decodeResource(mNotification.mContext.getResources(),
                 R.drawable.pugnotification_ic_launcher));
-        this.mBuilder.setContentIntent(PendingIntent.getBroadcast(mNotification.mContext, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT));
+        this.builder.setContentIntent(PendingIntent.getBroadcast(mNotification.mContext, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
     public Load identifier(int identifier) {
@@ -47,7 +46,7 @@ public class Load {
             throw new IllegalStateException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        this.mIdentifier = identifier;
+        this.notificationId = identifier;
         return this;
     }
 
@@ -56,17 +55,17 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        if (mTitle != null) {
+        if (this.title != null) {
             throw new IllegalStateException("Title Already Set!");
         }
 
-        this.mTitle = mNotification.mContext.getResources().getString(title);
-        this.mBuilder.setContentTitle(mTitle);
+        this.title = mNotification.mContext.getResources().getString(title);
+        this.builder.setContentTitle(this.title);
         return this;
     }
 
     public Load title(String title) {
-        if (mTitle != null) {
+        if (this.title != null) {
             throw new IllegalStateException("Title Already Set!");
         }
 
@@ -78,8 +77,8 @@ public class Load {
             throw new IllegalArgumentException("Title Must Not Be Empty!");
         }
 
-        this.mTitle = title;
-        this.mBuilder.setContentTitle(mTitle);
+        this.title = title;
+        this.builder.setContentTitle(this.title);
         return this;
     }
 
@@ -88,17 +87,17 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        if (mMessage != null) {
+        if (this.message != null) {
             throw new IllegalStateException("Message Already Set!");
         }
 
-        this.mMessage = mNotification.mContext.getResources().getString(message);
-        this.mBuilder.setContentText(mMessage);
+        this.message = mNotification.mContext.getResources().getString(message);
+        this.builder.setContentText(this.message);
         return this;
     }
 
     public Load message(String message) {
-        if (mMessage != null) {
+        if (this.message != null) {
             throw new IllegalStateException("Message already set.");
         }
 
@@ -110,8 +109,8 @@ public class Load {
             throw new IllegalArgumentException("Message Must Not Be Empty!");
         }
 
-        this.mMessage = message;
-        this.mBuilder.setContentText(message);
+        this.message = message;
+        this.builder.setContentText(message);
         return this;
     }
 
@@ -120,7 +119,7 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        this.mBuilder.setColor(color);
+        this.builder.setColor(color);
         return this;
     }
 
@@ -129,7 +128,7 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        this.mBuilder.setTicker(mNotification.mContext.getResources().getString(ticker));
+        this.builder.setTicker(mNotification.mContext.getResources().getString(ticker));
         return this;
     }
 
@@ -142,7 +141,7 @@ public class Load {
             throw new IllegalArgumentException("Ticker Must Not Be Empty!");
         }
 
-        this.mBuilder.setTicker(ticker);
+        this.builder.setTicker(ticker);
         return this;
     }
 
@@ -151,7 +150,7 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        this.mBuilder.setWhen(when);
+        this.builder.setWhen(when);
         return this;
     }
 
@@ -160,7 +159,7 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        this.mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(mNotification.mContext.getResources().getString(
+        this.builder.setStyle(new NotificationCompat.BigTextStyle().bigText(mNotification.mContext.getResources().getString(
                 bigTextStyle)));
         return this;
     }
@@ -174,12 +173,12 @@ public class Load {
             throw new IllegalArgumentException("Big Text Style Must Not Be Empty!");
         }
 
-        this.mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText((bigTextStyle)));
+        this.builder.setStyle(new NotificationCompat.BigTextStyle().bigText((bigTextStyle)));
         return this;
     }
 
     public Load autoCancel(boolean autoCancel) {
-        this.mBuilder.setAutoCancel(autoCancel);
+        this.builder.setAutoCancel(autoCancel);
         return this;
     }
 
@@ -188,8 +187,8 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        this.mSmallIcon = smallIcon;
-        this.mBuilder.setSmallIcon(mSmallIcon);
+        this.smallIcon = smallIcon;
+        this.builder.setSmallIcon(this.smallIcon);
         return this;
     }
 
@@ -198,7 +197,7 @@ public class Load {
             throw new IllegalArgumentException("Bitmap Must Not Be Null.");
         }
 
-        this.mBuilder.setLargeIcon(bitmap);
+        this.builder.setLargeIcon(bitmap);
         return this;
     }
 
@@ -208,7 +207,7 @@ public class Load {
         }
 
         Bitmap bitmap = BitmapFactory.decodeResource(mNotification.mContext.getResources(), largeIcon);
-        this.mBuilder.setLargeIcon(bitmap);
+        this.builder.setLargeIcon(bitmap);
         return this;
     }
 
@@ -219,7 +218,7 @@ public class Load {
             }
         }
 
-        this.mBuilder.setVibrate(vibrate);
+        this.builder.setVibrate(vibrate);
         return this;
     }
 
@@ -232,7 +231,7 @@ public class Load {
             throw new IllegalStateException("Led Off Milliseconds Invalid!");
         }
 
-        this.mBuilder.setLights(color, ledOnMs, ledOfMs);
+        this.builder.setLights(color, ledOnMs, ledOfMs);
         return this;
     }
 
@@ -241,7 +240,7 @@ public class Load {
             throw new IllegalArgumentException("Sound Must Not Be Null.");
         }
 
-        this.mBuilder.setSound(sound);
+        this.builder.setSound(sound);
         return this;
     }
 
@@ -250,7 +249,7 @@ public class Load {
             throw new IllegalArgumentException("Activity Must Not Be Null.");
         }
 
-        this.mBuilder.setContentIntent(new ClickPendingIntentActivity(activity, bundle, mIdentifier).onSettingPendingIntent());
+        this.builder.setContentIntent(new ClickPendingIntentActivity(activity, bundle, notificationId).onSettingPendingIntent());
         return this;
     }
 
@@ -264,7 +263,7 @@ public class Load {
             throw new IllegalArgumentException("Bundle Must Not Be Null.");
         }
 
-        this.mBuilder.setContentIntent(new ClickPendingIntentBroadCast(bundle, mIdentifier).onSettingPendingIntent());
+        this.builder.setContentIntent(new ClickPendingIntentBroadCast(bundle, notificationId).onSettingPendingIntent());
         return this;
     }
 
@@ -273,7 +272,7 @@ public class Load {
             throw new IllegalArgumentException("PendingIntentNotification Must Not Be Null.");
         }
 
-        this.mBuilder.setContentIntent(pendingIntentNotification.onSettingPendingIntent());
+        this.builder.setContentIntent(pendingIntentNotification.onSettingPendingIntent());
         return this;
     }
 
@@ -282,7 +281,7 @@ public class Load {
             throw new IllegalArgumentException("Activity Must Not Be Null.");
         }
 
-        this.mBuilder.setDeleteIntent(new DismissPendingIntentActivity(activity, bundle, mIdentifier).onSettingPendingIntent());
+        this.builder.setDeleteIntent(new DismissPendingIntentActivity(activity, bundle, notificationId).onSettingPendingIntent());
         return this;
     }
 
@@ -296,7 +295,7 @@ public class Load {
             throw new IllegalArgumentException("Bundle Must Not Be Null.");
         }
 
-        this.mBuilder.setDeleteIntent(new DismissPendingIntentBroadCast(bundle, mIdentifier).onSettingPendingIntent());
+        this.builder.setDeleteIntent(new DismissPendingIntentBroadCast(bundle, notificationId).onSettingPendingIntent());
         return this;
     }
 
@@ -305,16 +304,16 @@ public class Load {
             throw new IllegalArgumentException("Pending Intent Notification Must Not Be Null.");
         }
 
-        this.mBuilder.setDeleteIntent(pendingIntentNotification.onSettingPendingIntent());
+        this.builder.setDeleteIntent(pendingIntentNotification.onSettingPendingIntent());
         return this;
     }
 
     public Custom custom() {
         Utils.checkMain();
-        return new Custom(mBuilder, mIdentifier, mTitle, mMessage, mSmallIcon);
+        return new Custom(builder, notificationId, title, message, smallIcon);
     }
 
     public Simple simple() {
-        return new Simple(mBuilder, mIdentifier);
+        return new Simple(builder, notificationId);
     }
 }

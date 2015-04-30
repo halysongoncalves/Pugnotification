@@ -16,7 +16,7 @@ public class Simple extends Basic {
 
     @Override
     public void build() {
-        mBuilder.setProgress(mMax, mProgress, mIndeterminate);
+        builder.setProgress(mMax, mProgress, mIndeterminate);
         super.build();
         super.notificationNotify();
     }
@@ -25,8 +25,8 @@ public class Simple extends Basic {
         Builder builder = new NotificationCompat.Builder(PugNotification.mSingleton.mContext);
         builder.setProgress(mMax, mProgress, mIndeterminate);
 
-        mNotification = builder.build();
-        mNotification.flags |= Notification.FLAG_NO_CLEAR;
+        notification = builder.build();
+        notification.flags |= Notification.FLAG_NO_CLEAR;
         notificationNotify(identifier);
         return this;
     }
