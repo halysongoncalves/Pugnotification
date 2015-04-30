@@ -60,5 +60,4 @@ public class PugNotification {
             return new PugNotification(mContext);
         }
     }
-
 }

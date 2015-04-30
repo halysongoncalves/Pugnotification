@@ -276,6 +276,15 @@ public class Load {
         return this;
     }
 
+    public Load button(NotificationCompat.Action action) {
+        if (action == null) {
+            throw new IllegalArgumentException("Action Must Not Be Null.");
+        }
+
+        this.builder.addAction(action);
+        return this;
+    }
+
     public Load click(Class<?> activity, Bundle bundle) {
         if (activity == null) {
             throw new IllegalArgumentException("Activity Must Not Be Null.");

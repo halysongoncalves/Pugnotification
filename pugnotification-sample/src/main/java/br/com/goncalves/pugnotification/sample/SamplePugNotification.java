@@ -76,7 +76,7 @@ public class SamplePugNotification extends ActionBarActivity implements ImageLoa
                         .bigTextStyle(bigtext)
                         .smallIcon(R.drawable.pugnotification_ic_launcher)
                         .largeIcon(R.drawable.pugnotification_ic_launcher)
-                        .color(android.R.color.holo_green_dark)
+                        .color(android.R.color.background_dark)
                         .custom()
                         .setImageLoader(SamplePugNotification.this)
                         .background(url)
