@@ -244,6 +244,38 @@ public class Load {
         return this;
     }
 
+    public Load button(int icon, String title, PendingIntent pendingIntent) {
+        if (icon < 0) {
+            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
+        }
+
+        if (title == null) {
+            throw new IllegalStateException("Title Must Not Be Null!");
+        }
+        if (pendingIntent == null) {
+            throw new IllegalArgumentException("PendingIntent Must Not Be Null.");
+        }
+
+        this.builder.addAction(icon, title, pendingIntent);
+        return this;
+    }
+
+    public Load button(int icon, String title, PendingIntentNotification pendingIntentNotification) {
+        if (icon < 0) {
+            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
+        }
+
+        if (title == null) {
+            throw new IllegalStateException("Title Must Not Be Null!");
+        }
+        if (pendingIntentNotification == null) {
+            throw new IllegalArgumentException("PendingIntentNotification Must Not Be Null.");
+        }
+
+        this.builder.addAction(icon, title, pendingIntentNotification.onSettingPendingIntent());
+        return this;
+    }
+
     public Load click(Class<?> activity, Bundle bundle) {
         if (activity == null) {
             throw new IllegalArgumentException("Activity Must Not Be Null.");
