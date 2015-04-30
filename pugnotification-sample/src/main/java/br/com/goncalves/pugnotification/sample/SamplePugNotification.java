@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +16,7 @@ import br.com.goncalves.pugnotification.interfaces.ImageLoader;
 import br.com.goncalves.pugnotification.interfaces.OnImageLoadingCompleted;
 import br.com.goncalves.pugnotification.notification.PugNotification;
 
-public class SamplePugNotification extends ActionBarActivity implements ImageLoader {
+public class SamplePugNotification extends AppCompatActivity implements ImageLoader {
     private EditText mEdtTitle, mEdtMessage, mEdtBigText, mEdtUrl;
     private Button mBtnNotifySimple, mBtnNotifyCustom;
     private Context mContext;
