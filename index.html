@@ -50,12 +50,7 @@
               <li>Custom Notifications depend on <code>RemoteViews</code> and Android has RemoteView support for Api's below Jelly Bean.</li>
               <li>Notifications without no messages and title does not make sense there.</li>
             </ul>
-			<p>In addition to these treatments, there are other held by Picasso Library Square:</p>
-              <li>Handling <code>ImageView</code> recycling and download cancelation in an adapter.</li>
-              <li>Complex image transformations with minimal memory use.</li>
-              <li>Automatic memory and disk caching.</li>
-            </ul>
-            <p class="screenshot">
+		    <p class="screenshot">
 				<img src="image/screen2.png" alt="Sample application screenshot.">
 				<img src="image/screen1.png" alt="Sample application screenshot.">
 			</p>
@@ -76,7 +71,8 @@
             </pre>
 
             <h4>Custom Notification</h4>
-            <p>Custom notification with background.</p>
+            <p>We have changed the way the library handles the download images for custom notifications. Previously disrespectfully because of the Picasso library. But many users were asking for the option of being able to choose how to download the image. So we serve the requests and modify the library to allow the download of image management as an example:
+            </p>
             <pre class="prettyprint">PugNotification.with(context)
     .load()
     .title(title)
@@ -86,29 +82,38 @@
     .largeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.pugnotification_ic_launcher))
     .custom()
     .background(url)
+    .setImageLoader(Callback)
+    .setPlaceholder(R.drawable.pugnotification_ic_placeholder)
     .build();
     		</pre>
-            <h4>Place Holders</h4>
-            <p>PugNotification supports placeholders if download the image in the background is not successful. The library already have a default placeholder size 622x384.</p>
-            <pre class-"prettyprint">PugNotification.with(context)
-    .load()
-    .title(title)
-    .message(message)
-    .bigTextStyle(bigtext)
-    .smallIcon(R.drawable.pugnotification_ic_launcher)
-    .largeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.pugnotification_ic_launcher))
-    .custom()
-    .background(url)
-    .setPlaceholder(R.drawable.pugnotification_ic_placeholder)
-    .build();    		
+              <p>Now just the client implement the ImageLoader interface and implement a way to manage the download of the image. Below we use the Picasso:
+              </p>
+         <pre class="prettyprint">
+    @Override
+    public void load(String uri, final OnImageLoadingCompleted onCompleted) {
+    	viewTarget = getViewTarget(onCompleted);
+        Picasso.with(this).load(uri).into(viewTarget);
+    }
+    private static Target getViewTarget(final OnImageLoadingCompleted onCompleted) {
+        return new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                onCompleted.imageLoadingCompleted(bitmap);
+            }
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+            }
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+            }
+        };
+    }
     		</pre>
-
-            <p>Using the picasso library for working with images. The request will be repeated three times before the error placeholder is shown.</p>
-
-
+            
+            <p>PugNotification supports placeholders if download the image in the background is not successful. The library already have a default placeholder size 622x384.</p>
 
               <h6 id="proguard">Proguard</h6>
-              <p>If you are using ProGuard make sure you add the following option:</p>
+              <p>If you use the Picasso to manage the download of the image, add the line below to your proguard file:</p>
               <pre class="prettyprint">-dontwarn com.squareup.okhttp.**</pre>
               <h6 id="download">Download</h6>
             <p><a href="https://search.maven.org/remote_content?g=com.github.halysongoncalves&a=pugnotification&v=LATEST" class="dl version-href">&darr; <span class="version-tag">Latest</span> AAR</a></p>
