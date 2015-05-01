@@ -26,9 +26,22 @@ You're probably tired of writing code to display notifications in your applicati
 ```java
 PugNotification.with(context)
     .load()
+    .identifier(identifier)
     .title(title)
     .message(message)
     .bigTextStyle(bigtext)
+    .smallIcon(smallIcon)
+    .largeIcon(largeIcon)
+    .button(icon, title, pendingIntent)
+    .click(cctivity, bundle)
+    .dismiss(activity, bundle)
+    .color(color)
+    .ticker(ticker)
+    .when(when)
+    .vibrate(vibrate)
+    .lights(color, ledOnMs, ledOfMs)
+    .sound(sound) 
+    .autoCancel(autoCancel)
     .simple()
     .build();
 ```
@@ -64,7 +77,8 @@ PugNotification.with(context)
 
 # Custom Notification
 
-PugNotification supports placeholders if download the image in the background is not successful. The library already have a default placeholder size 622x384.
+We have changed the way the library handles the download images for custom notifications. Previously disrespectfully because of the Picasso library. But many users were asking for the option of being able to choose how to download the image.
+So we serve the requests and modify the library to allow the download of image management as an example:
 
 ```java
 PugNotification.with(context)
@@ -74,13 +88,39 @@ PugNotification.with(context)
     .bigTextStyle(bigtext)
     .smallIcon(R.drawable.pugnotification_ic_launcher)
     .largeIcon(R.drawable.pugnotification_ic_launcher)
+    .color(android.R.color.background_dark)
     .custom()
     .background(url)
+    .setImageLoader(Callback)
     .setPlaceholder(R.drawable.pugnotification_ic_placeholder)
     .build();  
 ```
+Now just the client implement the ImageLoader interface and implement a way to manage the download of the image. Below we use the Picasso:
+```java
+    @Override
+    public void load(String uri, final OnImageLoadingCompleted onCompleted) {
+        viewTarget = getViewTarget(onCompleted);
+        Picasso.with(this).load(uri).into(viewTarget);
+    }
+    
+    private static Target getViewTarget(final OnImageLoadingCompleted onCompleted) {
+        return new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                onCompleted.imageLoadingCompleted(bitmap);
+            }
 
-Using the picasso library for working with images. The request will be repeated three times before the error placeholder is shown.
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+            }
+        };
+    }
+```
+PugNotification supports placeholders if download the image in the background is not successful. The library already have a default placeholder size 622x384.
 
 
 # ProGuard
@@ -114,4 +154,4 @@ When submitting code, please make every effort to follow existing conventions an
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[1]: http://repo1.maven.org/maven2/com/github/halysongoncalves/pugnotification/1.0.2/pugnotification-1.1.0.aar
+[1]: http://repo1.maven.org/maven2/com/github/halysongoncalves/pugnotification/1.1.0/pugnotification-1.1.0.aar
