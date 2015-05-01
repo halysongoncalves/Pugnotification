@@ -1,5 +1,5 @@
 # PugNotification
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.0.2|) 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.1.0|) 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PugNotification-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1688)
 
 ![Screenshots](https://raw.githubusercontent.com/halysongoncalves/pugnotification/master/art/screencshot.png)
@@ -11,12 +11,12 @@ Download [the latest AAR][1] or grab via Maven:
 <dependency>
   <groupId>com.github.halysongoncalves</groupId>
   <artifactId>pugnotification</artifactId>
-  <version>1.0.2</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-compile 'com.github.halysongoncalves:pugnotification:1.0.2'
+compile 'com.github.halysongoncalves:pugnotification:1.1.0'
 ```
 
 # Introduction
@@ -85,7 +85,7 @@ Using the picasso library for working with images. The request will be repeated 
 
 # ProGuard
 
-If you are using ProGuard make sure you add the following option:
+If you use the Picasso to manage the download of the image, add the line below to your proguard file:
 
 ```
 -dontwarn com.squareup.okhttp.**
@@ -114,4 +114,4 @@ When submitting code, please make every effort to follow existing conventions an
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[1]: http://repo1.maven.org/maven2/com/github/halysongoncalves/pugnotification/1.0.2/pugnotification-1.0.2.aar
+[1]: http://repo1.maven.org/maven2/com/github/halysongoncalves/pugnotification/1.0.2/pugnotification-1.1.0.aar
