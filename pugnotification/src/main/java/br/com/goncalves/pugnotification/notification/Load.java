@@ -357,4 +357,8 @@ public class Load {
     public Simple simple() {
         return new Simple(builder, notificationId);
     }
+
+    public Wear wear() {
+        return new Wear(builder, notificationId);
+    }
 }

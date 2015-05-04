@@ -21,9 +21,9 @@ public class Wear extends Basic {
     private NotificationCompat.WearableExtender wearableExtender;
     private RemoteInput remoteInput;
 
-    public Wear(NotificationCompat.Builder builder, int identifier, PugNotification pugNotification1) {
+    public Wear(NotificationCompat.Builder builder, int identifier) {
         super(builder, identifier);
-        this.pugNotification = Utils.isActiveSingleton(pugNotification1);
+        this.pugNotification = Utils.isActiveSingleton(PugNotification.mSingleton);
         this.wearableExtender = new NotificationCompat.WearableExtender();
     }
 
