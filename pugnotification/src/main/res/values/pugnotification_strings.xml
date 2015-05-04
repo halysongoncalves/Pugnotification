@@ -4,5 +4,12 @@
     <string name="pugnotification_text_title">Title</string>
     <string name="pugnotification_text_message">Message</string>
     <string name="pugnotification_text_description_image_icon">Small Icon</string>
-    <string name="pugnotificationtext_description_image_background">Background</string>
+    <string name="pugnotification_text_description_image_background">Background</string>
+    <string name="pugnotification_key_voice_reply">extra_voice_reply</string>
+    <string name="pugnotification_label_voice_reply">Reply</string>
+    <string-array name="pugnotification_reply_choices">
+        <item>Yes</item>
+        <item>No</item>
+        <item>Maybe</item>
+    </string-array>
 </resources>

@@ -1,12 +1,16 @@
 package br.com.goncalves.pugnotification.notification;
 
 import android.app.Notification;
+import android.app.PendingIntent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.RemoteInput;
 
 import java.util.List;
 
+import br.com.goncalves.pugnotification.R;
+import br.com.goncalves.pugnotification.interfaces.PendingIntentNotification;
 import br.com.goncalves.pugnotification.utils.Utils;
 
 /**
@@ -15,6 +19,7 @@ import br.com.goncalves.pugnotification.utils.Utils;
 public class Wear extends Basic {
     private final PugNotification pugNotification;
     private NotificationCompat.WearableExtender wearableExtender;
+    private RemoteInput remoteInput;
 
     public Wear(NotificationCompat.Builder builder, int identifier, PugNotification pugNotification1) {
         super(builder, identifier);
@@ -28,12 +33,127 @@ public class Wear extends Basic {
     }
 
     public Wear setPages(Notification notification) {
+        if (notification == null) {
+            throw new IllegalArgumentException("Notification Must Not Be Null.");
+        }
+
         wearableExtender.addPage(notification);
         return this;
     }
 
-    public Wear setPages(List<Notification> listPages) {
-        wearableExtender.addPages(listPages);
+    public Wear setPages(List<Notification> notificationList) {
+        if (notificationList == null || notificationList.isEmpty()) {
+            throw new IllegalArgumentException("List Notitifcation Must Not Be Null And Empty!");
+        }
+
+        wearableExtender.addPages(notificationList);
+        return this;
+    }
+
+    public Wear setRemoteInput(int icon, int title, PendingIntentNotification pendingIntentNotification, RemoteInput remoteInput) {
+        setRemoteInput(icon, pugNotification.mContext.getString(title), pendingIntentNotification.onSettingPendingIntent(), remoteInput);
+        return this;
+    }
+
+    public Wear setRemoteInput(int icon, String title, PendingIntentNotification pendingIntentNotification, RemoteInput remoteInput) {
+        setRemoteInput(icon, title, pendingIntentNotification.onSettingPendingIntent(), remoteInput);
+        return this;
+    }
+
+    public Wear setRemoteInput(int icon, int title, PendingIntent pendingIntent, RemoteInput remoteInput) {
+        setRemoteInput(icon, pugNotification.mContext.getString(title), pendingIntent, remoteInput);
+        return this;
+    }
+
+    public Wear setRemoteInput(int icon, String title, PendingIntent pendingIntent, RemoteInput remoteInput) {
+        if (this.remoteInput != null) {
+            throw new IllegalStateException("RemoteInput Already Set!");
+        }
+
+        if (icon <= 0) {
+            throw new IllegalArgumentException("Resource ID Icon Should Not Be Less Than Or Equal To Zero!");
+        }
+
+        if (title == null) {
+            throw new IllegalArgumentException("Title Must Not Be Null!");
+        }
+
+        if (pendingIntent == null) {
+            throw new IllegalArgumentException("PendingIntent Must Not Be Null!");
+        }
+
+        if (remoteInput == null) {
+            throw new IllegalArgumentException("RemoteInput Must Not Be Null!");
+        }
+
+        this.remoteInput = remoteInput;
+        wearableExtender.addAction(new NotificationCompat.Action.Builder(icon,
+                title, pendingIntent)
+                .addRemoteInput(remoteInput)
+                .build());
+        return this;
+    }
+
+    public Wear setRemoteInput(int icon, String title, PendingIntent pendingIntent) {
+        if (this.remoteInput != null) {
+            throw new IllegalStateException("RemoteInput Already Set!");
+        }
+
+        if (icon <= 0) {
+            throw new IllegalArgumentException("Resource ID Icon Should Not Be Less Than Or Equal To Zero!");
+        }
+
+        if (title == null) {
+            throw new IllegalArgumentException("Title Must Not Be Null!");
+        }
+
+        if (pendingIntent == null) {
+            throw new IllegalArgumentException("PendingIntent Must Not Be Null!");
+        }
+
+        this.remoteInput = new RemoteInput.Builder(pugNotification.mContext.getString(R.string.pugnotification_key_voice_reply))
+                .setLabel(pugNotification.mContext.getString(R.string.pugnotification_label_voice_reply))
+                .setChoices(pugNotification.mContext.getResources().getStringArray(R.array.pugnotification_reply_choices))
+                .build();
+        wearableExtender.addAction(new NotificationCompat.Action.Builder(icon,
+                title, pendingIntent)
+                .addRemoteInput(remoteInput)
+                .build());
+        return this;
+    }
+
+    public Wear setRemoteInput(int icon, String title, PendingIntent pendingIntent, String replyLabel, String[] replyChoices) {
+        if (this.remoteInput != null) {
+            throw new IllegalStateException("RemoteInput Already Set!");
+        }
+
+        if (icon <= 0) {
+            throw new IllegalArgumentException("Resource ID Icon Should Not Be Less Than Or Equal To Zero!");
+        }
+
+        if (title == null) {
+            throw new IllegalArgumentException("Title Must Not Be Null!");
+        }
+
+        if (replyChoices == null) {
+            throw new IllegalArgumentException("Reply Choices Must Not Be Null!");
+        }
+
+        if (pendingIntent == null) {
+            throw new IllegalArgumentException("PendingIntent Must Not Be Null!");
+        }
+        if (replyLabel == null) {
+            throw new IllegalArgumentException("Reply Label Must Not Be Null!");
+        }
+
+        this.remoteInput = new RemoteInput.Builder(pugNotification.mContext.getString(R.string.pugnotification_key_voice_reply))
+                .setLabel(replyLabel)
+                .setChoices(replyChoices)
+                .build();
+        wearableExtender.addAction(new NotificationCompat.Action.Builder(icon,
+                title, pendingIntent)
+                .addRemoteInput(remoteInput)
+                .build());
         return this;
     }
 
@@ -48,7 +168,7 @@ public class Wear extends Basic {
 
     public Wear background(int background) {
         if (background <= 0) {
-            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
+            throw new IllegalArgumentException("Resource ID Background Should Not Be Less Than Or Equal To Zero!");
         }
 
         Bitmap bitmap = BitmapFactory.decodeResource(pugNotification.mContext.getResources(), background);
