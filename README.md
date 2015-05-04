@@ -1,5 +1,5 @@
 # PugNotification
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.2.0|)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.2.0|)`
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PugNotification-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1688)
 
 ![Screenshots](https://raw.githubusercontent.com/halysongoncalves/pugnotification/master/art/screenshot.png)
@@ -103,19 +103,19 @@ PugNotification.with(context)
 PugNotification from release 1.2.0 started to support all types of notifications to Android Wear. We try to anticipate us to make life easier for developers to develop applications for wearable.
 
 ```java
-      PugNotification.with(mContext).load()
-          .smallIcon(R.drawable.pugnotification_ic_launcher)
-          .autoCancel(true)
-          .largeIcon(R.drawable.pugnotification_ic_launcher)
-          .title(title)
-          .message(message)
-          .bigTextStyle(bigtext)
-          .wear()
-          .background(Bitmap)
-          .setRemoteInput(icon, title, pendingIntent, remoteInput)
-          .setPages(List<Notification> listNotification)
-          .setHideIcon(Boolean)
-          .build();
+PugNotification.with(mContext).load()
+    .smallIcon(R.drawable.pugnotification_ic_launcher)
+    .autoCancel(true)
+    .largeIcon(R.drawable.pugnotification_ic_launcher)
+    .title(title)
+    .message(message)
+    .bigTextStyle(bigtext)
+    .wear()
+    .background(Bitmap)
+    .setRemoteInput(icon, title, pendingIntent, remoteInput)
+    .setPages(List<Notification> listNotification)
+    .setHideIcon(Boolean)
+    .build();
 ```
 # What's New
 Now just the client implement the ImageLoader interface and implement a way to manage the download of the image. Below we use the Picasso:
