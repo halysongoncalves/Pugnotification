@@ -22,6 +22,7 @@ compile 'com.github.halysongoncalves:pugnotification:1.2.0'
 # Introduction
 
 You're probably tired of writing code to display notifications in your applications, the library abstracts all the notifications construction process for you in a single line of code. Magic? Lie? I summarize in: productivity.
+To further improve productivity, pugnotification from release 1.2.0 now has support Android Wear.
 
 ```java
 PugNotification.with(context)
@@ -95,7 +96,30 @@ PugNotification.with(context)
     .setPlaceholder(R.drawable.pugnotification_ic_placeholder)
     .build();  
 ```
+
+
+# Wear Notification
+
+PugNotification from release 1.2.0 started to support all types of notifications to Android Wear. We try to anticipate us to make life easier for developers to develop applications for wearable.
+
+```java
+      PugNotification.with(mContext).load()
+          .smallIcon(R.drawable.pugnotification_ic_launcher)
+          .autoCancel(true)
+          .largeIcon(R.drawable.pugnotification_ic_launcher)
+          .title(title)
+          .message(message)
+          .bigTextStyle(bigtext)
+          .wear()
+          .background(Bitmap)
+          .setRemoteInput(icon, title, pendingIntent, remoteInput)
+          .setPages(List<Notification> listNotification)
+          .setHideIcon(Boolean)
+          .build();
+```
+# What's New
 Now just the client implement the ImageLoader interface and implement a way to manage the download of the image. Below we use the Picasso:
+
 ```java
     @Override
     public void load(String uri, final OnImageLoadingCompleted onCompleted) {
