@@ -85,6 +85,24 @@
     .setPlaceholder(R.drawable.pugnotification_ic_placeholder)
     .build();
     		</pre>
+
+           <h4>Wear Notification</h4>
+            <p>PugNotification from release 1.2.0 started to support all types of notifications to Android Wear. We try to anticipate us to make life easier for developers to develop applications for wearable.</p>
+            <pre class="prettyprint">PugNotification.with(mContext).load()
+    .smallIcon(R.drawable.pugnotification_ic_launcher)
+    .autoCancel(true)
+    .largeIcon(R.drawable.pugnotification_ic_launcher)
+    .title(title)
+    .message(message)
+    .bigTextStyle(bigtext)
+    .wear()
+    .background(Bitmap)
+    .setRemoteInput(icon, title, pendingIntent, remoteInput)
+    .setPages(List<Notification> listNotification)
+    .setHideIcon(Boolean)
+    .build();
+    		</pre>
+
              <h4>What's New</h4>
 			<p>Now just the client implement the ImageLoader interface and implement a way to manage the download of the image. Below we use the Picasso:
               </p>
