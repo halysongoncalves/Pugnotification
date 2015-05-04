@@ -42,7 +42,7 @@
           <div class="span9">
             <h3 id="introduction">Introduction</h3>
             <p>You're probably tired of writing code to display notifications in your applications, the library abstracts all the notifications construction process for you in a single line of code.
-			Magic? Lie? I summarize in: productivity.</p>
+			Magic? Lie? I summarize in: productivity. To further improve productivity, pugnotification from release 1.2.0 now has support Android Wear.</p>
             <pre class="prettyprint">PugNotification.with(context).load().title(title).message(message).bigTextStyle(bigtext).simple().build();
             </pre>
             <p>Many common pitfalls in building cases are handled automatically by PugNotification:</p>
@@ -51,8 +51,7 @@
               <li>Notifications without no messages and title does not make sense there.</li>
             </ul>
 		    <p class="screenshot">
-				<img src="image/screen2.png" alt="Sample application screenshot.">
-				<img src="image/screen1.png" alt="Sample application screenshot.">
+				<img src="image/screenshot.png" alt="Sample application screenshot.">
 			</p>
             <h6 id="features">Features</h6>
 
@@ -86,7 +85,8 @@
     .setPlaceholder(R.drawable.pugnotification_ic_placeholder)
     .build();
     		</pre>
-              <p>Now just the client implement the ImageLoader interface and implement a way to manage the download of the image. Below we use the Picasso:
+             <h4>What's New</h4>
+			<p>Now just the client implement the ImageLoader interface and implement a way to manage the download of the image. Below we use the Picasso:
               </p>
          <pre class="prettyprint">
     @Override
