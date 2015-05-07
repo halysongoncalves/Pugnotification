@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.DrawableRes;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.RemoteInput;
 
@@ -21,8 +22,8 @@ public class Wear extends Basic {
     private NotificationCompat.WearableExtender wearableExtender;
     private RemoteInput remoteInput;
 
-    public Wear(NotificationCompat.Builder builder, int identifier) {
-        super(builder, identifier);
+    public Wear(NotificationCompat.Builder builder, int identifier, String tag) {
+        super(builder, identifier, tag);
         this.pugNotification = Utils.isActiveSingleton(PugNotification.mSingleton);
         this.wearableExtender = new NotificationCompat.WearableExtender();
     }
@@ -32,6 +33,7 @@ public class Wear extends Basic {
         return this;
     }
 
+    @Deprecated
     public Wear setPages(Notification notification) {
         if (notification == null) {
             throw new IllegalArgumentException("Notification Must Not Be Null.");
@@ -41,7 +43,26 @@ public class Wear extends Basic {
         return this;
     }
 
+    public Wear addPages(Notification notification) {
+        if (notification == null) {
+            throw new IllegalArgumentException("Notification Must Not Be Null.");
+        }
+
+        wearableExtender.addPage(notification);
+        return this;
+    }
+
+    @Deprecated
     public Wear setPages(List<Notification> notificationList) {
+        if (notificationList == null || notificationList.isEmpty()) {
+            throw new IllegalArgumentException("List Notitifcation Must Not Be Null And Empty!");
+        }
+
+        wearableExtender.addPages(notificationList);
+        return this;
+    }
+
+    public Wear addPages(List<Notification> notificationList) {
         if (notificationList == null || notificationList.isEmpty()) {
             throw new IllegalArgumentException("List Notitifcation Must Not Be Null And Empty!");
         }
@@ -65,7 +86,7 @@ public class Wear extends Basic {
         return this;
     }
 
-    public Wear setRemoteInput(int icon, String title, PendingIntent pendingIntent, RemoteInput remoteInput) {
+    public Wear setRemoteInput(@DrawableRes int icon, String title, PendingIntent pendingIntent, RemoteInput remoteInput) {
         if (this.remoteInput != null) {
             throw new IllegalStateException("RemoteInput Already Set!");
         }
@@ -94,7 +115,7 @@ public class Wear extends Basic {
         return this;
     }
 
-    public Wear setRemoteInput(int icon, String title, PendingIntent pendingIntent) {
+    public Wear setRemoteInput(@DrawableRes int icon, String title, PendingIntent pendingIntent) {
         if (this.remoteInput != null) {
             throw new IllegalStateException("RemoteInput Already Set!");
         }
@@ -122,7 +143,7 @@ public class Wear extends Basic {
         return this;
     }
 
-    public Wear setRemoteInput(int icon, String title, PendingIntent pendingIntent, String replyLabel, String[] replyChoices) {
+    public Wear setRemoteInput(@DrawableRes int icon, String title, PendingIntent pendingIntent, String replyLabel, String[] replyChoices) {
         if (this.remoteInput != null) {
             throw new IllegalStateException("RemoteInput Already Set!");
         }
@@ -166,7 +187,7 @@ public class Wear extends Basic {
         return this;
     }
 
-    public Wear background(int background) {
+    public Wear background(@DrawableRes int background) {
         if (background <= 0) {
             throw new IllegalArgumentException("Resource ID Background Should Not Be Less Than Or Equal To Zero!");
         }

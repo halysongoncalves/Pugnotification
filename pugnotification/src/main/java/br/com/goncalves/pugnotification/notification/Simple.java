@@ -10,8 +10,8 @@ public class Simple extends Basic {
     private int mMax;
     private boolean mIndeterminate;
 
-    public Simple(Builder builder, int identifier) {
-        super(builder, identifier);
+    public Simple(Builder builder, int identifier, String tag) {
+        super(builder, identifier, tag);
     }
 
     @Override
