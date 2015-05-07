@@ -3,13 +3,11 @@ language: android
 android:
   components:
     - build-tools-20.0.0
-    - android-17
+    - android-22
   licenses:
     - android-sdk-license-5be876d5
 
-jdk:
-  - oraclejdk7
-  - oraclejdk8
+jdk: oraclejdk7
 
 after_success:
   - .buildscript/deploy_snapshot.sh
