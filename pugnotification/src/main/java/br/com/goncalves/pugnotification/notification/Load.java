@@ -66,20 +66,12 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        if (this.title != null) {
-            throw new IllegalStateException("Title Already Set!");
-        }
-
         this.title = mNotification.mContext.getResources().getString(title);
         this.builder.setContentTitle(this.title);
         return this;
     }
 
     public Load title(String title) {
-        if (this.title != null) {
-            throw new IllegalStateException("Title Already Set!");
-        }
-
         if (title == null) {
             throw new IllegalStateException("Title Must Not Be Null!");
         }
@@ -98,20 +90,12 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        if (this.message != null) {
-            throw new IllegalStateException("Message Already Set!");
-        }
-
         this.message = mNotification.mContext.getResources().getString(message);
         this.builder.setContentText(this.message);
         return this;
     }
 
     public Load message(@NonNull String message) {
-        if (this.message != null) {
-            throw new IllegalStateException("Message already set.");
-        }
-
         if (message.trim().length() == 0) {
             throw new IllegalArgumentException("Message Must Not Be Empty!");
         }

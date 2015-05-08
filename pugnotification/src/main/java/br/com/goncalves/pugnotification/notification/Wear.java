@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.RemoteInput;
 
@@ -71,26 +72,39 @@ public class Wear extends Basic {
         return this;
     }
 
-    public Wear setRemoteInput(int icon, int title, PendingIntentNotification pendingIntentNotification, RemoteInput remoteInput) {
+    public Wear button(@DrawableRes int icon, String title, PendingIntent pendingIntent) {
+        if (icon < 0) {
+            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
+        }
+
+        if (title == null) {
+            throw new IllegalStateException("Title Must Not Be Null!");
+        }
+        if (pendingIntent == null) {
+            throw new IllegalArgumentException("PendingIntent Must Not Be Null.");
+        }
+
+        this.wearableExtender.addAction(new NotificationCompat.Action(icon, title, pendingIntent));
+        return this;
+    }
+
+
+    public Wear setRemoteInput(@DrawableRes int icon, @StringRes int title, PendingIntentNotification pendingIntentNotification, RemoteInput remoteInput) {
         setRemoteInput(icon, pugNotification.mContext.getString(title), pendingIntentNotification.onSettingPendingIntent(), remoteInput);
         return this;
     }
 
-    public Wear setRemoteInput(int icon, String title, PendingIntentNotification pendingIntentNotification, RemoteInput remoteInput) {
+    public Wear setRemoteInput(@DrawableRes int icon, String title, PendingIntentNotification pendingIntentNotification, RemoteInput remoteInput) {
         setRemoteInput(icon, title, pendingIntentNotification.onSettingPendingIntent(), remoteInput);
         return this;
     }
 
-    public Wear setRemoteInput(int icon, int title, PendingIntent pendingIntent, RemoteInput remoteInput) {
+    public Wear setRemoteInput(@DrawableRes int icon, @StringRes int title, PendingIntent pendingIntent, RemoteInput remoteInput) {
         setRemoteInput(icon, pugNotification.mContext.getString(title), pendingIntent, remoteInput);
         return this;
     }
 
     public Wear setRemoteInput(@DrawableRes int icon, String title, PendingIntent pendingIntent, RemoteInput remoteInput) {
-        if (this.remoteInput != null) {
-            throw new IllegalStateException("RemoteInput Already Set!");
-        }
-
         if (icon <= 0) {
             throw new IllegalArgumentException("Resource ID Icon Should Not Be Less Than Or Equal To Zero!");
         }
@@ -116,10 +130,6 @@ public class Wear extends Basic {
     }
 
     public Wear setRemoteInput(@DrawableRes int icon, String title, PendingIntent pendingIntent) {
-        if (this.remoteInput != null) {
-            throw new IllegalStateException("RemoteInput Already Set!");
-        }
-
         if (icon <= 0) {
             throw new IllegalArgumentException("Resource ID Icon Should Not Be Less Than Or Equal To Zero!");
         }
@@ -143,11 +153,11 @@ public class Wear extends Basic {
         return this;
     }
 
-    public Wear setRemoteInput(@DrawableRes int icon, String title, PendingIntent pendingIntent, String replyLabel, String[] replyChoices) {
-        if (this.remoteInput != null) {
-            throw new IllegalStateException("RemoteInput Already Set!");
-        }
+    public Wear setRemoteInput(@DrawableRes int icon, @StringRes int title, PendingIntent pendingIntent, String replyLabel, String[] replyChoices) {
+        return setRemoteInput(icon, pugNotification.mContext.getString(title), pendingIntent, replyLabel, replyChoices);
+    }
 
+    public Wear setRemoteInput(@DrawableRes int icon, String title, PendingIntent pendingIntent, String replyLabel, String[] replyChoices) {
         if (icon <= 0) {
             throw new IllegalArgumentException("Resource ID Icon Should Not Be Less Than Or Equal To Zero!");
         }
