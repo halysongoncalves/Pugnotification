@@ -190,7 +190,7 @@ public class Load {
 
         NotificationCompat.BigTextStyle bigStyle = new NotificationCompat.BigTextStyle();
         bigStyle.bigText(bigTextStyle);
-        if(summaryText != null && summaryText.length() > 0){
+        if(summaryText != null){
             bigStyle.setSummaryText(summaryText);
         }
         this.builder.setStyle(bigStyle);
@@ -204,7 +204,7 @@ public class Load {
 
         NotificationCompat.BigTextStyle bigStyle = new NotificationCompat.BigTextStyle();
         bigStyle.bigText(bigTextStyle);
-        if(summaryText != null && summaryText.length() > 0){
+        if(summaryText != null){
             bigStyle.setSummaryText(summaryText);
         }
         this.builder.setStyle(bigStyle);
