@@ -11,14 +11,16 @@ import br.com.goncalves.pugnotification.utils.Utils;
 public abstract class Basic {
     private static final String TAG = Basic.class.getSimpleName();
     protected final PugNotification pugNotification;
+    protected String tag;
     protected Notification notification;
     protected NotificationCompat.Builder builder;
     protected int notificationId;
 
-    public Basic(NotificationCompat.Builder builder, int identifier) {
+    public Basic(NotificationCompat.Builder builder, int identifier, String tag) {
         this.pugNotification = Utils.isActiveSingleton(PugNotification.mSingleton);
         this.builder = builder;
         this.notificationId = identifier;
+        this.tag = tag;
     }
 
     public void build() {
@@ -37,12 +39,21 @@ public abstract class Basic {
     }
 
     protected Notification notificationNotify() {
+        if(tag != null){
+            return notificationNotify(tag, notificationId);
+        }
         return notificationNotify(notificationId);
     }
 
     protected Notification notificationNotify(int identifier) {
         NotificationManagerCompat notificationManager =NotificationManagerCompat.from(pugNotification.mContext);
         notificationManager.notify(identifier, notification);
+        return notification;
+    }
+
+    protected Notification notificationNotify(String tag, int identifier) {
+        NotificationManagerCompat notificationManager =NotificationManagerCompat.from(pugNotification.mContext);
+        notificationManager.notify(tag, identifier, notification);
         return notification;
     }
 

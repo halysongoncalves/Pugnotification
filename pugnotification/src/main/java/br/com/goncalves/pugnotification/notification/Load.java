@@ -6,7 +6,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v4.app.NotificationCompat;
+import android.text.Spanned;
 
 import br.com.goncalves.pugnotification.R;
 import br.com.goncalves.pugnotification.interfaces.PendingIntentNotification;
@@ -24,6 +28,8 @@ public class Load {
     private String title;
     private String message;
     private int smallIcon;
+    private Spanned messageSpanned;
+    private String tag;
 
     public Load(PugNotification notification) {
         this.mNotification = Utils.isActiveSingleton(notification);
@@ -50,13 +56,14 @@ public class Load {
         return this;
     }
 
-    public Load title(int title) {
+    public Load tag(@NonNull String tag) {
+        this.tag = tag;
+        return this;
+    }
+
+    public Load title(@StringRes int title) {
         if (title <= 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
-        }
-
-        if (this.title != null) {
-            throw new IllegalStateException("Title Already Set!");
         }
 
         this.title = mNotification.mContext.getResources().getString(title);
@@ -65,10 +72,6 @@ public class Load {
     }
 
     public Load title(String title) {
-        if (this.title != null) {
-            throw new IllegalStateException("Title Already Set!");
-        }
-
         if (title == null) {
             throw new IllegalStateException("Title Must Not Be Null!");
         }
@@ -82,13 +85,9 @@ public class Load {
         return this;
     }
 
-    public Load message(int message) {
+    public Load message(@StringRes int message) {
         if (message <= 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
-        }
-
-        if (this.message != null) {
-            throw new IllegalStateException("Message Already Set!");
         }
 
         this.message = mNotification.mContext.getResources().getString(message);
@@ -96,20 +95,22 @@ public class Load {
         return this;
     }
 
-    public Load message(String message) {
-        if (this.message != null) {
-            throw new IllegalStateException("Message already set.");
-        }
-
-        if (message == null) {
-            throw new IllegalStateException("Message Must Not Be Null!");
-        }
-
+    public Load message(@NonNull String message) {
         if (message.trim().length() == 0) {
             throw new IllegalArgumentException("Message Must Not Be Empty!");
         }
 
         this.message = message;
+        this.builder.setContentText(message);
+        return this;
+    }
+
+    public Load message(@NonNull Spanned message) {
+        if (message.length() == 0) {
+            throw new IllegalArgumentException("Message Must Not Be Empty!");
+        }
+
+        this.messageSpanned = message;
         this.builder.setContentText(message);
         return this;
     }
@@ -123,7 +124,7 @@ public class Load {
         return this;
     }
 
-    public Load ticker(int ticker) {
+    public Load ticker(@StringRes int ticker) {
         if (ticker <= 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
@@ -154,26 +155,80 @@ public class Load {
         return this;
     }
 
-    public Load bigTextStyle(int bigTextStyle) {
+    public Load bigTextStyle(@StringRes int bigTextStyle) {
         if (bigTextStyle <= 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        this.builder.setStyle(new NotificationCompat.BigTextStyle().bigText(mNotification.mContext.getResources().getString(
-                bigTextStyle)));
-        return this;
+        return bigTextStyle(mNotification.mContext.getResources().getString(
+                bigTextStyle), null);
     }
 
-    public Load bigTextStyle(String bigTextStyle) {
-        if (bigTextStyle == null) {
-            throw new IllegalStateException("Big Text Style Must Not Be Null!");
+    public Load bigTextStyle(@StringRes int bigTextStyle, @StringRes int summaryText) {
+        if (bigTextStyle <= 0) {
+            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
+        return bigTextStyle(mNotification.mContext.getResources().getString(
+                bigTextStyle), mNotification.mContext.getResources().getString(
+                summaryText));
+    }
+
+
+    public Load bigTextStyle(@NonNull String bigTextStyle) {
         if (bigTextStyle.trim().length() == 0) {
             throw new IllegalArgumentException("Big Text Style Must Not Be Empty!");
         }
 
-        this.builder.setStyle(new NotificationCompat.BigTextStyle().bigText((bigTextStyle)));
+        return bigTextStyle(bigTextStyle, null);
+    }
+
+    public Load bigTextStyle(@NonNull String bigTextStyle, String summaryText) {
+        if (bigTextStyle.trim().length() == 0) {
+            throw new IllegalArgumentException("Big Text Style Must Not Be Empty!");
+        }
+
+        NotificationCompat.BigTextStyle bigStyle = new NotificationCompat.BigTextStyle();
+        bigStyle.bigText(bigTextStyle);
+        if(summaryText != null){
+            bigStyle.setSummaryText(summaryText);
+        }
+        this.builder.setStyle(bigStyle);
+        return this;
+    }
+
+    public Load bigTextStyle(@NonNull Spanned bigTextStyle, String summaryText) {
+        if (bigTextStyle.length() == 0) {
+            throw new IllegalArgumentException("Big Text Style Must Not Be Empty!");
+        }
+
+        NotificationCompat.BigTextStyle bigStyle = new NotificationCompat.BigTextStyle();
+        bigStyle.bigText(bigTextStyle);
+        if(summaryText != null){
+            bigStyle.setSummaryText(summaryText);
+        }
+        this.builder.setStyle(bigStyle);
+        return this;
+    }
+
+    public Load inboxStyle(@NonNull String[] inboxLines, @NonNull String title, String summary) {
+        if (inboxLines.length <= 0) {
+            throw new IllegalArgumentException("Inbox Lines Must Have At Least One Text!");
+        }
+
+        if (title.trim().length() == 0) {
+            throw new IllegalArgumentException("Title Must Not Be Empty!");
+        }
+
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+        for (int i = 0; i < inboxLines.length; i++) {
+            inboxStyle.addLine(inboxLines[i]);
+        }
+        inboxStyle.setBigContentTitle(title);
+        if (summary != null) {
+            inboxStyle.setSummaryText(summary);
+        }
+        this.builder.setStyle(inboxStyle);
         return this;
     }
 
@@ -182,7 +237,7 @@ public class Load {
         return this;
     }
 
-    public Load smallIcon(int smallIcon) {
+    public Load smallIcon(@DrawableRes int smallIcon) {
         if (smallIcon <= 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
@@ -201,13 +256,27 @@ public class Load {
         return this;
     }
 
-    public Load largeIcon(int largeIcon) {
+    public Load largeIcon(@DrawableRes int largeIcon) {
         if (largeIcon <= 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
         Bitmap bitmap = BitmapFactory.decodeResource(mNotification.mContext.getResources(), largeIcon);
         this.builder.setLargeIcon(bitmap);
+        return this;
+    }
+
+    public Load group(@NonNull String groupKey){
+        if (groupKey.trim().length() == 0) {
+            throw new IllegalArgumentException("Group Key Must Not Be Empty!");
+        }
+
+        this.builder.setGroup(groupKey);
+        return this;
+    }
+
+    public Load number(int number){
+        this.builder.setNumber(number);
         return this;
     }
 
@@ -244,7 +313,7 @@ public class Load {
         return this;
     }
 
-    public Load button(int icon, String title, PendingIntent pendingIntent) {
+    public Load button(@DrawableRes int icon, String title, PendingIntent pendingIntent) {
         if (icon < 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
@@ -260,7 +329,7 @@ public class Load {
         return this;
     }
 
-    public Load button(int icon, String title, PendingIntentNotification pendingIntentNotification) {
+    public Load button(@DrawableRes int icon, String title, PendingIntentNotification pendingIntentNotification) {
         if (icon < 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
@@ -317,6 +386,11 @@ public class Load {
         return this;
     }
 
+    public Load click(@NonNull PendingIntent pendingIntent) {
+        this.builder.setContentIntent(pendingIntent);
+        return this;
+    }
+
     public Load dismiss(Class<?> activity, Bundle bundle) {
         if (activity == null) {
             throw new IllegalArgumentException("Activity Must Not Be Null.");
@@ -349,16 +423,24 @@ public class Load {
         return this;
     }
 
+    public Load dismiss(@NonNull PendingIntent pendingIntent) {
+        this.builder.setDeleteIntent(pendingIntent);
+        return this;
+    }
+
     public Custom custom() {
         Utils.checkMain();
-        return new Custom(builder, notificationId, title, message, smallIcon);
+        if(messageSpanned != null){
+            return new Custom(builder, notificationId, title, messageSpanned, smallIcon, tag);
+        }
+        return new Custom(builder, notificationId, title, message, smallIcon, tag);
     }
 
     public Simple simple() {
-        return new Simple(builder, notificationId);
+        return new Simple(builder, notificationId, tag);
     }
 
     public Wear wear() {
-        return new Wear(builder, notificationId);
+        return new Wear(builder, notificationId, tag);
     }
 }

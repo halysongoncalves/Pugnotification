@@ -1,13 +1,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin_large">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_large">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="@dimen/margin_large"
+        android:animateLayoutChanges="true"
         android:orientation="vertical">
 
         <TextView
@@ -16,7 +17,34 @@
             android:layout_height="wrap_content"
             android:text="@string/pugnotification_text_notification"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/textSize_large" />
+            android:layout_marginBottom="@dimen/margin_default"
+            android:textSize="@dimen/textSize_large"/>
+
+        <RelativeLayout
+            android:id="@+id/content_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default"
+                android:text="@string/pugnotification_text_type"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/textSize_medium"/>
+
+            <Spinner
+                android:id="@+id/spn_notification_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_default"
+                android:layout_toEndOf="@+id/text_type"
+                android:layout_toRightOf="@+id/text_type"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/textSize_small"
+                />
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/content_title"
@@ -29,15 +57,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default"
                 android:text="@string/pugnotification_text_title"
-                android:textSize="@dimen/textSize_medium" />
+                android:textSize="@dimen/textSize_medium"/>
 
             <EditText
                 android:id="@+id/edt_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/text_title"
+                android:layout_marginLeft="@dimen/margin_default"
                 android:layout_toEndOf="@+id/text_title"
-                android:hint="@string/pugnotification_text_hint_title" />
+                android:layout_toRightOf="@+id/text_title"
+                android:hint="@string/pugnotification_text_hint_title"
+                android:textSize="@dimen/textSize_small"/>
+
+
         </RelativeLayout>
 
 
@@ -46,28 +78,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
+
             <TextView
                 android:id="@+id/text_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default"
                 android:text="@string/pugnotification_text_message"
-                android:textSize="@dimen/textSize_medium" />
+                android:textSize="@dimen/textSize_medium"/>
 
             <EditText
                 android:id="@+id/edt_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/text_message"
+                android:layout_marginLeft="@dimen/margin_default"
                 android:layout_toEndOf="@+id/text_message"
-                android:hint="@string/pugnotification_text_hint_message" />
+                android:layout_toRightOf="@+id/text_message"
+                android:hint="@string/pugnotification_text_hint_message"
+                android:textSize="@dimen/textSize_small"/>
         </RelativeLayout>
 
 
         <RelativeLayout
             android:id="@+id/content_bigtext"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/text_bigtext"
@@ -75,15 +111,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default"
                 android:text="@string/pugnotification_text_bigtext"
-                android:textSize="@dimen/textSize_medium" />
+                android:textSize="@dimen/textSize_medium"/>
 
             <EditText
                 android:id="@+id/edt_bigtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/text_bigtext"
+                android:layout_marginLeft="@dimen/margin_default"
                 android:layout_toEndOf="@+id/text_bigtext"
-                android:hint="@string/pugnotification_text_hint_bigtext" />
+                android:layout_toRightOf="@+id/text_bigtext"
+                android:hint="@string/pugnotification_text_hint_bigtext"
+                android:textSize="@dimen/textSize_small"/>
         </RelativeLayout>
 
 
@@ -91,7 +129,7 @@
             android:id="@+id/btn_notify_simple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pugnotification_button_notify_simple" />
+            android:text="@string/pugnotification_button_notify_simple"/>
 
         <TextView
             android:id="@+id/text_title_custom"
@@ -100,7 +138,7 @@
             android:layout_marginTop="@dimen/margin_middle"
             android:text="@string/pugnotification_text_notification_custom"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/textSize_large" />
+            android:textSize="@dimen/textSize_large"/>
 
 
         <RelativeLayout
@@ -114,21 +152,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default"
                 android:text="@string/pugnotification_text_url"
-                android:textSize="@dimen/textSize_medium" />
+                android:textSize="@dimen/textSize_medium"/>
 
             <EditText
                 android:id="@+id/edt_url"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/text_url"
+                android:layout_marginLeft="@dimen/margin_default"
                 android:layout_toEndOf="@+id/text_url"
-                android:hint="@string/pugnotification_text_hint_url" />
+                android:layout_toRightOf="@+id/text_url"
+                android:hint="@string/pugnotification_text_hint_url"
+                android:textSize="@dimen/textSize_small"/>
         </RelativeLayout>
 
         <Button
             android:id="@+id/btn_notify_custom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pugnotification_button_notify_custom" />
+            android:text="@string/pugnotification_button_notify_custom"/>
     </LinearLayout>
 </ScrollView>

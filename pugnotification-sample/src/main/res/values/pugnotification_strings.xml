@@ -11,4 +11,19 @@
     <string name="pugnotification_text_hint_message">Insert Message</string>
     <string name="pugnotification_button_notify_simple">Notify Simple</string>
     <string name="pugnotification_button_notify_custom">Notify Custom</string>
+    <string name="pugnotification_text_summary">5 new messages</string>
+
+    <array name="pugnotification_notification_types">
+        <item>Simple</item>
+        <item>Big Text</item>
+        <item>Inbox Style</item>
+    </array>
+
+    <array name="pugnotification_notification_inbox_lines">
+        <item>Message 1</item>
+        <item>Message 2</item>
+        <item>Message 3</item>
+        <item>Message 4</item>
+        <item>Message 5</item>
+    </array>
 </resources>
