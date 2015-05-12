@@ -275,6 +275,11 @@ public class Load {
         return this;
     }
 
+    public Load groupSummary(boolean groupSummary){
+        this.builder.setGroupSummary(groupSummary);
+        return this;
+    }
+
     public Load number(int number){
         this.builder.setNumber(number);
         return this;
