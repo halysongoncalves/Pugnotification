@@ -313,6 +313,19 @@ public class Load {
         return this;
     }
 
+    public Load onlyAlertOnce(boolean onlyAlertOnce){
+        this.builder.setOnlyAlertOnce(onlyAlertOnce);
+        return this;
+    }
+
+    public Load addPerson(@NonNull String uri){
+        if(uri.length() == 0){
+            throw new IllegalArgumentException("URI Must Not Be Empty!");
+        }
+        this.builder.addPerson(uri);
+        return this;
+    }
+
     public Load button(@DrawableRes int icon, String title, PendingIntent pendingIntent) {
         if (icon < 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
