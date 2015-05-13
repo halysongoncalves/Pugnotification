@@ -1,5 +1,5 @@
 # PugNotification
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.2.0|) 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.3.0|) 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PugNotification-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1688)
 
 ![Screenshots](https://raw.githubusercontent.com/halysongoncalves/pugnotification/master/art/screenshot.png)
@@ -11,18 +11,18 @@ Download [the latest AAR][1] or grab via Maven:
 <dependency>
   <groupId>com.github.halysongoncalves</groupId>
   <artifactId>pugnotification</artifactId>
-  <version>1.2.0</version>
+  <version>1.3.0</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-compile 'com.github.halysongoncalves:pugnotification:1.2.0'
+compile 'com.github.halysongoncalves:pugnotification:1.3.0'
 ```
 
 # Introduction
 
 You're probably tired of writing code to display notifications in your applications, the library abstracts all the notifications construction process for you in a single line of code. Magic? Lie? I summarize in: productivity.
-To further improve productivity, pugnotification from release 1.2.0 now has support Android Wear.
+To further improve productivity, pugnotification from release 1.3.0 now has support Android Wear.
 
 ```java
 PugNotification.with(context)
@@ -100,7 +100,7 @@ PugNotification.with(context)
 
 # Wear Notification
 
-PugNotification from release 1.2.0 started to support all types of notifications to Android Wear. We try to anticipate us to make life easier for developers to develop applications for wearable.
+PugNotification from release 1.3.0 started to support all types of notifications to Android Wear. We try to anticipate us to make life easier for developers to develop applications for wearable.
 
 ```java
 PugNotification.with(mContext).load()
@@ -178,4 +178,4 @@ When submitting code, please make every effort to follow existing conventions an
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[1]: http://repo1.maven.org/maven2/com/github/halysongoncalves/pugnotification/1.2.0/pugnotification-1.2.0.aar
+[1]: http://repo1.maven.org/maven2/com/github/halysongoncalves/pugnotification/1.3.0/pugnotification-1.3.0.aar
