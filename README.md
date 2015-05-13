@@ -100,7 +100,7 @@ PugNotification.with(context)
 
 # Wear Notification
 
-PugNotification from release 1.3.0 started to support all types of notifications to Android Wear. We try to anticipate us to make life easier for developers to develop applications for wearable.
+PugNotification from release 1.2.0 started to support all types of notifications to Android Wear. We try to anticipate us to make life easier for developers to develop applications for wearable.
 
 ```java
 PugNotification.with(mContext).load()
