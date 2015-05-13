@@ -275,6 +275,11 @@ public class Load {
         return this;
     }
 
+    public Load groupSummary(boolean groupSummary){
+        this.builder.setGroupSummary(groupSummary);
+        return this;
+    }
+
     public Load number(int number){
         this.builder.setNumber(number);
         return this;
@@ -310,6 +315,19 @@ public class Load {
         }
 
         this.builder.setSound(sound);
+        return this;
+    }
+
+    public Load onlyAlertOnce(boolean onlyAlertOnce){
+        this.builder.setOnlyAlertOnce(onlyAlertOnce);
+        return this;
+    }
+
+    public Load addPerson(@NonNull String uri){
+        if(uri.length() == 0){
+            throw new IllegalArgumentException("URI Must Not Be Empty!");
+        }
+        this.builder.addPerson(uri);
         return this;
     }
 

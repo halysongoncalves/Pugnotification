@@ -207,6 +207,11 @@ public class Wear extends Basic {
         return this;
     }
 
+    public Wear startScrollBottom (boolean startScrollBottom){
+        this.wearableExtender.setStartScrollBottom(startScrollBottom);
+        return this;
+    }
+
     @Override
     public void build() {
         builder.extend(wearableExtender);
