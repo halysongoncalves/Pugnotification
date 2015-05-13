@@ -22,7 +22,7 @@ compile 'com.github.halysongoncalves:pugnotification:1.3.0'
 # Introduction
 
 You're probably tired of writing code to display notifications in your applications, the library abstracts all the notifications construction process for you in a single line of code. Magic? Lie? I summarize in: productivity.
-To further improve productivity, pugnotification from release 1.3.0 now has support Android Wear.
+To further improve productivity, pugnotification from release 1.2.0 now has support Android Wear.
 
 ```java
 PugNotification.with(context)
