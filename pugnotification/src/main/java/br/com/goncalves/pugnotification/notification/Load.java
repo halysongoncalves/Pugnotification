@@ -190,7 +190,7 @@ public class Load {
 
         NotificationCompat.BigTextStyle bigStyle = new NotificationCompat.BigTextStyle();
         bigStyle.bigText(bigTextStyle);
-        if(summaryText != null){
+        if (summaryText != null) {
             bigStyle.setSummaryText(summaryText);
         }
         this.builder.setStyle(bigStyle);
@@ -204,7 +204,7 @@ public class Load {
 
         NotificationCompat.BigTextStyle bigStyle = new NotificationCompat.BigTextStyle();
         bigStyle.bigText(bigTextStyle);
-        if(summaryText != null){
+        if (summaryText != null) {
             bigStyle.setSummaryText(summaryText);
         }
         this.builder.setStyle(bigStyle);
@@ -266,7 +266,7 @@ public class Load {
         return this;
     }
 
-    public Load group(@NonNull String groupKey){
+    public Load group(@NonNull String groupKey) {
         if (groupKey.trim().length() == 0) {
             throw new IllegalArgumentException("Group Key Must Not Be Empty!");
         }
@@ -275,12 +275,12 @@ public class Load {
         return this;
     }
 
-    public Load groupSummary(boolean groupSummary){
+    public Load groupSummary(boolean groupSummary) {
         this.builder.setGroupSummary(groupSummary);
         return this;
     }
 
-    public Load number(int number){
+    public Load number(int number) {
         this.builder.setNumber(number);
         return this;
     }
@@ -318,13 +318,13 @@ public class Load {
         return this;
     }
 
-    public Load onlyAlertOnce(boolean onlyAlertOnce){
+    public Load onlyAlertOnce(boolean onlyAlertOnce) {
         this.builder.setOnlyAlertOnce(onlyAlertOnce);
         return this;
     }
 
-    public Load addPerson(@NonNull String uri){
-        if(uri.length() == 0){
+    public Load addPerson(@NonNull String uri) {
+        if (uri.length() == 0) {
             throw new IllegalArgumentException("URI Must Not Be Empty!");
         }
         this.builder.addPerson(uri);
@@ -404,6 +404,14 @@ public class Load {
         return this;
     }
 
+    public Load priority(int priority) {
+        if (priority <= 0) {
+            throw new IllegalArgumentException("Priority Should Not Be Less Than Or Equal To Zero!");
+        }
+        this.builder.setPriority(priority);
+        return this;
+    }
+
     public Load click(@NonNull PendingIntent pendingIntent) {
         this.builder.setContentIntent(pendingIntent);
         return this;
@@ -448,7 +456,7 @@ public class Load {
 
     public Custom custom() {
         Utils.checkMain();
-        if(messageSpanned != null){
+        if (messageSpanned != null) {
             return new Custom(builder, notificationId, title, messageSpanned, smallIcon, tag);
         }
         return new Custom(builder, notificationId, title, message, smallIcon, tag);
