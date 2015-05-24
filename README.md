@@ -1,6 +1,7 @@
 # PugNotification
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.4.0|)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PugNotification-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1688)
+[![Join the chat at https://gitter.im/halysongoncalves/pugnotification](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/halysongoncalves/pugnotification?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ![Screenshots](https://raw.githubusercontent.com/halysongoncalves/pugnotification/master/art/screenshot.png)
 
