@@ -12,6 +12,10 @@ android:
   licenses:
     - '.+'
 
+branches:
+  except:
+    - gh-pages
+    
 cache:
   directories:
     - $HOME/.m2
