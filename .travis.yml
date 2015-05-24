@@ -2,7 +2,6 @@ language: android
 
 jdk:
   - oraclejdk7
-  - oraclejdk8
 
 android:
   components:
@@ -23,4 +22,3 @@ cache:
 
 before_install:
     - export JAVA7_HOME=/usr/lib/jvm/java-7-oracle
-    - export JAVA8_HOME=/usr/lib/jvm/java-8-oracle
