@@ -37,5 +37,4 @@ dependencies {
     compile project(':pugnotification')
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.squareup.picasso:picasso:2.3.4'
-
 }
