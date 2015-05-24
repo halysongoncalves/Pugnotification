@@ -1,24 +1,26 @@
 language: android
+
 jdk:
-    - oraclejdk7
+  - oraclejdk7
+  - oraclejdk8
+
 android:
   components:
-    - build-tools-21.1.0
-    - build-tools-21.0.2
-    - build-tools-21.0.0
-    - build-tools-20.0.0
-    - android-20
-    - android-21
+    - build-tools-22.0.1
+    - android-22
     - extra-android-support
     - extra-android-m2repository
   licenses:
     - '.+'
 
+cache:
+  directories:
+    - $HOME/.m2
+
 #after_success:
 #  - if [[ $TRAVIS_PULL_REQUEST == 'false' && $TRAVIS_TAG ]]; then ./gradlew build uploadArchives -PNEXUS_USERNAME="${nexusUsername}" -PNEXUS_PASSWORD="${nexusPassword}" -PnexusUsername="${nexusUsername}" -PnexusPassword="${nexusPassword}" ; fi
 #
+
 before_install:
     - export JAVA7_HOME=/usr/lib/jvm/java-7-oracle
     - export JAVA8_HOME=/usr/lib/jvm/java-8-oracle
-script:
-    - ./gradlew clean assemble check
