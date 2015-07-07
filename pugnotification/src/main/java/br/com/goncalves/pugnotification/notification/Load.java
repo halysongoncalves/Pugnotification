@@ -42,8 +42,13 @@ public class Load {
         this.builder.setContentTitle("");
         this.builder.setContentText("");
         this.builder.setSmallIcon(R.drawable.pugnotification_ic_launcher);
-        this.builder.setLargeIcon(BitmapFactory.decodeResource(mNotification.mContext.getResources(),
-                R.drawable.pugnotification_ic_launcher));
+
+        // FIX: Not setting a default LargeIcon, to make an option to use or not use a large icon in notification. Otherwise I'll get an Android icon plus smallIcon in notification.
+        // I tested it in Sample App and it worked. Just comment .largeIcon() line in PugNotification builder to test.
+
+        //this.builder.setLargeIcon(BitmapFactory.decodeResource(mNotification.mContext.getResources(),
+        //        R.drawable.pugnotification_ic_launcher));
+
         this.builder.setContentIntent(PendingIntent.getBroadcast(mNotification.mContext, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
