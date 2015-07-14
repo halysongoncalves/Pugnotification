@@ -42,8 +42,7 @@ public class Load {
         this.builder.setContentTitle("");
         this.builder.setContentText("");
         this.builder.setSmallIcon(R.drawable.pugnotification_ic_launcher);
-        this.builder.setLargeIcon(BitmapFactory.decodeResource(mNotification.mContext.getResources(),
-                R.drawable.pugnotification_ic_launcher));
+
         this.builder.setContentIntent(PendingIntent.getBroadcast(mNotification.mContext, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
