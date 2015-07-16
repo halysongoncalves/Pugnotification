@@ -1,5 +1,6 @@
 package br.com.goncalves.pugnotification.notification;
 
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -22,7 +23,7 @@ import br.com.goncalves.pugnotification.utils.Utils;
 
 public class Load {
     private static final String TAG = Load.class.getSimpleName();
-    private final PugNotification mNotification;
+    private final PugNotification notification;
     private NotificationCompat.Builder builder;
     private int notificationId;
     private String title;
@@ -32,9 +33,9 @@ public class Load {
     private String tag;
 
     public Load(PugNotification notification) {
-        this.mNotification = Utils.isActiveSingleton(notification);
-        this.builder = new NotificationCompat.Builder(mNotification.mContext);
-        this.createNotifationDefault();
+        this.notification = Utils.isActiveSingleton(notification);
+        builder = new NotificationCompat.Builder(this.notification.mContext);
+        createNotifationDefault();
     }
 
     private void createNotifationDefault() {
@@ -42,8 +43,9 @@ public class Load {
         this.builder.setContentTitle("");
         this.builder.setContentText("");
         this.builder.setSmallIcon(R.drawable.pugnotification_ic_launcher);
+        this.builder.setDefaults(Notification.DEFAULT_ALL);
 
-        this.builder.setContentIntent(PendingIntent.getBroadcast(mNotification.mContext, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT));
+        this.builder.setContentIntent(PendingIntent.getBroadcast(notification.mContext, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
     public Load identifier(int identifier) {
@@ -65,7 +67,7 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        this.title = mNotification.mContext.getResources().getString(title);
+        this.title = notification.mContext.getResources().getString(title);
         this.builder.setContentTitle(this.title);
         return this;
     }
@@ -89,7 +91,7 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        this.message = mNotification.mContext.getResources().getString(message);
+        this.message = notification.mContext.getResources().getString(message);
         this.builder.setContentText(this.message);
         return this;
     }
@@ -128,7 +130,7 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        this.builder.setTicker(mNotification.mContext.getResources().getString(ticker));
+        this.builder.setTicker(notification.mContext.getResources().getString(ticker));
         return this;
     }
 
@@ -159,7 +161,7 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        return bigTextStyle(mNotification.mContext.getResources().getString(
+        return bigTextStyle(notification.mContext.getResources().getString(
                 bigTextStyle), null);
     }
 
@@ -168,8 +170,8 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        return bigTextStyle(mNotification.mContext.getResources().getString(
-                bigTextStyle), mNotification.mContext.getResources().getString(
+        return bigTextStyle(notification.mContext.getResources().getString(
+                bigTextStyle), notification.mContext.getResources().getString(
                 summaryText));
     }
 
@@ -260,7 +262,7 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        Bitmap bitmap = BitmapFactory.decodeResource(mNotification.mContext.getResources(), largeIcon);
+        Bitmap bitmap = BitmapFactory.decodeResource(notification.mContext.getResources(), largeIcon);
         this.builder.setLargeIcon(bitmap);
         return this;
     }
@@ -410,6 +412,15 @@ public class Load {
         this.builder.setPriority(priority);
         return this;
     }
+
+    public Load defaults(int defaults) {
+        if (defaults < 0) {
+            throw new IllegalArgumentException("Defaults Should Not Be Less Than Or Equal!");
+        }
+        this.builder.setDefaults(defaults);
+        return this;
+    }
+
 
     public Load click(@NonNull PendingIntent pendingIntent) {
         this.builder.setContentIntent(pendingIntent);
