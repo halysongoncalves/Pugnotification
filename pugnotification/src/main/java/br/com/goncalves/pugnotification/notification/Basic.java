@@ -25,9 +25,6 @@ public abstract class Basic {
 
     public void build() {
         notification = builder.build();
-        notification.defaults |= Notification.DEFAULT_LIGHTS;
-        notification.defaults |= Notification.DEFAULT_VIBRATE;
-        notification.defaults |= Notification.DEFAULT_SOUND;
     }
 
     public void setBigContentView(RemoteViews views) {
