@@ -3,6 +3,7 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.5.0|)
 [![Build Status](https://travis-ci.org/halysongoncalves/pugnotification.svg)](https://travis-ci.org/halysongoncalves/pugnotification)
 [![Coverage Status](https://coveralls.io/repos/halysongoncalves/pugnotification/badge.svg)](https://coveralls.io/r/halysongoncalves/pugnotification)
+[![Stories in Ready](https://badge.waffle.io/halysongoncalves/pugnotification.svg?label=ready&title=Ready)](http://waffle.io/halysongoncalves/pugnotification)
 [![Join the chat at https://gitter.im/halysongoncalves/pugnotification](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/halysongoncalves/pugnotification?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ![Screenshots](https://raw.githubusercontent.com/halysongoncalves/pugnotification/master/art/screenshot.png)
