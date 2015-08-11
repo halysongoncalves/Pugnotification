@@ -21,6 +21,12 @@ public class Simple extends Basic {
         super.notificationNotify();
     }
 
+    public void build(int flags){
+        builder.setProgress(mMax, mProgress, mIndeterminate);
+        super.build(flags);
+        super.notificationNotify();
+    }
+
     public Simple update(int identifier) {
         Builder builder = new NotificationCompat.Builder(PugNotification.mSingleton.mContext);
         builder.setProgress(mMax, mProgress, mIndeterminate);
