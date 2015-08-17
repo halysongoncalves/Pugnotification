@@ -16,10 +16,10 @@ afterEvaluate { project ->
                 pom.version = '1.6.0'
 
                 repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2/') {
-                    authentication(userName: 'halysongoncalves', password: '1990limahlglima')
+                    authentication(userName: '', password: '')
                 }
                 snapshotRepository(url: 'https://oss.sonatype.org/content/repositories/snapshots/') {
-                    authentication(userName: 'halysongoncalves', password: '1990limahlglima')
+                    authentication(userName: '', password: '')
                 }
 
                 pom.project {
