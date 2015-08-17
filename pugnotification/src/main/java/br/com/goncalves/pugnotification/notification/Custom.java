@@ -2,7 +2,7 @@ package br.com.goncalves.pugnotification.notification;
 
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
-import android.os.Build;
+import android.os.Looper;
 import android.support.annotation.DrawableRes;
 import android.support.v4.app.NotificationCompat;
 import android.text.Spanned;
@@ -12,8 +12,8 @@ import br.com.goncalves.pugnotification.R;
 import br.com.goncalves.pugnotification.interfaces.ImageLoader;
 import br.com.goncalves.pugnotification.interfaces.OnImageLoadingCompleted;
 
-@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public class Custom extends Basic implements OnImageLoadingCompleted {
+@TargetApi(android.os.Build.VERSION_CODES.JELLY_BEAN)
+public class Custom extends Builder implements OnImageLoadingCompleted {
     private static final String TAG = Custom.class.getSimpleName();
     private RemoteViews mRemoteView;
     private String mTitle;
@@ -25,21 +25,13 @@ public class Custom extends Basic implements OnImageLoadingCompleted {
     private int mPlaceHolderResourceId;
     private ImageLoader mImageLoader;
 
-    public Custom(NotificationCompat.Builder builder, int identifier, String title, String message, int smallIcon, String tag) {
+
+    public Custom(NotificationCompat.Builder builder, int identifier, String title, String message, Spanned messageSpanned, int smallIcon, String tag) {
         super(builder, identifier, tag);
         this.mRemoteView = new RemoteViews(PugNotification.mSingleton.mContext.getPackageName(), R.layout.pugnotification_custom);
         this.mTitle = title;
         this.mMessage = message;
-        this.mSmallIcon = smallIcon;
-        this.mPlaceHolderResourceId = R.drawable.pugnotification_ic_placeholder;
-        this.init();
-    }
-
-    public Custom(NotificationCompat.Builder builder, int identifier, String title, Spanned message, int smallIcon, String tag) {
-        super(builder, identifier, tag);
-        this.mRemoteView = new RemoteViews(PugNotification.mSingleton.mContext.getPackageName(), R.layout.pugnotification_custom);
-        this.mTitle = title;
-        this.mMessageSpanned = message;
+        this.mMessageSpanned = messageSpanned;
         this.mSmallIcon = smallIcon;
         this.mPlaceHolderResourceId = R.drawable.pugnotification_ic_placeholder;
         this.init();
@@ -56,9 +48,9 @@ public class Custom extends Basic implements OnImageLoadingCompleted {
     }
 
     private void setMessage() {
-        if(mMessageSpanned != null){
+        if (mMessageSpanned != null) {
             mRemoteView.setTextViewText(R.id.notification_text_message, mMessageSpanned);
-        }else {
+        } else {
             mRemoteView.setTextViewText(R.id.notification_text_message, mMessage);
         }
     }
@@ -123,6 +115,10 @@ public class Custom extends Basic implements OnImageLoadingCompleted {
 
     @Override
     public void build() {
+        if (!(Looper.getMainLooper().getThread() == Thread.currentThread())) {
+            throw new IllegalStateException("Method call should happen from the main thread.");
+        }
+
         super.build();
         setBigContentView(mRemoteView);
         loadImageBackground();
