@@ -2,15 +2,14 @@ package br.com.goncalves.pugnotification.notification;
 
 import android.app.Notification;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationCompat.Builder;
 
-public class Simple extends Basic {
+public class Simple extends Builder {
     private static final String TAG = Simple.class.getSimpleName();
     private int mProgress;
     private int mMax;
     private boolean mIndeterminate;
 
-    public Simple(Builder builder, int identifier, String tag) {
+    public Simple(NotificationCompat.Builder builder, int identifier, String tag) {
         super(builder, identifier, tag);
     }
 
@@ -22,7 +21,7 @@ public class Simple extends Basic {
     }
 
     public Simple update(int identifier) {
-        Builder builder = new NotificationCompat.Builder(PugNotification.mSingleton.mContext);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(PugNotification.mSingleton.mContext);
         builder.setProgress(mMax, mProgress, mIndeterminate);
 
         notification = builder.build();
