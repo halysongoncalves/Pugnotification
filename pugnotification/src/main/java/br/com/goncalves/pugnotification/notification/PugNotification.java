@@ -3,8 +3,6 @@ package br.com.goncalves.pugnotification.notification;
 import android.app.NotificationManager;
 import android.content.Context;
 
-import br.com.goncalves.pugnotification.utils.Utils;
-
 public class PugNotification {
     private static final String TAG = PugNotification.class.getSimpleName();
     public static PugNotification mSingleton = null;
@@ -27,11 +25,10 @@ public class PugNotification {
     }
 
     public Load load() {
-        return new Load(this);
+        return new Load();
     }
 
     public void cancel(int identifier) {
-        Utils.checkMain();
         NotificationManager notifyManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         notifyManager.cancel(identifier);
     }
