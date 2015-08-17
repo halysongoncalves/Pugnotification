@@ -1,6 +1,5 @@
 package br.com.goncalves.pugnotification.notification;
 
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,39 +12,25 @@ import android.support.annotation.StringRes;
 import android.support.v4.app.NotificationCompat;
 import android.text.Spanned;
 
-import br.com.goncalves.pugnotification.R;
 import br.com.goncalves.pugnotification.interfaces.PendingIntentNotification;
 import br.com.goncalves.pugnotification.pendingintent.ClickPendingIntentActivity;
 import br.com.goncalves.pugnotification.pendingintent.ClickPendingIntentBroadCast;
 import br.com.goncalves.pugnotification.pendingintent.DismissPendingIntentActivity;
 import br.com.goncalves.pugnotification.pendingintent.DismissPendingIntentBroadCast;
-import br.com.goncalves.pugnotification.utils.Utils;
 
 public class Load {
     private static final String TAG = Load.class.getSimpleName();
-    private final PugNotification notification;
     private NotificationCompat.Builder builder;
-    private int notificationId;
     private String title;
     private String message;
-    private int smallIcon;
     private Spanned messageSpanned;
     private String tag;
+    private int notificationId;
+    private int smallIcon;
 
-    public Load(PugNotification notification) {
-        this.notification = Utils.isActiveSingleton(notification);
-        builder = new NotificationCompat.Builder(this.notification.mContext);
-        createNotifationDefault();
-    }
-
-    private void createNotifationDefault() {
-        this.notificationId = Utils.radom();
-        this.builder.setContentTitle("");
-        this.builder.setContentText("");
-        this.builder.setSmallIcon(R.drawable.pugnotification_ic_launcher);
-        this.builder.setDefaults(Notification.DEFAULT_ALL);
-
-        this.builder.setContentIntent(PendingIntent.getBroadcast(notification.mContext, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT));
+    public Load() {
+        builder = new NotificationCompat.Builder(PugNotification.mSingleton.mContext);
+        builder.setContentIntent(PendingIntent.getBroadcast(PugNotification.mSingleton.mContext, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
     public Load identifier(int identifier) {
@@ -67,7 +52,7 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        this.title = notification.mContext.getResources().getString(title);
+        this.title = PugNotification.mSingleton.mContext.getResources().getString(title);
         this.builder.setContentTitle(this.title);
         return this;
     }
@@ -91,7 +76,7 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        this.message = notification.mContext.getResources().getString(message);
+        this.message = PugNotification.mSingleton.mContext.getResources().getString(message);
         this.builder.setContentText(this.message);
         return this;
     }
@@ -106,13 +91,13 @@ public class Load {
         return this;
     }
 
-    public Load message(@NonNull Spanned message) {
+    public Load message(@NonNull Spanned messageSpanned) {
         if (message.length() == 0) {
             throw new IllegalArgumentException("Message Must Not Be Empty!");
         }
 
-        this.messageSpanned = message;
-        this.builder.setContentText(message);
+        this.messageSpanned = messageSpanned;
+        this.builder.setContentText(messageSpanned);
         return this;
     }
 
@@ -130,7 +115,7 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        this.builder.setTicker(notification.mContext.getResources().getString(ticker));
+        this.builder.setTicker(PugNotification.mSingleton.mContext.getResources().getString(ticker));
         return this;
     }
 
@@ -161,7 +146,7 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        return bigTextStyle(notification.mContext.getResources().getString(
+        return bigTextStyle(PugNotification.mSingleton.mContext.getResources().getString(
                 bigTextStyle), null);
     }
 
@@ -170,8 +155,8 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        return bigTextStyle(notification.mContext.getResources().getString(
-                bigTextStyle), notification.mContext.getResources().getString(
+        return bigTextStyle(PugNotification.mSingleton.mContext.getResources().getString(
+                bigTextStyle), PugNotification.mSingleton.mContext.getResources().getString(
                 summaryText));
     }
 
@@ -262,7 +247,7 @@ public class Load {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        Bitmap bitmap = BitmapFactory.decodeResource(notification.mContext.getResources(), largeIcon);
+        Bitmap bitmap = BitmapFactory.decodeResource(PugNotification.mSingleton.mContext.getResources(), largeIcon);
         this.builder.setLargeIcon(bitmap);
         return this;
     }
@@ -413,14 +398,10 @@ public class Load {
         return this;
     }
 
-    public Load defaults(int defaults) {
-        if (defaults < 0) {
-            throw new IllegalArgumentException("Defaults Should Not Be Less Than Or Equal!");
-        }
+    public Load flags(int defaults) {
         this.builder.setDefaults(defaults);
         return this;
     }
-
 
     public Load click(@NonNull PendingIntent pendingIntent) {
         this.builder.setContentIntent(pendingIntent);
@@ -465,18 +446,27 @@ public class Load {
     }
 
     public Custom custom() {
-        Utils.checkMain();
-        if (messageSpanned != null) {
-            return new Custom(builder, notificationId, title, messageSpanned, smallIcon, tag);
-        }
-        return new Custom(builder, notificationId, title, message, smallIcon, tag);
+        notificationShallContainAtLeastThoseAttributesValid();
+        return new Custom(builder, notificationId, title, message, messageSpanned, smallIcon, tag);
     }
 
     public Simple simple() {
+        notificationShallContainAtLeastThoseAttributesValid();
         return new Simple(builder, notificationId, tag);
     }
 
     public Wear wear() {
+        notificationShallContainAtLeastThoseAttributesValid();
         return new Wear(builder, notificationId, tag);
+    }
+
+    private void notificationShallContainAtLeastThoseAttributesValid() {
+        if (((title == null) || (title.isEmpty()))
+                || ((message == null) || (message.isEmpty()))
+                || ((smallIcon <= 0))) {
+            throw new IllegalArgumentException("Notification Shall Contain At Least Those Attributes Valid:" +
+                    "((title != null) && (!title.isEmpty())), ((message != null) && (!message.isEmpty())), ((smallIcon <= 0))");
+
+        }
     }
 }
