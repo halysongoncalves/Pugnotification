@@ -1,5 +1,6 @@
 package br.com.goncalves.pugnotification.sample;
 
+import android.app.Notification;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -93,7 +94,8 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
                             .autoCancel(true)
                             .largeIcon(R.drawable.pugnotification_ic_launcher)
                             .title(title)
-                            .message(message);
+                            .message(message)
+                            .flags(Notification.DEFAULT_ALL);
 
                     switch (mPosSelected) {
                         case 0:

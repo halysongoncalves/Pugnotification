@@ -13,19 +13,16 @@ import java.util.List;
 
 import br.com.goncalves.pugnotification.R;
 import br.com.goncalves.pugnotification.interfaces.PendingIntentNotification;
-import br.com.goncalves.pugnotification.utils.Utils;
 
 /**
  * Created by Halyson on 04/05/15.
  */
-public class Wear extends Basic {
-    private final PugNotification pugNotification;
+public class Wear extends Builder {
     private NotificationCompat.WearableExtender wearableExtender;
     private RemoteInput remoteInput;
 
     public Wear(NotificationCompat.Builder builder, int identifier, String tag) {
         super(builder, identifier, tag);
-        this.pugNotification = Utils.isActiveSingleton(PugNotification.mSingleton);
         this.wearableExtender = new NotificationCompat.WearableExtender();
     }
 
@@ -75,7 +72,7 @@ public class Wear extends Basic {
 
 
     public Wear remoteInput(@DrawableRes int icon, @StringRes int title, PendingIntentNotification pendingIntentNotification, RemoteInput remoteInput) {
-        remoteInput(icon, pugNotification.mContext.getString(title), pendingIntentNotification.onSettingPendingIntent(), remoteInput);
+        remoteInput(icon, PugNotification.mSingleton.mContext.getString(title), pendingIntentNotification.onSettingPendingIntent(), remoteInput);
         return this;
     }
 
@@ -85,7 +82,7 @@ public class Wear extends Basic {
     }
 
     public Wear remoteInput(@DrawableRes int icon, @StringRes int title, PendingIntent pendingIntent, RemoteInput remoteInput) {
-        remoteInput(icon, pugNotification.mContext.getString(title), pendingIntent, remoteInput);
+        remoteInput(icon, PugNotification.mSingleton.mContext.getString(title), pendingIntent, remoteInput);
         return this;
     }
 
@@ -127,9 +124,9 @@ public class Wear extends Basic {
             throw new IllegalArgumentException("PendingIntent Must Not Be Null!");
         }
 
-        this.remoteInput = new RemoteInput.Builder(pugNotification.mContext.getString(R.string.pugnotification_key_voice_reply))
-                .setLabel(pugNotification.mContext.getString(R.string.pugnotification_label_voice_reply))
-                .setChoices(pugNotification.mContext.getResources().getStringArray(R.array.pugnotification_reply_choices))
+        this.remoteInput = new RemoteInput.Builder(PugNotification.mSingleton.mContext.getString(R.string.pugnotification_key_voice_reply))
+                .setLabel(PugNotification.mSingleton.mContext.getString(R.string.pugnotification_label_voice_reply))
+                .setChoices(PugNotification.mSingleton.mContext.getResources().getStringArray(R.array.pugnotification_reply_choices))
                 .build();
         wearableExtender.addAction(new NotificationCompat.Action.Builder(icon,
                 title, pendingIntent)
@@ -139,7 +136,7 @@ public class Wear extends Basic {
     }
 
     public Wear remoteInput(@DrawableRes int icon, @StringRes int title, PendingIntent pendingIntent, String replyLabel, String[] replyChoices) {
-        return remoteInput(icon, pugNotification.mContext.getString(title), pendingIntent, replyLabel, replyChoices);
+        return remoteInput(icon, PugNotification.mSingleton.mContext.getString(title), pendingIntent, replyLabel, replyChoices);
     }
 
     public Wear remoteInput(@DrawableRes int icon, String title, PendingIntent pendingIntent, String replyLabel, String[] replyChoices) {
@@ -162,7 +159,7 @@ public class Wear extends Basic {
             throw new IllegalArgumentException("Reply Label Must Not Be Null!");
         }
 
-        this.remoteInput = new RemoteInput.Builder(pugNotification.mContext.getString(R.string.pugnotification_key_voice_reply))
+        this.remoteInput = new RemoteInput.Builder(PugNotification.mSingleton.mContext.getString(R.string.pugnotification_key_voice_reply))
                 .setLabel(replyLabel)
                 .setChoices(replyChoices)
                 .build();
@@ -187,7 +184,7 @@ public class Wear extends Basic {
             throw new IllegalArgumentException("Resource ID Background Should Not Be Less Than Or Equal To Zero!");
         }
 
-        Bitmap bitmap = BitmapFactory.decodeResource(pugNotification.mContext.getResources(), background);
+        Bitmap bitmap = BitmapFactory.decodeResource(PugNotification.mSingleton.mContext.getResources(), background);
         this.wearableExtender.setBackground(bitmap);
         return this;
     }
