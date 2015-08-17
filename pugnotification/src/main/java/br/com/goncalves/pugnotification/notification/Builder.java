@@ -6,18 +6,14 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import br.com.goncalves.pugnotification.utils.Utils;
-
-public abstract class Basic {
-    private static final String TAG = Basic.class.getSimpleName();
-    protected final PugNotification pugNotification;
+public abstract class Builder {
+    private static final String TAG = Builder.class.getSimpleName();
     protected String tag;
     protected Notification notification;
     protected NotificationCompat.Builder builder;
     protected int notificationId;
 
-    public Basic(NotificationCompat.Builder builder, int identifier, String tag) {
-        this.pugNotification = Utils.isActiveSingleton(PugNotification.mSingleton);
+    public Builder(NotificationCompat.Builder builder, int identifier, String tag) {
         this.builder = builder;
         this.notificationId = identifier;
         this.tag = tag;
@@ -36,20 +32,20 @@ public abstract class Basic {
     }
 
     protected Notification notificationNotify() {
-        if(tag != null){
+        if (tag != null) {
             return notificationNotify(tag, notificationId);
         }
         return notificationNotify(notificationId);
     }
 
     protected Notification notificationNotify(int identifier) {
-        NotificationManagerCompat notificationManager =NotificationManagerCompat.from(pugNotification.mContext);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(PugNotification.mSingleton.mContext);
         notificationManager.notify(identifier, notification);
         return notification;
     }
 
     protected Notification notificationNotify(String tag, int identifier) {
-        NotificationManagerCompat notificationManager =NotificationManagerCompat.from(pugNotification.mContext);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(PugNotification.mSingleton.mContext);
         notificationManager.notify(tag, identifier, notification);
         return notification;
     }
