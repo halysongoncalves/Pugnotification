@@ -4,9 +4,9 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 
-import br.com.goncalves.pugnotification.notification.PugNotification;
 import br.com.goncalves.pugnotification.constants.BroadcastActions;
 import br.com.goncalves.pugnotification.interfaces.PendingIntentNotification;
+import br.com.goncalves.pugnotification.notification.PugNotification;
 
 public class DismissPendingIntentActivity implements PendingIntentNotification {
     private final Class<?> mActivity;
