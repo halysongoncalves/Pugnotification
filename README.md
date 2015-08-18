@@ -122,7 +122,10 @@ PugNotification.with(mContext).load()
 ```
 # What's New
 *1.6.0
-Fixed bug that did not allow the award of a sound and made some organizations and otimizaçnoes the code
+
+Fixed bug that did not allow the award of a sound and made some organizations and otimizaçnoes the code.
+
+Now it is necessary to set one of the flag's: Notification.DEFAULT_ALL, Notification.DEFAULT_SOUND, Notification.DEFAULT_VIBRATE or Notification.DEFAULT_LIGHTS
 
 *1.5.0
 
