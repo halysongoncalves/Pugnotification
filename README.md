@@ -1,6 +1,6 @@
 # PugNotification
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PugNotification-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1688)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.6.0|)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.7.0|)
 [![Build Status](https://travis-ci.org/halysongoncalves/pugnotification.svg)](https://travis-ci.org/halysongoncalves/pugnotification)
 [![Coverage Status](https://coveralls.io/repos/halysongoncalves/pugnotification/badge.svg)](https://coveralls.io/r/halysongoncalves/pugnotification)
 [![Join the chat at https://gitter.im/halysongoncalves/pugnotification](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/halysongoncalves/pugnotification?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -14,12 +14,12 @@ Download [the latest AAR][1] or grab via Maven:
 <dependency>
   <groupId>com.github.halysongoncalves</groupId>
   <artifactId>pugnotification</artifactId>
-  <version>1.6.0</version>
+  <version>1.7.0</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-compile 'com.github.halysongoncalves:pugnotification:1.6.0'
+compile 'com.github.halysongoncalves:pugnotification:1.7.0'
 ```
 
 # Introduction
@@ -80,6 +80,29 @@ PugNotification.with(context)
     .build();
 ```
 
+# Progress Notification
+
+Simple notification with progress.
+
+```java
+PugNotification.with(context)
+    .load()
+    .identifier(identifier)
+    .smallIcon(R.drawable.pugnotification_ic_launcher)
+    .progress()
+    .value(progress,max, indeterminate)
+    .build();
+```
+
+```java
+PugNotification.with(context)
+    .load()
+    .identifier(identifier)
+    .smallIcon(R.drawable.pugnotification_ic_launcher)
+    .progress()
+    .update(identifier,progress,max, indeterminate)
+    .build();
+```
 
 # Custom Notification
 
@@ -125,6 +148,12 @@ PugNotification.with(mContext).load()
     .build();
 ```
 # What's New
+*1.7.0
+
+Added a new type of notification, progress. Now you can assign the basic features of a notification, while also adding a progressbar in the notification.
+
+It was also added new method: ongoing (). With it possible to make false removing the notification.
+
 *1.6.0
 
 Fixed bug that did not allow the award of a sound and made some organizations and otimizaçnoes the code.
@@ -198,4 +227,4 @@ When submitting code, please make every effort to follow existing conventions an
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[1]: http://repo1.maven.org/maven2/com/github/halysongoncalves/pugnotification/1.6.0/pugnotification-1.6.0.aar
+[1]: http://repo1.maven.org/maven2/com/github/halysongoncalves/pugnotification/1.7.0/pugnotification-1.7.0.aar
