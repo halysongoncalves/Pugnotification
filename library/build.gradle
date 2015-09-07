@@ -15,7 +15,7 @@ android {
         abortOnError false
     }
 }
-apply from: 'mvnpublish.gradle'
+apply from: 'maven.gradle'
 
 dependencies {
     compile 'com.android.support:support-v4:23.0.0'
