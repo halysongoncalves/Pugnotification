@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.NotificationCompat;
 import android.text.Spanned;
+import android.util.Log;
 
 import br.com.goncalves.pugnotification.interfaces.PendingIntentNotification;
 import br.com.goncalves.pugnotification.pendingintent.ClickPendingIntentActivity;
@@ -19,7 +20,7 @@ import br.com.goncalves.pugnotification.pendingintent.DismissPendingIntentActivi
 import br.com.goncalves.pugnotification.pendingintent.DismissPendingIntentBroadCast;
 
 public class Load {
-    private static final String TAG = Load.class.getSimpleName();
+    private static final String TAG = "Pugnotification";
     private NotificationCompat.Builder builder;
     private String title;
     private String message;
@@ -220,6 +221,11 @@ public class Load {
 
     public Load autoCancel(boolean autoCancel) {
         this.builder.setAutoCancel(autoCancel);
+        return this;
+    }
+
+    public Load ongoing(boolean ongoing) {
+        this.builder.setOngoing(ongoing);
         return this;
     }
 
@@ -464,7 +470,7 @@ public class Load {
         if (((title == null) || (title.isEmpty()))
                 || ((message == null) || (message.isEmpty()))
                 || ((smallIcon <= 0))) {
-            throw new IllegalArgumentException("Notification Shall Contain At Least Those Attributes Valid:" +
+            Log.w(TAG, "Notification Shall Contain At Least Those Attributes Valid:" +
                     "((title != null) && (!title.isEmpty())), ((message != null) && (!message.isEmpty())), ((smallIcon <= 0))");
 
         }

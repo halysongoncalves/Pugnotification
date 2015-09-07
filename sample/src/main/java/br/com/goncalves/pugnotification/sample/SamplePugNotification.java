@@ -33,11 +33,33 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
     private RelativeLayout mContentBigText;
     private int mPosSelected = 0;
 
+    private static Target getViewTarget(final OnImageLoadingCompleted onCompleted) {
+        return new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                onCompleted.imageLoadingCompleted(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        };
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
         setContentView(R.layout.pugnotification_sample_activity);
+
+
+        PugNotification.with(this).load().identifier(10).simple().setProgress(10, 100, true).build();
 
         loadInfoComponents();
         loadListeners();
@@ -173,24 +195,5 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
     public void load(int imageResId, OnImageLoadingCompleted onCompleted) {
         viewTarget = getViewTarget(onCompleted);
         Picasso.with(this).load(imageResId).into(viewTarget);
-    }
-
-    private static Target getViewTarget(final OnImageLoadingCompleted onCompleted) {
-        return new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                onCompleted.imageLoadingCompleted(bitmap);
-            }
-
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
-
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            }
-        };
     }
 }
