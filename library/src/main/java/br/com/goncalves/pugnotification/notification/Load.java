@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.NotificationCompat;
 import android.text.Spanned;
-import android.util.Log;
 
 import br.com.goncalves.pugnotification.interfaces.PendingIntentNotification;
 import br.com.goncalves.pugnotification.pendingintent.ClickPendingIntentActivity;
@@ -20,7 +19,7 @@ import br.com.goncalves.pugnotification.pendingintent.DismissPendingIntentActivi
 import br.com.goncalves.pugnotification.pendingintent.DismissPendingIntentBroadCast;
 
 public class Load {
-    private static final String TAG = "Pugnotification";
+    private static final String TAG = "Pugnotification.Load";
     private NotificationCompat.Builder builder;
     private String title;
     private String message;
@@ -36,7 +35,7 @@ public class Load {
 
     public Load identifier(int identifier) {
         if (identifier <= 0) {
-            throw new IllegalStateException("Resource ID Should Not Be Less Than Or Equal To Zero!");
+            throw new IllegalStateException("Identifier Should Not Be Less Than Or Equal To Zero!");
         }
 
         this.notificationId = identifier;
@@ -208,8 +207,8 @@ public class Load {
         }
 
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-        for (int i = 0; i < inboxLines.length; i++) {
-            inboxStyle.addLine(inboxLines[i]);
+        for (String inboxLine : inboxLines) {
+            inboxStyle.addLine(inboxLine);
         }
         inboxStyle.setBigContentTitle(title);
         if (summary != null) {
@@ -230,20 +229,12 @@ public class Load {
     }
 
     public Load smallIcon(@DrawableRes int smallIcon) {
-        if (smallIcon <= 0) {
-            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
-        }
-
         this.smallIcon = smallIcon;
-        this.builder.setSmallIcon(this.smallIcon);
+        this.builder.setSmallIcon(smallIcon);
         return this;
     }
 
-    public Load largeIcon(Bitmap bitmap) {
-        if (bitmap == null) {
-            throw new IllegalArgumentException("Bitmap Must Not Be Null.");
-        }
-
+    public Load largeIcon(@NonNull Bitmap bitmap) {
         this.builder.setLargeIcon(bitmap);
         return this;
     }
@@ -277,7 +268,7 @@ public class Load {
         return this;
     }
 
-    public Load vibrate(long[] vibrate) {
+    public Load vibrate(@NonNull long[] vibrate) {
         for (long aVibrate : vibrate) {
             if (aVibrate <= 0) {
                 throw new IllegalArgumentException("Vibrate Time " + aVibrate + " Invalid!");
@@ -301,11 +292,7 @@ public class Load {
         return this;
     }
 
-    public Load sound(Uri sound) {
-        if (sound == null) {
-            throw new IllegalArgumentException("Sound Must Not Be Null.");
-        }
-
+    public Load sound(@NonNull Uri sound) {
         this.builder.setSound(sound);
         return this;
     }
@@ -323,75 +310,37 @@ public class Load {
         return this;
     }
 
-    public Load button(@DrawableRes int icon, String title, PendingIntent pendingIntent) {
-        if (icon < 0) {
-            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
-        }
-
-        if (title == null) {
-            throw new IllegalStateException("Title Must Not Be Null!");
-        }
-        if (pendingIntent == null) {
-            throw new IllegalArgumentException("PendingIntent Must Not Be Null.");
-        }
-
+    public Load button(@DrawableRes int icon, @NonNull String title, @NonNull PendingIntent pendingIntent) {
         this.builder.addAction(icon, title, pendingIntent);
         return this;
     }
 
-    public Load button(@DrawableRes int icon, String title, PendingIntentNotification pendingIntentNotification) {
-        if (icon < 0) {
-            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
-        }
-
-        if (title == null) {
-            throw new IllegalStateException("Title Must Not Be Null!");
-        }
-        if (pendingIntentNotification == null) {
-            throw new IllegalArgumentException("PendingIntentNotification Must Not Be Null.");
-        }
-
+    public Load button(@DrawableRes int icon, @NonNull String title, @NonNull PendingIntentNotification pendingIntentNotification) {
         this.builder.addAction(icon, title, pendingIntentNotification.onSettingPendingIntent());
         return this;
     }
 
-    public Load button(NotificationCompat.Action action) {
-        if (action == null) {
-            throw new IllegalArgumentException("Action Must Not Be Null.");
-        }
-
+    public Load button(@NonNull NotificationCompat.Action action) {
         this.builder.addAction(action);
         return this;
     }
 
-    public Load click(Class<?> activity, Bundle bundle) {
-        if (activity == null) {
-            throw new IllegalArgumentException("Activity Must Not Be Null.");
-        }
-
+    public Load click(@NonNull Class<?> activity, Bundle bundle) {
         this.builder.setContentIntent(new ClickPendingIntentActivity(activity, bundle, notificationId).onSettingPendingIntent());
         return this;
     }
 
-    public Load click(Class<?> activity) {
+    public Load click(@NonNull Class<?> activity) {
         click(activity, null);
         return this;
     }
 
-    public Load click(Bundle bundle) {
-        if (bundle == null) {
-            throw new IllegalArgumentException("Bundle Must Not Be Null.");
-        }
-
+    public Load click(@NonNull Bundle bundle) {
         this.builder.setContentIntent(new ClickPendingIntentBroadCast(bundle, notificationId).onSettingPendingIntent());
         return this;
     }
 
-    public Load click(PendingIntentNotification pendingIntentNotification) {
-        if (pendingIntentNotification == null) {
-            throw new IllegalArgumentException("PendingIntentNotification Must Not Be Null.");
-        }
-
+    public Load click(@NonNull PendingIntentNotification pendingIntentNotification) {
         this.builder.setContentIntent(pendingIntentNotification.onSettingPendingIntent());
         return this;
     }
@@ -414,34 +363,22 @@ public class Load {
         return this;
     }
 
-    public Load dismiss(Class<?> activity, Bundle bundle) {
-        if (activity == null) {
-            throw new IllegalArgumentException("Activity Must Not Be Null.");
-        }
-
+    public Load dismiss(@NonNull Class<?> activity, Bundle bundle) {
         this.builder.setDeleteIntent(new DismissPendingIntentActivity(activity, bundle, notificationId).onSettingPendingIntent());
         return this;
     }
 
-    public Load dismiss(Class<?> activity) {
+    public Load dismiss(@NonNull Class<?> activity) {
         dismiss(activity, null);
         return this;
     }
 
-    public Load dismiss(Bundle bundle) {
-        if (bundle == null) {
-            throw new IllegalArgumentException("Bundle Must Not Be Null.");
-        }
-
+    public Load dismiss(@NonNull Bundle bundle) {
         this.builder.setDeleteIntent(new DismissPendingIntentBroadCast(bundle, notificationId).onSettingPendingIntent());
         return this;
     }
 
-    public Load dismiss(PendingIntentNotification pendingIntentNotification) {
-        if (pendingIntentNotification == null) {
-            throw new IllegalArgumentException("Pending Intent Notification Must Not Be Null.");
-        }
-
+    public Load dismiss(@NonNull PendingIntentNotification pendingIntentNotification) {
         this.builder.setDeleteIntent(pendingIntentNotification.onSettingPendingIntent());
         return this;
     }
@@ -452,27 +389,28 @@ public class Load {
     }
 
     public Custom custom() {
-        notificationShallContainAtLeastThoseAttributesValid();
+        notificationShallContainAtLeastThoseSmallIconValid();
         return new Custom(builder, notificationId, title, message, messageSpanned, smallIcon, tag);
     }
 
     public Simple simple() {
-        notificationShallContainAtLeastThoseAttributesValid();
+        notificationShallContainAtLeastThoseSmallIconValid();
         return new Simple(builder, notificationId, tag);
     }
 
     public Wear wear() {
-        notificationShallContainAtLeastThoseAttributesValid();
+        notificationShallContainAtLeastThoseSmallIconValid();
         return new Wear(builder, notificationId, tag);
     }
 
-    private void notificationShallContainAtLeastThoseAttributesValid() {
-        if (((title == null) || (title.isEmpty()))
-                || ((message == null) || (message.isEmpty()))
-                || ((smallIcon <= 0))) {
-            Log.w(TAG, "Notification Shall Contain At Least Those Attributes Valid:" +
-                    "((title != null) && (!title.isEmpty())), ((message != null) && (!message.isEmpty())), ((smallIcon <= 0))");
+    public Progress progress() {
+        notificationShallContainAtLeastThoseSmallIconValid();
+        return new Progress(builder, notificationId, tag);
+    }
 
+    private void notificationShallContainAtLeastThoseSmallIconValid() {
+        if (smallIcon <= 0) {
+            throw new IllegalArgumentException("This is required. Notifications with an invalid icon resource will not be shown.");
         }
     }
 }
