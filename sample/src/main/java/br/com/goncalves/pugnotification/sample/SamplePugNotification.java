@@ -58,9 +58,6 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
         mContext = this;
         setContentView(R.layout.pugnotification_sample_activity);
 
-
-        PugNotification.with(this).load().identifier(10).simple().setProgress(10, 100, true).build();
-
         loadInfoComponents();
         loadListeners();
     }
@@ -157,7 +154,6 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
         {
             @Override
             public void onClick(View v) {
-
                 String title = mEdtTitle.getText().toString();
                 String message = mEdtMessage.getText().toString();
                 String bigtext = mEdtBigText.getText().toString();
