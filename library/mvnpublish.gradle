@@ -13,7 +13,7 @@ afterEvaluate { project ->
 
                 pom.groupId = 'com.github.halysongoncalves'
                 pom.artifactId = 'pugnotification'
-                pom.version = '1.6.0'
+                pom.version = '1.7.0'
 
                 repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2/') {
                     authentication(userName: '', password: '')
