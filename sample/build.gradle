@@ -1,40 +1,50 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.0"
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
 
     defaultConfig {
-        applicationId "br.com.goncalves.pugnotification.sample"
-        minSdkVersion 10
-        targetSdkVersion 23
-        versionCode 4
-        versionName "1.2.0"
+        applicationId globalConfiguration.getAt("androidApplicationId")
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+
+        versionCode globalConfiguration.getAt("androidVersionCode")
+        versionName globalConfiguration.getAt("androidVersionName")
     }
 
     buildTypes {
         release {
             zipAlignEnabled true
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             debuggable false
-
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
 
         debug {
             zipAlignEnabled true
             minifyEnabled false
             debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
     }
 
-    lintOptions {
-        abortOnError false
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'LICENSE.txt'
     }
 }
 
 dependencies {
+    //Libraries
+    def sampleDependencies = rootProject.ext.sampleDependencies
+    compile sampleDependencies.annotationsVersion
+    compile sampleDependencies.supportV4
+    compile sampleDependencies.supportV7
+    compile sampleDependencies.picasso
     compile project(':library')
-    compile 'com.android.support:appcompat-v7:23.0.0'
-    compile 'com.squareup.picasso:picasso:2.3.4'
 }

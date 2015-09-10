@@ -1,0 +1,33 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext {
+    //Libraries
+    annotations = 'com.android.support:support-annotations'
+    supportV4 = 'com.android.support:support-v4'
+    supportV7 = 'com.android.support:appcompat-v7'
+    picasso = 'com.squareup.picasso:picasso'
+
+    //Version Libraries
+    annotationsVersion = '23.0.1'
+    supportV4Version = '23.0.1'
+    supportV7Version = '23.0.1'
+    picassoVersion = '2.3.4'
+
+    //Library
+    libraryDependencies = [
+            annotationsVersion: "${annotations}:${annotationsVersion}",
+            supportV4         : "${supportV4}:${supportV4Version}",
+    ]
+
+    //Sample
+    sampleDependencies = [
+            annotationsVersion: "${annotations}:${annotationsVersion}",
+            supportV4         : "${supportV4}:${supportV4Version}",
+            supportV7         : "${supportV7}:${supportV7Version}",
+            picasso         : "${picasso}:${picassoVersion}",
+    ]
+}
