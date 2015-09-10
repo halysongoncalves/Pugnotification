@@ -99,5 +99,3 @@ build
 .idea
 .gradle
 release.keystore.jks
-/gradle.properties
-signin.properties
