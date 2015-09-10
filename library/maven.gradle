@@ -16,11 +16,11 @@ def getSnapshotRepositoryUrl() {
 }
 
 def getRepositoryUsername() {
-    return System.getenv('NEXUS_USERNAME') != null ? System.getenv('NEXUS_USERNAME') != null  : ""
+    return System.getenv("NEXUS_USERNAME") != null ? System.getenv("NEXUS_USERNAME") : ""
 }
 
 def getRepositoryPassword() {
-    return System.getenv('NEXUS_PASSWORD') != null ? System.getenv('NEXUS_PASSWORD') != null  : ""
+    return System.getenv("NEXUS_PASSWORD") != null ? System.getenv("NEXUS_PASSWORD") : ""
 }
 
 afterEvaluate { project ->

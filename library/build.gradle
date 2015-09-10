@@ -16,11 +16,11 @@ android {
     }
 
     buildTypes {
-        release {
-            zipAlignEnabled true
-            minifyEnabled true
-            shrinkResources true
-            debuggable false
+        debug {
+            zipAlignEnabled false
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
     }
