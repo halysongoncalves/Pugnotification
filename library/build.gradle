@@ -23,13 +23,6 @@ android {
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
-
-        debug {
-            zipAlignEnabled true
-            minifyEnabled false
-            debuggable true
-            proguardFiles getDefaultProguardFile('proguard-android.txt')
-        }
     }
 
     packagingOptions {
@@ -45,5 +38,8 @@ dependencies {
     compile libraryDependencies.annotationsVersion
     compile libraryDependencies.supportV4
 }
+
+uploadArchives.dependsOn(assemble)
+
 
 

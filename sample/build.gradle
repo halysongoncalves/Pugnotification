@@ -23,13 +23,6 @@ android {
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
-
-        debug {
-            zipAlignEnabled true
-            minifyEnabled false
-            debuggable true
-            proguardFiles getDefaultProguardFile('proguard-android.txt')
-        }
     }
 
     packagingOptions {
