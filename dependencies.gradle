@@ -28,6 +28,6 @@ ext {
             annotationsVersion: "${annotations}:${annotationsVersion}",
             supportV4         : "${supportV4}:${supportV4Version}",
             supportV7         : "${supportV7}:${supportV7Version}",
-            picasso         : "${picasso}:${picassoVersion}",
+            picasso           : "${picasso}:${picassoVersion}",
     ]
 }
