@@ -1,11 +1,14 @@
 package br.com.goncalves.pugnotification.notification;
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -101,12 +104,17 @@ public class Load {
         return this;
     }
 
-    public Load color(int color) {
+    public Load color(@ColorRes int color) {
         if (color <= 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
         }
 
-        this.builder.setColor(color);
+        Context context = PugNotification.mSingleton.mContext;
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            this.builder.setColor(context.getColor(color));
+        } else {
+            this.builder.setColor(context.getResources().getColor(color));
+        }
         return this;
     }
 
