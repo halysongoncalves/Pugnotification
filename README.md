@@ -148,6 +148,10 @@ PugNotification.with(mContext).load()
     .build();
 ```
 # What's New
+*1.8.0
+
+Adding method for cancellation in tag-based notifications. And added validation to ensure that the color assigned in the method is @ColorRes.
+
 *1.7.0
 
 Added a new type of notification, progress. Now you can assign the basic features of a notification, while also adding a progressbar in the notification.
