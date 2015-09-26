@@ -33,6 +33,11 @@ public class PugNotification {
         notifyManager.cancel(identifier);
     }
 
+    public void cancel(String tag, int identifier) {
+        NotificationManager notifyManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        notifyManager.cancel(tag, identifier);
+    }
+
     public void shutdown() {
         if (this == mSingleton) {
             throw new UnsupportedOperationException("Default singleton instance cannot be shutdown.");
