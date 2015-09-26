@@ -22,4 +22,4 @@ notifications:
     - halysongoncalves@gmail.com
 
 script:
-    - ./gradlew assemble
+    - ./gradlew uploadArchives
