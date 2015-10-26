@@ -1,14 +1,11 @@
 # PugNotification
-![soon](https://raw.githubusercontent.com/halysongoncalves/pugnotification/master/art/soon.png)
-
+![soon](https://raw.githubusercontent.com/halysongoncalves/pugnotification/develop/art/soon.png)
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PugNotification-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1688)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.7.0|)
 [![Build Status](https://api.travis-ci.org/halysongoncalves/Pugnotification.svg)](https://travis-ci.org/halysongoncalves/pugnotification)
 [![Coverage Status](https://coveralls.io/repos/halysongoncalves/pugnotification/badge.svg)](https://coveralls.io/r/halysongoncalves/pugnotification)
 [![Join the chat at https://gitter.im/halysongoncalves/pugnotification](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/halysongoncalves/pugnotification?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-![Screenshots](https://raw.githubusercontent.com/halysongoncalves/pugnotification/master/art/screenshot.png)
 
 # Download
 
@@ -26,6 +23,8 @@ compile 'com.github.halysongoncalves:pugnotification:1.7.0'
 ```
 
 # Introduction
+
+![Screenshots](https://raw.githubusercontent.com/halysongoncalves/pugnotification/master/art/screenshot.png)
 
 You're probably tired of writing code to display notifications in your applications, the library abstracts all the notifications construction process for you in a single line of code. Magic? Lie? I summarize in: productivity.
 To further improve productivity, pugnotification from release 1.2.0 now has support Android Wear.
