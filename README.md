@@ -76,8 +76,7 @@ PugNotification.with(context)
     .smallIcon(R.drawable.pugnotification_ic_launcher)
     .largeIcon(R.drawable.pugnotification_ic_launcher)
     .flags(Notification.DEFAULT_ALL)
-    .custom()
-    .background(url)
+    .simple()
     .build();
 ```
 
