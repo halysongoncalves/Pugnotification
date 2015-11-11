@@ -95,7 +95,7 @@ public class Load {
     }
 
     public Load message(@NonNull Spanned messageSpanned) {
-        if (message.length() == 0) {
+        if (messageSpanned.length() == 0) {
             throw new IllegalArgumentException("Message Must Not Be Empty!");
         }
 
