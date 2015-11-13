@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.getkeepsafe.dexcount'
 apply from: 'maven.gradle'
 
 android {
@@ -29,6 +30,14 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
         exclude 'LICENSE.txt'
+    }
+
+    dexcount {
+        includeClasses = true
+        includeFieldCount = true
+        printAsTree = true
+        orderByMethodCount = false
+        verbose = false
     }
 }
 
