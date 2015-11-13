@@ -1,5 +1,5 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-PugNotification-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1688)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.7.0|)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.halysongoncalves/pugnotification/badge.svg)](http://search.maven.org/#artifactdetails|com.github.halysongoncalves|pugnotification|1.8.1|)
 [![Build Status](https://api.travis-ci.org/halysongoncalves/Pugnotification.svg)](https://travis-ci.org/halysongoncalves/pugnotification)
 [![Coverage Status](https://coveralls.io/repos/halysongoncalves/pugnotification/badge.svg)](https://coveralls.io/r/halysongoncalves/pugnotification)
 [![Join the chat at https://gitter.im/halysongoncalves/pugnotification](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/halysongoncalves/pugnotification?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -13,12 +13,12 @@ Download [the latest AAR][1] or grab via Maven:
 <dependency>
   <groupId>com.github.halysongoncalves</groupId>
   <artifactId>pugnotification</artifactId>
-  <version>1.7.0</version>
+  <version>1.8.1</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-compile 'com.github.halysongoncalves:pugnotification:1.7.0'
+compile 'com.github.halysongoncalves:pugnotification:1.8.1'
 ```
 
 # Introduction
@@ -76,8 +76,7 @@ PugNotification.with(context)
     .smallIcon(R.drawable.pugnotification_ic_launcher)
     .largeIcon(R.drawable.pugnotification_ic_launcher)
     .flags(Notification.DEFAULT_ALL)
-    .custom()
-    .background(url)
+    .simple()
     .build();
 ```
 
@@ -149,6 +148,10 @@ PugNotification.with(mContext).load()
     .build();
 ```
 # What's New
+*1.8.1
+
+Fix Message Spanned length check
+
 *1.8.0
 
 Adding method for cancellation in tag-based notifications. And added validation to ensure that the color assigned in the method is @ColorRes.
@@ -232,4 +235,4 @@ When submitting code, please make every effort to follow existing conventions an
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[1]: http://repo1.maven.org/maven2/com/github/halysongoncalves/pugnotification/1.7.0/pugnotification-1.7.0.aar
+[1]: http://repo1.maven.org/maven2/com/github/halysongoncalves/pugnotification/1.8.1/pugnotification-1.8.1.aar
