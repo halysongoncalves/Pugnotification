@@ -354,8 +354,8 @@ public class Load {
     }
 
     public Load priority(int priority) {
-        if (priority <= 0) {
-            throw new IllegalArgumentException("Priority Should Not Be Less Than Or Equal To Zero!");
+        if (priority < NotificationCompat.PRIORITY_MIN || priority > NotificationCompat.PRIORITY_MAX) {
+            throw new IllegalArgumentException("Priority Should Not Be Less Than -2 or greater than 2!");
         }
         this.builder.setPriority(priority);
         return this;
