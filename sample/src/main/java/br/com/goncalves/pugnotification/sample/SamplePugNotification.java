@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -127,9 +128,7 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
                                         .simple()
                                         .build();
                             } else {
-                                Toast.makeText(getApplicationContext(),
-                                        R.string.pugnotification_text_empty_fields,
-                                        Toast.LENGTH_SHORT).show();
+                                notifyEmptyFields();
                             }
                             break;
                         case 2:
@@ -142,9 +141,7 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
                             break;
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(),
-                            R.string.pugnotification_text_empty_fields,
-                            Toast.LENGTH_SHORT).show();
+                    notifyEmptyFields();
                 }
             }
         });
@@ -159,26 +156,33 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
                 String bigtext = mEdtBigText.getText().toString();
                 String url = mEdtUrl.getText().toString();
 
-                if (title.length() > 0 && message.length() > 0) {
-                    PugNotification.with(mContext).load()
-                            .title(title)
-                            .message(message)
-                            .bigTextStyle(bigtext)
-                            .smallIcon(R.drawable.pugnotification_ic_launcher)
-                            .largeIcon(R.drawable.pugnotification_ic_launcher)
-                            .color(android.R.color.background_dark)
-                            .custom()
-                            .setImageLoader(SamplePugNotification.this)
-                            .background(url)
-                            .setPlaceholder(R.drawable.pugnotification_ic_placeholder)
-                            .build();
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            R.string.pugnotification_text_empty_fields,
-                            Toast.LENGTH_SHORT).show();
+
+                if (TextUtils.isEmpty(title) || TextUtils.isEmpty(message) || TextUtils.isEmpty(bigtext) || TextUtils.isEmpty(url)) {
+                    mSpnType.setSelection(1);
+                    notifyEmptyFields();
+                    return;
                 }
+
+                PugNotification.with(mContext).load()
+                        .title(title)
+                        .message(message)
+                        .bigTextStyle(bigtext)
+                        .smallIcon(R.drawable.pugnotification_ic_launcher)
+                        .largeIcon(R.drawable.pugnotification_ic_launcher)
+                        .color(android.R.color.background_dark)
+                        .custom()
+                        .setImageLoader(SamplePugNotification.this)
+                        .background(url)
+                        .setPlaceholder(R.drawable.pugnotification_ic_placeholder)
+                        .build();
             }
         });
+    }
+
+    private void notifyEmptyFields() {
+        Toast.makeText(getApplicationContext(),
+                R.string.pugnotification_text_empty_fields,
+                Toast.LENGTH_SHORT).show();
     }
 
     @Override
