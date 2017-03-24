@@ -122,7 +122,6 @@ public class Custom extends Builder implements OnImageLoadingCompleted {
         super.build();
         setBigContentView(mRemoteView);
         loadImageBackground();
-        super.notificationNotify();
     }
 
     private void loadImageBackground() {
