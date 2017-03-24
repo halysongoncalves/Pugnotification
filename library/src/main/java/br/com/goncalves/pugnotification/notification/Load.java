@@ -242,6 +242,28 @@ public class Load {
         return this;
     }
 
+    public Load category(String category) {
+        if (category == null) {
+            throw new IllegalStateException("Category Must Not Be Null!");
+        }
+        this.builder.setCategory(category);
+        return this;
+    }
+
+    public Load fullScreenIntent(PendingIntent intent, boolean highPriority) {
+        if (intent == null) {
+            throw new IllegalStateException("intent Must Not Be Null!");
+        }
+
+        this.builder.setFullScreenIntent(intent, highPriority);
+        return this;
+    }
+
+    public Load visibility(int visibility) {
+        this.builder.setVisibility(visibility);
+        return this;
+    }
+
     public Load largeIcon(@NonNull Bitmap bitmap) {
         this.builder.setLargeIcon(bitmap);
         return this;

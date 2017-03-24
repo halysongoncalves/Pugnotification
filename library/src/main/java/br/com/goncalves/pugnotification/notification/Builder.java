@@ -12,6 +12,7 @@ public abstract class Builder {
     protected Notification notification;
     protected NotificationCompat.Builder builder;
     protected int notificationId;
+    protected NotificationCompat.BigPictureStyle bigPictureStyle;
 
     public Builder(NotificationCompat.Builder builder, int identifier, String tag) {
         this.builder = builder;
@@ -21,6 +22,10 @@ public abstract class Builder {
 
     public void build() {
         notification = builder.build();
+    }
+
+    public NotificationCompat.Builder getBuilder() {
+        return builder;
     }
 
     public void setBigContentView(RemoteViews views) {
