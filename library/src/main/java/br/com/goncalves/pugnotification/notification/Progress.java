@@ -17,7 +17,7 @@ public class Progress extends Builder {
     }
 
     public Progress update(int identifier, int progress, int max, boolean indeterminate) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(PugNotification.mSingleton.mContext);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(PugNotification.singleton.context, PugNotification.singleton.channelId);
         builder.setProgress(max, progress, indeterminate);
 
         notification = builder.build();

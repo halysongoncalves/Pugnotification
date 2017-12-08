@@ -4,24 +4,25 @@ import android.app.NotificationManager;
 import android.content.Context;
 
 public class PugNotification {
-    private static final String TAG = PugNotification.class.getSimpleName();
-    public static PugNotification mSingleton = null;
-    public final Context mContext;
-    public boolean shutdown;
+    public static PugNotification singleton = null;
+    public final Context context;
+    public final String channelId;
+    private boolean shutdown;
 
-    public PugNotification(Context context) {
-        this.mContext = context;
+    private PugNotification(Context context, String channelId) {
+        this.context = context;
+        this.channelId = channelId;
     }
 
-    public static PugNotification with(Context context) {
-        if (mSingleton == null) {
+    public static PugNotification with(Context context, String channelId) {
+        if (singleton == null) {
             synchronized (PugNotification.class) {
-                if (mSingleton == null) {
-                    mSingleton = new Contractor(context).build();
+                if (singleton == null) {
+                    singleton = new Contractor(context, channelId).build();
                 }
             }
         }
-        return mSingleton;
+        return singleton;
     }
 
     public Load load() {
@@ -29,17 +30,17 @@ public class PugNotification {
     }
 
     public void cancel(int identifier) {
-        NotificationManager notifyManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notifyManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notifyManager.cancel(identifier);
     }
 
     public void cancel(String tag, int identifier) {
-        NotificationManager notifyManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notifyManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notifyManager.cancel(tag, identifier);
     }
 
     public void shutdown() {
-        if (this == mSingleton) {
+        if (this == singleton) {
             throw new UnsupportedOperationException("Default singleton instance cannot be shutdown.");
         }
         if (shutdown) {
@@ -49,17 +50,22 @@ public class PugNotification {
     }
 
     private static class Contractor {
-        private final Context mContext;
+        private final Context context;
+        private final String channelId;
 
-        public Contractor(Context context) {
+        Contractor(Context context, String channelId) {
             if (context == null) {
                 throw new IllegalArgumentException("Context must not be null.");
             }
-            this.mContext = context.getApplicationContext();
+            if (channelId == null) {
+                throw new IllegalArgumentException("Channel must not be null.");
+            }
+            this.context = context.getApplicationContext();
+            this.channelId = channelId;
         }
 
         public PugNotification build() {
-            return new PugNotification(mContext);
+            return new PugNotification(context, channelId);
         }
     }
 }

@@ -21,15 +21,15 @@ public class DismissPendingIntentActivity implements PendingIntentNotification {
 
     @Override
     public PendingIntent onSettingPendingIntent() {
-        Intent dismissIntentActivity = new Intent(PugNotification.mSingleton.mContext, mActivity);
+        Intent dismissIntentActivity = new Intent(PugNotification.singleton.context, mActivity);
         dismissIntentActivity.setAction(BroadcastActions.ACTION_PUGNOTIFICATION_DIMISS_INTENT);
         dismissIntentActivity.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        dismissIntentActivity.setPackage(PugNotification.mSingleton.mContext.getPackageName());
+        dismissIntentActivity.setPackage(PugNotification.singleton.context.getPackageName());
         if (mBundle != null) {
             dismissIntentActivity.putExtras(mBundle);
         }
 
-        return PendingIntent.getActivity(PugNotification.mSingleton.mContext, mIdentifier, dismissIntentActivity,
+        return PendingIntent.getActivity(PugNotification.singleton.context, mIdentifier, dismissIntentActivity,
                 PendingIntent.FLAG_UPDATE_CURRENT);
     }
 

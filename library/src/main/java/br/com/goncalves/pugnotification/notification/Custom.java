@@ -28,7 +28,7 @@ public class Custom extends Builder implements OnImageLoadingCompleted {
 
     public Custom(NotificationCompat.Builder builder, int identifier, String title, String message, Spanned messageSpanned, int smallIcon, String tag) {
         super(builder, identifier, tag);
-        this.mRemoteView = new RemoteViews(PugNotification.mSingleton.mContext.getPackageName(), R.layout.pugnotification_custom);
+        this.mRemoteView = new RemoteViews(PugNotification.singleton.context.getPackageName(), R.layout.pugnotification_custom);
         this.mTitle = title;
         this.mMessage = message;
         this.mMessageSpanned = messageSpanned;

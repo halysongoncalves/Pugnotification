@@ -72,7 +72,7 @@ public class Wear extends Builder {
 
 
     public Wear remoteInput(@DrawableRes int icon, @StringRes int title, PendingIntentNotification pendingIntentNotification, RemoteInput remoteInput) {
-        remoteInput(icon, PugNotification.mSingleton.mContext.getString(title), pendingIntentNotification.onSettingPendingIntent(), remoteInput);
+        remoteInput(icon, PugNotification.singleton.context.getString(title), pendingIntentNotification.onSettingPendingIntent(), remoteInput);
         return this;
     }
 
@@ -82,7 +82,7 @@ public class Wear extends Builder {
     }
 
     public Wear remoteInput(@DrawableRes int icon, @StringRes int title, PendingIntent pendingIntent, RemoteInput remoteInput) {
-        remoteInput(icon, PugNotification.mSingleton.mContext.getString(title), pendingIntent, remoteInput);
+        remoteInput(icon, PugNotification.singleton.context.getString(title), pendingIntent, remoteInput);
         return this;
     }
 
@@ -124,9 +124,9 @@ public class Wear extends Builder {
             throw new IllegalArgumentException("PendingIntent Must Not Be Null!");
         }
 
-        this.remoteInput = new RemoteInput.Builder(PugNotification.mSingleton.mContext.getString(R.string.pugnotification_key_voice_reply))
-                .setLabel(PugNotification.mSingleton.mContext.getString(R.string.pugnotification_label_voice_reply))
-                .setChoices(PugNotification.mSingleton.mContext.getResources().getStringArray(R.array.pugnotification_reply_choices))
+        this.remoteInput = new RemoteInput.Builder(PugNotification.singleton.context.getString(R.string.pugnotification_key_voice_reply))
+                .setLabel(PugNotification.singleton.context.getString(R.string.pugnotification_label_voice_reply))
+                .setChoices(PugNotification.singleton.context.getResources().getStringArray(R.array.pugnotification_reply_choices))
                 .build();
         wearableExtender.addAction(new NotificationCompat.Action.Builder(icon,
                 title, pendingIntent)
@@ -136,7 +136,7 @@ public class Wear extends Builder {
     }
 
     public Wear remoteInput(@DrawableRes int icon, @StringRes int title, PendingIntent pendingIntent, String replyLabel, String[] replyChoices) {
-        return remoteInput(icon, PugNotification.mSingleton.mContext.getString(title), pendingIntent, replyLabel, replyChoices);
+        return remoteInput(icon, PugNotification.singleton.context.getString(title), pendingIntent, replyLabel, replyChoices);
     }
 
     public Wear remoteInput(@DrawableRes int icon, String title, PendingIntent pendingIntent, String replyLabel, String[] replyChoices) {
@@ -159,7 +159,7 @@ public class Wear extends Builder {
             throw new IllegalArgumentException("Reply Label Must Not Be Null!");
         }
 
-        this.remoteInput = new RemoteInput.Builder(PugNotification.mSingleton.mContext.getString(R.string.pugnotification_key_voice_reply))
+        this.remoteInput = new RemoteInput.Builder(PugNotification.singleton.context.getString(R.string.pugnotification_key_voice_reply))
                 .setLabel(replyLabel)
                 .setChoices(replyChoices)
                 .build();
@@ -184,7 +184,7 @@ public class Wear extends Builder {
             throw new IllegalArgumentException("Resource ID Background Should Not Be Less Than Or Equal To Zero!");
         }
 
-        Bitmap bitmap = BitmapFactory.decodeResource(PugNotification.mSingleton.mContext.getResources(), background);
+        Bitmap bitmap = BitmapFactory.decodeResource(PugNotification.singleton.context.getResources(), background);
         this.wearableExtender.setBackground(bitmap);
         return this;
     }

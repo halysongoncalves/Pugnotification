@@ -21,15 +21,15 @@ public class ClickPendingIntentActivity implements PendingIntentNotification {
 
     @Override
     public PendingIntent onSettingPendingIntent() {
-        Intent clickIntentActivity = new Intent(PugNotification.mSingleton.mContext, mActivity);
+        Intent clickIntentActivity = new Intent(PugNotification.singleton.context, mActivity);
         clickIntentActivity.setAction(BroadcastActions.ACTION_PUGNOTIFICATION_CLICK_INTENT);
         clickIntentActivity.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        clickIntentActivity.setPackage(PugNotification.mSingleton.mContext.getPackageName());
+        clickIntentActivity.setPackage(PugNotification.singleton.context.getPackageName());
 
         if (mBundle != null) {
             clickIntentActivity.putExtras(mBundle);
         }
-        return PendingIntent.getActivity(PugNotification.mSingleton.mContext, mIdentifier, clickIntentActivity,
+        return PendingIntent.getActivity(PugNotification.singleton.context, mIdentifier, clickIntentActivity,
                 PendingIntent.FLAG_UPDATE_CURRENT);
     }
 }

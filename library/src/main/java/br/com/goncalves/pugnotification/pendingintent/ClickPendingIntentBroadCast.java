@@ -21,12 +21,12 @@ public class ClickPendingIntentBroadCast implements PendingIntentNotification {
     public PendingIntent onSettingPendingIntent() {
         Intent clickIntentBroadcast = new Intent(BroadcastActions.ACTION_PUGNOTIFICATION_CLICK_INTENT);
         clickIntentBroadcast.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        clickIntentBroadcast.setPackage(PugNotification.mSingleton.mContext.getPackageName());
+        clickIntentBroadcast.setPackage(PugNotification.singleton.context.getPackageName());
         if (mBundle != null) {
             clickIntentBroadcast.putExtras(mBundle);
         }
 
-        return PendingIntent.getBroadcast(PugNotification.mSingleton.mContext, mIdentifier, clickIntentBroadcast,
+        return PendingIntent.getBroadcast(PugNotification.singleton.context, mIdentifier, clickIntentBroadcast,
                 PendingIntent.FLAG_UPDATE_CURRENT);
     }
 

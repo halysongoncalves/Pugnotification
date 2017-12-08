@@ -1,11 +1,15 @@
 package br.com.goncalves.pugnotification.sample;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +28,8 @@ import br.com.goncalves.pugnotification.notification.Load;
 import br.com.goncalves.pugnotification.notification.PugNotification;
 
 public class SamplePugNotification extends AppCompatActivity implements ImageLoader {
+    private static final String TAG = "SamplePugNotification";
+    private static final String CHANNEL_ID = "br.com.goncalves.pugnotification.sample.GENERAL_NOTIFICATIONS";
     private EditText mEdtTitle, mEdtMessage, mEdtBigText, mEdtUrl;
     private Button mBtnNotifySimple, mBtnNotifyCustom;
     private Context mContext;
@@ -58,8 +64,25 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
         mContext = this;
         setContentView(R.layout.pugnotification_sample_activity);
 
+        createNotificationChannel();
+
         loadInfoComponents();
         loadListeners();
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "General Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("All notifications");
+            channel.enableVibration(true);
+
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            if (notificationManager == null) {
+                Log.e(TAG, "Failed to create notifications");
+                return;
+            }
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     private void loadInfoComponents() {
@@ -108,7 +131,7 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
                 String message = mEdtMessage.getText().toString();
                 String bigtext = mEdtBigText.getText().toString();
                 if (title.length() > 0 && message.length() > 0) {
-                    Load mLoad = PugNotification.with(mContext).load()
+                    Load mLoad = PugNotification.with(mContext, CHANNEL_ID).load()
                             .smallIcon(R.drawable.pugnotification_ic_launcher)
                             .autoCancel(true)
                             .largeIcon(R.drawable.pugnotification_ic_launcher)
@@ -160,7 +183,7 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
                 String url = mEdtUrl.getText().toString();
 
                 if (title.length() > 0 && message.length() > 0) {
-                    PugNotification.with(mContext).load()
+                    PugNotification.with(mContext, CHANNEL_ID).load()
                             .title(title)
                             .message(message)
                             .bigTextStyle(bigtext)

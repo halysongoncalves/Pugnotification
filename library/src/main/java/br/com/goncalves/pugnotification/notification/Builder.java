@@ -44,13 +44,13 @@ public abstract class Builder {
     }
 
     protected Notification notificationNotify(int identifier) {
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(PugNotification.mSingleton.mContext);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(PugNotification.singleton.context);
         notificationManager.notify(identifier, notification);
         return notification;
     }
 
     protected Notification notificationNotify(String tag, int identifier) {
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(PugNotification.mSingleton.mContext);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(PugNotification.singleton.context);
         notificationManager.notify(tag, identifier, notification);
         return notification;
     }
