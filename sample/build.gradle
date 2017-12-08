@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.getkeepsafe.dexcount'
 
+repositories {
+    maven { url 'https://maven.google.com' }
+}
+
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
@@ -35,7 +39,7 @@ android {
     dexcount {
         includeClasses = true
         includeFieldCount = true
-        printAsTree = true
+        format = "tree"
         orderByMethodCount = false
         verbose = false
     }

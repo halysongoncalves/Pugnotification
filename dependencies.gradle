@@ -12,9 +12,9 @@ ext {
     picasso = 'com.squareup.picasso:picasso'
 
     //Version Libraries
-    annotationsVersion = '23.0.1'
-    supportV4Version = '23.0.1'
-    supportV7Version = '23.0.1'
+    annotationsVersion = '26.1.0'
+    supportV4Version = '26.1.0'
+    supportV7Version = '26.1.0'
     picassoVersion = '2.3.4'
 
     //Library
