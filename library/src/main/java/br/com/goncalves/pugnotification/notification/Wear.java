@@ -70,6 +70,53 @@ public class Wear extends Builder {
         return this;
     }
 
+    /**
+     * Enable action to appear inline on Wear 2.0 (24+). This is only possible for one action.
+     *
+     * @param icon icon to show for this action
+     * @param title the title of the action
+     * @param pendingIntent the {@link PendingIntent} to fire when users trigger this action
+     * @param shouldLaunchActivity {@code true} if the content intent will launch an activity
+     * and transitions should be generated, false otherwise.
+     *
+     * @return this object for method chaining
+     */
+    public Wear inlineButton(@DrawableRes int icon, @StringRes int title, PendingIntent pendingIntent, boolean shouldLaunchActivity) {
+        return inlineButton(icon, PugNotification.singleton.context.getString(title), pendingIntent, shouldLaunchActivity);
+    }
+
+    /**
+     * Enable action to appear inline on Wear 2.0 (24+). This is only possible for one action.
+     *
+     * @param icon icon to show for this action
+     * @param title the title of the action
+     * @param pendingIntent the {@link PendingIntent} to fire when users trigger this action
+     * @param shouldLaunchActivity {@code true} if the content intent will launch an activity
+     * and transitions should be generated, false otherwise.
+     *
+     * @return this object for method chaining
+     */
+    public Wear inlineButton(@DrawableRes int icon, String title, PendingIntent pendingIntent, boolean shouldLaunchActivity) {
+        if (icon < 0) {
+            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
+        }
+
+        if (title == null) {
+            throw new IllegalStateException("Title Must Not Be Null!");
+        }
+        if (pendingIntent == null) {
+            throw new IllegalArgumentException("PendingIntent Must Not Be Null.");
+        }
+
+        final NotificationCompat.Action.WearableExtender extender = new NotificationCompat.Action.WearableExtender()
+                .setHintDisplayActionInline(true)
+                .setHintLaunchesActivity(shouldLaunchActivity);
+
+        this.wearableExtender.addAction(new NotificationCompat.Action.Builder(icon, title, pendingIntent)
+                .extend(extender)
+                .build());
+        return this;
+    }
 
     public Wear remoteInput(@DrawableRes int icon, @StringRes int title, PendingIntentNotification pendingIntentNotification, RemoteInput remoteInput) {
         remoteInput(icon, PugNotification.singleton.context.getString(title), pendingIntentNotification.onSettingPendingIntent(), remoteInput);
