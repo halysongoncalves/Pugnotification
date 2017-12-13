@@ -54,6 +54,14 @@ public class Wear extends Builder {
         return this;
     }
 
+    public Wear button(@DrawableRes int icon, @StringRes int title, PendingIntent pendingIntent) {
+        if (title <= 0) {
+            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
+        }
+
+        return button(icon, PugNotification.singleton.context.getString(title), pendingIntent);
+    }
+
     public Wear button(@DrawableRes int icon, String title, PendingIntent pendingIntent) {
         if (icon < 0) {
             throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
@@ -82,6 +90,10 @@ public class Wear extends Builder {
      * @return this object for method chaining
      */
     public Wear inlineButton(@DrawableRes int icon, @StringRes int title, PendingIntent pendingIntent, boolean shouldLaunchActivity) {
+        if (title <= 0) {
+            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
+        }
+
         return inlineButton(icon, PugNotification.singleton.context.getString(title), pendingIntent, shouldLaunchActivity);
     }
 

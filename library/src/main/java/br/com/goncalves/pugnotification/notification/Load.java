@@ -340,9 +340,25 @@ public class Load {
         return this;
     }
 
+    public Load button(@DrawableRes int icon, @StringRes int title, @NonNull PendingIntent pendingIntent) {
+        if (title <= 0) {
+            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
+        }
+
+        return button(icon, PugNotification.singleton.context.getResources().getString(title), pendingIntent);
+    }
+
     public Load button(@DrawableRes int icon, @NonNull String title, @NonNull PendingIntent pendingIntent) {
         this.builder.addAction(icon, title, pendingIntent);
         return this;
+    }
+
+    public Load button(@DrawableRes int icon, @StringRes int title, @NonNull PendingIntentNotification pendingIntentNotification) {
+        if (title <= 0) {
+            throw new IllegalArgumentException("Resource ID Should Not Be Less Than Or Equal To Zero!");
+        }
+
+        return button(icon, PugNotification.singleton.context.getResources().getString(title), pendingIntentNotification);
     }
 
     public Load button(@DrawableRes int icon, @NonNull String title, @NonNull PendingIntentNotification pendingIntentNotification) {
