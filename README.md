@@ -13,7 +13,7 @@ Download [the latest AAR][1] or grab via Maven:
 <dependency>
   <groupId>com.github.halysongoncalves</groupId>
   <artifactId>pugnotification</artifactId>
-  <version>1.8.1</version>
+  <version>1.8.2</version>
 </dependency>
 ```
 or Gradle:
@@ -156,7 +156,8 @@ PugNotification.with(mContext).load()
 # What's New
 *1.8.2
 
-Support for Android Oreo NotificationChannels
+Support for Android Oreo NotificationChannels.
+Note: This library does not create the NotificationChannel.
 
 *1.8.1
 
