@@ -18,7 +18,7 @@ Download [the latest AAR][1] or grab via Maven:
 ```
 or Gradle:
 ```groovy
-compile 'com.github.halysongoncalves:pugnotification:1.8.1'
+compile 'com.github.halysongoncalves:pugnotification:1.8.2'
 ```
 
 # Introduction
@@ -31,6 +31,7 @@ To further improve productivity, pugnotification from release 1.2.0 now has supp
 ```java
 PugNotification.with(context)
     .load()
+    .notificationChannelId(CHANNEL_ID)
     .identifier(identifier)
     .title(title)
     .message(message)
@@ -70,6 +71,7 @@ Simple notification with just text and message.
 ```java
 PugNotification.with(context)
     .load()
+    .notificationChannelId(CHANNEL_ID)
     .title(title)
     .message(message)
     .bigTextStyle(bigtext)
@@ -87,6 +89,7 @@ Simple notification with progress.
 ```java
 PugNotification.with(context)
     .load()
+    .notificationChannelId(CHANNEL_ID)
     .identifier(identifier)
     .smallIcon(R.drawable.pugnotification_ic_launcher)
     .progress()
@@ -97,6 +100,7 @@ PugNotification.with(context)
 ```java
 PugNotification.with(context)
     .load()
+    .notificationChannelId(CHANNEL_ID)
     .identifier(identifier)
     .smallIcon(R.drawable.pugnotification_ic_launcher)
     .progress()
@@ -112,6 +116,7 @@ So we serve the requests and modify the library to allow the download of image m
 ```java
 PugNotification.with(context)
     .load()
+    .notificationChannelId(CHANNEL_ID)
     .title(title)
     .message(message)
     .bigTextStyle(bigtext)
@@ -133,6 +138,7 @@ PugNotification from release 1.2.0 started to support all types of notifications
 
 ```java
 PugNotification.with(mContext).load()
+    .notificationChannelId(CHANNEL_ID)
     .smallIcon(R.drawable.pugnotification_ic_launcher)
     .autoCancel(true)
     .largeIcon(R.drawable.pugnotification_ic_launcher)
@@ -148,6 +154,10 @@ PugNotification.with(mContext).load()
     .build();
 ```
 # What's New
+*1.8.2
+
+Support for Android Oreo NotificationChannels
+
 *1.8.1
 
 Fix Message Spanned length check

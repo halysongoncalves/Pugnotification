@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.getkeepsafe.dexcount'
 apply from: 'maven.gradle'
 
 android {
@@ -32,20 +31,13 @@ android {
         exclude 'LICENSE.txt'
     }
 
-    dexcount {
-        includeClasses = true
-        includeFieldCount = true
-        printAsTree = true
-        orderByMethodCount = false
-        verbose = false
-    }
 }
 
 dependencies {
     //Libraries
     def libraryDependencies = rootProject.ext.libraryDependencies
-    compile libraryDependencies.annotationsVersion
-    compile libraryDependencies.supportV4
+    implementation libraryDependencies.annotationsVersion
+    implementation libraryDependencies.supportV4
 }
 
 uploadArchives.dependsOn(assemble)
