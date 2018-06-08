@@ -62,7 +62,7 @@ public class Custom extends Builder implements OnImageLoadingCompleted {
 
     private void setMessage() {
         if (messageSpanned != null) {
-            CharSequence targetMessage = useSpanForCustomNotification ? this.messageSpanned : this.messageSpanned.toString();
+            CharSequence targetMessage = useSpanForCustomNotification ? this.messageSpanned : this.messageSpanned.toString().trim();
             remoteViews.setTextViewText(R.id.notification_text_message, targetMessage);
         } else {
             remoteViews.setTextViewText(R.id.notification_text_message, message);
