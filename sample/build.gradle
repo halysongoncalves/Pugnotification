@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -32,21 +31,14 @@ android {
         exclude 'LICENSE.txt'
     }
 
-    dexcount {
-        includeClasses = true
-        includeFieldCount = true
-        printAsTree = true
-        orderByMethodCount = false
-        verbose = false
-    }
 }
 
 dependencies {
     //Libraries
     def sampleDependencies = rootProject.ext.sampleDependencies
-    compile sampleDependencies.annotationsVersion
-    compile sampleDependencies.supportV4
-    compile sampleDependencies.supportV7
-    compile sampleDependencies.picasso
-    compile project(':library')
+    implementation sampleDependencies.annotationsVersion
+    implementation sampleDependencies.supportV4
+    implementation sampleDependencies.supportV7
+    implementation sampleDependencies.picasso
+    implementation project(':library')
 }

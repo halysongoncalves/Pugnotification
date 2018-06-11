@@ -1,9 +1,12 @@
 package br.com.goncalves.pugnotification.sample;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -25,25 +28,19 @@ import br.com.goncalves.pugnotification.notification.Load;
 import br.com.goncalves.pugnotification.notification.PugNotification;
 
 public class SamplePugNotification extends AppCompatActivity implements ImageLoader {
-    private EditText mEdtTitle, mEdtMessage, mEdtBigText, mEdtUrl;
-    private Button mBtnNotifySimple, mBtnNotifyCustom;
-    private Context mContext;
-    // Keep a strong reference to keep it from being garbage collected inside into method
-    private Target viewTarget;
-    private Spinner mSpnType;
-    private RelativeLayout mContentBigText;
-    private int mPosSelected = 0;
+    private static final String CHANNEL_ID = "NOTIFICATION_CHANNEL_ID";
 
     private static Target getViewTarget(final OnImageLoadingCompleted onCompleted) {
         return new Target() {
+
             @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                onCompleted.imageLoadingCompleted(bitmap);
+            public void onBitmapFailed(final Exception e, final Drawable errorDrawable) {
+
             }
 
             @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
-
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                onCompleted.imageLoadingCompleted(bitmap);
             }
 
             @Override
@@ -53,30 +50,68 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
         };
     }
 
+    private Button mBtnNotifySimple, mBtnNotifyCustom;
+    private RelativeLayout mContentBigText;
+    private Context mContext;
+    private EditText mEdtTitle, mEdtMessage, mEdtBigText, mEdtUrl;
+    private int mPosSelected = 0;
+    private Spinner mSpnType;
+    // Keep a strong reference to keep it from being garbage collected inside into method
+    private Target viewTarget;
+
+    @Override
+    public void load(String uri, final OnImageLoadingCompleted onCompleted) {
+        viewTarget = getViewTarget(onCompleted);
+        Picasso.get().load(uri).into(viewTarget);
+    }
+
+    @Override
+    public void load(int imageResId, OnImageLoadingCompleted onCompleted) {
+        viewTarget = getViewTarget(onCompleted);
+        Picasso.get().load(imageResId).into(viewTarget);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
         setContentView(R.layout.pugnotification_sample_activity);
 
+        createNotificationChannel();
         loadInfoComponents();
         loadListeners();
     }
 
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "My app notification channel";
+            String description = "Description for this channel";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
     private void loadInfoComponents() {
-        this.mEdtTitle = (EditText) findViewById(R.id.edt_title);
-        this.mEdtMessage = (EditText) findViewById(R.id.edt_message);
-        this.mEdtBigText = (EditText) findViewById(R.id.edt_bigtext);
-        this.mEdtUrl = (EditText) findViewById(R.id.edt_url);
-        this.mBtnNotifySimple = (Button) findViewById(R.id.btn_notify_simple);
-        this.mBtnNotifyCustom = (Button) findViewById(R.id.btn_notify_custom);
-        this.mSpnType = (Spinner) findViewById(R.id.spn_notification_type);
+        this.mEdtMessage = findViewById(R.id.edt_message);
+        this.mEdtTitle = findViewById(R.id.edt_title);
+        this.mEdtBigText = findViewById(R.id.edt_bigtext);
+        this.mEdtUrl = findViewById(R.id.edt_url);
+        this.mBtnNotifySimple = findViewById(R.id.btn_notify_simple);
+        this.mBtnNotifyCustom = findViewById(R.id.btn_notify_custom);
+        this.mSpnType = findViewById(R.id.spn_notification_type);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.pugnotification_notification_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.mSpnType.setAdapter(adapter);
 
-        this.mContentBigText = (RelativeLayout) findViewById(R.id.content_bigtext);
+        this.mContentBigText = findViewById(R.id.content_bigtext);
     }
 
     private void loadListeners() {
@@ -110,6 +145,7 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
                 String bigtext = mEdtBigText.getText().toString();
                 if (title.length() > 0 && message.length() > 0) {
                     Load mLoad = PugNotification.with(mContext).load()
+                            .notificationChannelId(CHANNEL_ID)
                             .smallIcon(R.drawable.pugnotification_ic_launcher)
                             .autoCancel(true)
                             .largeIcon(R.drawable.pugnotification_ic_launcher)
@@ -120,7 +156,7 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
                     switch (mPosSelected) {
                         case 0:
                             mLoad.simple()
-                                 .build();
+                                    .build();
                             break;
                         case 1:
                             if (bigtext.length() > 0) {
@@ -157,13 +193,15 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
                 String url = mEdtUrl.getText().toString();
 
 
-                if (TextUtils.isEmpty(title) || TextUtils.isEmpty(message) || TextUtils.isEmpty(bigtext) || TextUtils.isEmpty(url)) {
+                if (TextUtils.isEmpty(title) || TextUtils.isEmpty(message) || TextUtils.isEmpty(bigtext) || TextUtils
+                        .isEmpty(url)) {
                     mSpnType.setSelection(1);
                     notifyEmptyFields();
                     return;
                 }
 
                 PugNotification.with(mContext).load()
+                        .notificationChannelId(CHANNEL_ID)
                         .title(title)
                         .message(message)
                         .bigTextStyle(bigtext)
@@ -183,17 +221,5 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
         Toast.makeText(getApplicationContext(),
                 R.string.pugnotification_text_empty_fields,
                 Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void load(String uri, final OnImageLoadingCompleted onCompleted) {
-        viewTarget = getViewTarget(onCompleted);
-        Picasso.with(this).load(uri).into(viewTarget);
-    }
-
-    @Override
-    public void load(int imageResId, OnImageLoadingCompleted onCompleted) {
-        viewTarget = getViewTarget(onCompleted);
-        Picasso.with(this).load(imageResId).into(viewTarget);
     }
 }

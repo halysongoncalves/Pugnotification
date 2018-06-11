@@ -1,5 +1,6 @@
 allprojects {
     repositories {
+        google()
         jcenter()
     }
 }
@@ -12,10 +13,10 @@ ext {
     picasso = 'com.squareup.picasso:picasso'
 
     //Version Libraries
-    annotationsVersion = '23.0.1'
-    supportV4Version = '23.0.1'
-    supportV7Version = '23.0.1'
-    picassoVersion = '2.3.4'
+    annotationsVersion = '27.1.0'
+    supportV4Version = '27.1.0'
+    supportV7Version = '27.1.0'
+    picassoVersion = '2.71828'
 
     //Library
     libraryDependencies = [
