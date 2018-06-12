@@ -1,47 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/notification_content_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/notification_img_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
         android:contentDescription="@string/pugnotification_text_description_image_background"
-        android:scaleType="fitCenter" />
+        android:scaleType="centerCrop"
+        tools:layout_height="100dp" />
+
+    <ImageView
+        android:id="@+id/notification_img_bottom_gradient"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pugnotification_gradient_height"
+        android:layout_alignBottom="@id/notification_img_background"
+        android:scaleType="fitXY" />
 
     <RelativeLayout
         android:id="@+id/notification_content_information"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_below="@id/notification_img_background"
         android:background="@color/pugnotification_background"
         android:padding="@dimen/pugnotification_dimension_default">
 
         <TextView
             android:id="@+id/notification_text_title"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:ellipsize="end"
             android:layout_toLeftOf="@+id/notification_img_icon"
             android:layout_toStartOf="@+id/notification_img_icon"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textColor="@color/pugnotification_color_white"
-            android:textSize="@dimen/pugnotification_text_size_title" />
+            android:textSize="@dimen/pugnotification_text_size_title"
+            tools:text="But I must explain to you how all this mistaken idea" />
 
         <TextView
             android:id="@+id/notification_text_message"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:ellipsize="end"
             android:layout_below="@+id/notification_text_title"
             android:layout_toLeftOf="@+id/notification_img_icon"
             android:layout_toStartOf="@+id/notification_img_icon"
+            android:ellipsize="end"
+            android:maxLines="3"
             android:textColor="@color/pugnotification_color_white"
-            android:textSize="@dimen/pugnotification_text_size_subtitle" />
+            android:textSize="@dimen/pugnotification_text_size_subtitle"
+            tools:text="But I must explain to you how all" />
 
         <ImageView
             android:id="@+id/notification_img_icon"
@@ -52,5 +68,4 @@
             android:layout_centerInParent="true"
             android:contentDescription="@string/pugnotification_text_description_image_icon" />
     </RelativeLayout>
-
-</FrameLayout>
+</RelativeLayout>

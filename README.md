@@ -123,6 +123,7 @@ PugNotification.with(context)
     .background(url)
     .setImageLoader(Callback)
     .setPlaceholder(R.drawable.pugnotification_ic_placeholder)
+    .textBackground(Color.parseColor("#607D8B"), true)
     .build();  
 ```
 

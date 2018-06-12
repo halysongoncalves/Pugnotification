@@ -5,6 +5,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -68,6 +69,25 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
 
         loadInfoComponents();
         loadListeners();
+        postTestNotification();
+    }
+
+    private void postTestNotification() {
+        PugNotification.with(this, CHANNEL_ID)
+                .load()
+                .identifier(1)
+                .tag("tag")
+                .title("Test Notification Title")
+                .message("Test Notification content")
+                .smallIcon(R.drawable.pugnotification_ic_launcher)
+                .largeIcon(R.drawable.pugnotification_ic_launcher)
+                .autoCancel(true)
+                .useSpanForCustomNotification(false)
+                .custom()
+                .setImageLoader(this)
+                .background("https://placeimg.com/1120/412/any")
+                .textBackground(Color.parseColor("#607D8B"), true)
+                .build();
     }
 
     private void createNotificationChannel() {
@@ -142,7 +162,7 @@ public class SamplePugNotification extends AppCompatActivity implements ImageLoa
                     switch (mPosSelected) {
                         case 0:
                             mLoad.simple()
-                                 .build();
+                                    .build();
                             break;
                         case 1:
                             if (bigtext.length() > 0) {
