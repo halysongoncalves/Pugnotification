@@ -1,17 +1,10 @@
 package br.com.goncalves.pugnotification.notification;
 
 import android.annotation.TargetApi;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
-import android.graphics.Shader;
 import android.os.Looper;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.text.Spanned;
 import android.view.View;
@@ -91,7 +84,8 @@ public class Custom extends Builder implements OnImageLoadingCompleted {
 
         if (showGradient) {
             this.remoteViews.setViewVisibility(R.id.notification_img_bottom_gradient, View.VISIBLE);
-            this.remoteViews.setImageViewBitmap(R.id.notification_img_bottom_gradient, createGradientBitmap(color));
+            this.remoteViews.setImageViewResource(R.id.notification_img_bottom_gradient, R.drawable.img_notif_gradient);
+            this.remoteViews.setInt(R.id.notification_img_bottom_gradient, "setColorFilter", color);
         } else {
             this.remoteViews.setViewVisibility(R.id.notification_img_bottom_gradient, View.GONE);
         }
@@ -179,26 +173,5 @@ public class Custom extends Builder implements OnImageLoadingCompleted {
 
         remoteViews.setImageViewBitmap(R.id.notification_img_background, bitmap);
         super.notificationNotify();
-    }
-
-    @NonNull
-    private Bitmap createGradientBitmap(@ColorInt int color) {
-        int width = 1;      //width of the bitmap doesn't matter as it will be stretched by ImageView
-        int height = ((int) getResources().getDimension(R.dimen.pugnotification_gradient_height));
-
-        Shader shader = new LinearGradient(0, 0, 0, height, Color.TRANSPARENT, color, Shader.TileMode.CLAMP);
-
-        Bitmap b = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(b);
-
-        Paint paint = new Paint();
-        paint.setShader(shader);
-
-        c.drawRect(0, 0, width, height, paint);
-        return b;
-    }
-
-    private Resources getResources() {
-        return PugNotification.singleton.context.getResources();
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/notification_content_main"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<RelativeLayout android:id="@+id/notification_content_main"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/notification_img_background"
@@ -16,15 +16,16 @@
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
         android:contentDescription="@string/pugnotification_text_description_image_background"
+        android:maxHeight="@dimen/pugnotification_max_image_height"
         android:scaleType="centerCrop"
-        tools:layout_height="100dp" />
+        tools:layout_height="100dp"/>
 
     <ImageView
         android:id="@+id/notification_img_bottom_gradient"
         android:layout_width="match_parent"
         android:layout_height="@dimen/pugnotification_gradient_height"
         android:layout_alignBottom="@id/notification_img_background"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"/>
 
     <RelativeLayout
         android:id="@+id/notification_content_information"
@@ -44,7 +45,7 @@
             android:maxLines="1"
             android:textColor="@color/pugnotification_color_white"
             android:textSize="@dimen/pugnotification_text_size_title"
-            tools:text="But I must explain to you how all this mistaken idea" />
+            tools:text="But I must explain to you how all this mistaken idea"/>
 
         <TextView
             android:id="@+id/notification_text_message"
@@ -57,7 +58,7 @@
             android:maxLines="3"
             android:textColor="@color/pugnotification_color_white"
             android:textSize="@dimen/pugnotification_text_size_subtitle"
-            tools:text="But I must explain to you how all" />
+            tools:text="But I must explain to you how all"/>
 
         <ImageView
             android:id="@+id/notification_img_icon"
@@ -66,6 +67,6 @@
             android:layout_alignParentEnd="false"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
-            android:contentDescription="@string/pugnotification_text_description_image_icon" />
+            android:contentDescription="@string/pugnotification_text_description_image_icon"/>
     </RelativeLayout>
 </RelativeLayout>

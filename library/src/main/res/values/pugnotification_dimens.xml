@@ -3,5 +3,6 @@
     <dimen name="pugnotification_text_size_title">18sp</dimen>
     <dimen name="pugnotification_text_size_subtitle">14sp</dimen>
     <dimen name="pugnotification_dimension_default">8dp</dimen>
-    <dimen name="pugnotification_gradient_height">20dp</dimen>
+    <dimen name="pugnotification_gradient_height">63dp</dimen>
+    <dimen name="pugnotification_max_image_height">190dp</dimen>
 </resources>
