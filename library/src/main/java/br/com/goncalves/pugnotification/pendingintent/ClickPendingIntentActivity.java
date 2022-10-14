@@ -30,6 +30,6 @@ public class ClickPendingIntentActivity implements PendingIntentNotification {
             clickIntentActivity.putExtras(mBundle);
         }
         return PendingIntent.getActivity(PugNotification.singleton.context, mIdentifier, clickIntentActivity,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 }

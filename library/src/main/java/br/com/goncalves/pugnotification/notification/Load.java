@@ -34,7 +34,8 @@ public class Load {
 
     public Load() {
         builder = new NotificationCompat.Builder(PugNotification.singleton.context, PugNotification.singleton.channelId);
-        builder.setContentIntent(PendingIntent.getBroadcast(PugNotification.singleton.context, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT));
+        builder.setContentIntent(PendingIntent.getBroadcast(PugNotification.singleton.context, 0, new Intent(),
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE));
     }
 
     public Load identifier(int identifier) {

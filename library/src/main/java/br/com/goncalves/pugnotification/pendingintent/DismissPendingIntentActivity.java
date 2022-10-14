@@ -30,7 +30,7 @@ public class DismissPendingIntentActivity implements PendingIntentNotification {
         }
 
         return PendingIntent.getActivity(PugNotification.singleton.context, mIdentifier, dismissIntentActivity,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
 }

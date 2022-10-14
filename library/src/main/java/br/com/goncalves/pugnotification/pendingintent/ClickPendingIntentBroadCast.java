@@ -27,7 +27,7 @@ public class ClickPendingIntentBroadCast implements PendingIntentNotification {
         }
 
         return PendingIntent.getBroadcast(PugNotification.singleton.context, mIdentifier, clickIntentBroadcast,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
 }
